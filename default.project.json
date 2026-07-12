@@ -2,6 +2,7 @@
   "name": "Obby",
   "tree": {
     "$className": "DataModel",
+
     "Lighting": {
       "$properties": {
         "Ambient": [
@@ -40,12 +41,14 @@
     },
     "ReplicatedStorage": {},
     "ServerScriptService": {},
+
     "SoundService": {
       "$properties": {
         "DefaultListenerLocation": "Camera",
         "RespectFilteringEnabled": true
       }
     },
+
     "StarterPlayer": {
       "StarterPlayerScripts": {},
       "$properties": {
@@ -55,6 +58,7 @@
         "CharacterUseJumpPower": false
       }
     },
+    
     "Workspace": {
       "$properties": {
         "SignalBehavior": "Deferred",
