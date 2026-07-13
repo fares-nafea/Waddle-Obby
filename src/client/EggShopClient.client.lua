@@ -1,4 +1,4 @@
---// Egg Shop Client (Day 7)
+--// Egg Shop Client
 --// Place in: StarterPlayer > StarterPlayerScripts
 --// Builds a small result popup and shows what you rolled.
 

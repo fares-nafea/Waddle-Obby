@@ -39,62 +39,44 @@
         "TimeOfDay": "14:30:00"
       }
     },
-    "ReplicatedStorage": {},
-    "ServerScriptService": {},
-
-    "SoundService": {
-      "$properties": {
-        "DefaultListenerLocation": "Camera",
-        "RespectFilteringEnabled": true
+    "ReplicatedStorage": {
+      "Events": {
+        "$className": "Folder",
+        "TimerEvent": {
+          "$className": "RemoteEvent"
+        },
+        "EggEvent": {
+          "$className": "RemoteEvent"
+        }
+      }
+    },
+    "ServerScriptService": {
+      "Main": {
+        "$path": "src/server/Main.server.lua"
+      },
+      "TeleportService": {
+        "$path": "src/server/TeleportService.server.lua"
+      },
+      "TimerService": {
+        "$path": "src/server/TimerService.server.lua"
+      },
+      "EggService": {
+        "$path": "src/server/EggService.server.lua"
       }
     },
 
+    "SoundService": {
+    },
+
     "StarterPlayer": {
-      "StarterPlayerScripts": {},
-      "$properties": {
-        "AvatarJointUpgrade": "Enabled",
-        "CameraMaxZoomDistance": 128.0,
-        "CharacterBreakJointsOnDeath": false,
-        "CharacterUseJumpPower": false
+      "StarterPlayerScripts": {
+        "EggShopClient": {
+          "$path": "src/client/EggShopClient.client.lua"
+        }
       }
     },
     
     "Workspace": {
-      "$properties": {
-        "SignalBehavior": "Deferred",
-        "StreamOutBehavior": "Opportunistic",
-        "StreamingEnabled": true,
-        "StreamingIntegrityMode": "PauseOutsideLoadedArea",
-        "WorldPivotData": {
-          "OptionalCFrame": {
-            "position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "orientation": [
-              [
-                1.0,
-                0.0,
-                0.0
-              ],
-              [
-                0.0,
-                1.0,
-                0.0
-              ],
-              [
-                0.0,
-                0.0,
-                1.0
-              ]
-            ]
-          }
-        }
-      },
-      "$attributes": {
-        "Rojo_Target_CurrentCamera": "300583873a3bb1f20a5fe56e000003b6"
-      }
     }
   }
 }
