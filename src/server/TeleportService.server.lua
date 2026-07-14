@@ -7,6 +7,10 @@ local StagesFolder = workspace:WaitForChild("Stages")
 
 local debounce = {}
 
+Players.PlayerRemoving:Connect(function(player)
+	debounce[player] = nil
+end)
+
 for _, gate in ipairs(GatesFolder:GetChildren()) do
 	local portal = gate:WaitForChild("Portal") 
 

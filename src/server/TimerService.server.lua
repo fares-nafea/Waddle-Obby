@@ -46,11 +46,13 @@ for _, stage in ipairs(workspace.Stages:GetChildren()) do
 		local player = Players:GetPlayerFromCharacter(character)
 
 		if not player then return end
-		
+
+		if startTimes[player] then return end
+
 		if debounce[player] then return end
 
 		debounce[player] = true
-		
+
 		startTimes[player] = os.clock()
 		TimerEvent:FireClient(player, "Start")
 		print(player.Name .. " Started Timer")
@@ -69,11 +71,11 @@ for _, stage in ipairs(workspace.Stages:GetChildren()) do
 
 		debounce[player] = true
 
-		local elapsed = os.clock() - startTimes[player]
+		local elapsed = math.max(os.clock() - startTimes[player], 1)
 
 		print(player.Name .. " Finished in " .. string.format("%.2f", elapsed) .. " seconds")
 
-		local reward = math.floor((5000 / elapsed) + math.random(-50, 50))
+		local reward = math.max(math.floor((5000 / elapsed) + math.random(-50, 50)), 0)
 
 		local leaderstats = player:FindFirstChild("leaderstats")
 		if leaderstats then
@@ -106,4 +108,9 @@ Players.PlayerAdded:Connect(function(player)
 			TimerEvent:FireClient(player, "Reset")
 		end)
 	end)
+end)
+
+Players.PlayerRemoving:Connect(function(player)
+	startTimes[player] = nil
+	debounce[player] = nil
 end)

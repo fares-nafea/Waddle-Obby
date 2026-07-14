@@ -54,6 +54,9 @@
       "Main": {
         "$path": "src/server/Main.server.lua"
       },
+      "DataService": {
+        "$path": "src/server/DataService.server.lua"
+      },
       "TeleportService": {
         "$path": "src/server/TeleportService.server.lua"
       },

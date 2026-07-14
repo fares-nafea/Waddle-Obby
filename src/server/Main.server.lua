@@ -1,12 +1,5 @@
-local Players = game:GetService("Players")
-
-Players.PlayerAdded:Connect(function(player)
-	local leaderstats = Instance.new("Folder")
-	leaderstats.Name = "leaderstats"
-	leaderstats.Parent = player
-	
-	local Coin = Instance.new("IntValue")
-	Coin.Name = "Coins"
-	Coin.Value = 0
-	Coin.Parent = leaderstats
-end)
+--// Main
+--// leaderstats + Coins are now created by DataService (Day 8) so the SAVED
+--// values load in correctly. Do NOT create leaderstats here too, or you'll
+--// get a duplicate. This file is intentionally empty — put any future
+--// game-wide startup logic here.
