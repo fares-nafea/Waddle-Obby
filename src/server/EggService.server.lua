@@ -7,19 +7,15 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local EggEvent = ReplicatedStorage:WaitForChild("Events"):WaitForChild("EggEvent")
 
+-- rewards + rarities now live in one shared place (used by the UI too)
+local Catalog = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("RewardsCatalog"))
+
 --============================ CONFIG ============================--
 local EGG_COST = 100            -- coins per egg (about one obby run)
 local DUPLICATE_REFUND = 0.25   -- refund this fraction if you roll a dupe
 
--- Reward pool. Higher weight = more common.
--- Add/rename freely — this is what your viewers vote on.
-local REWARDS = {
-	{ name = "Icy Blue Penguin", rarity = "Common",    weight = 50 },
-	{ name = "Frost Trail",      rarity = "Common",    weight = 40 },
-	{ name = "Golden Penguin",   rarity = "Rare",      weight = 20 },
-	{ name = "Rainbow Trail",    rarity = "Epic",      weight = 8  },
-	{ name = "Mythic Emperor",   rarity = "Legendary", weight = 2  },
-}
+-- Edit rewards/drop-rates in src/shared/RewardsCatalog.lua
+local REWARDS = Catalog.Rewards
 --===============================================================--
 
 local debounce = {}

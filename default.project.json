@@ -48,6 +48,12 @@
         "EggEvent": {
           "$className": "RemoteEvent"
         }
+      },
+      "Shared": {
+        "$className": "Folder",
+        "RewardsCatalog": {
+          "$path": "src/shared/RewardsCatalog.lua"
+        }
       }
     },
     "ServerScriptService": {
@@ -75,6 +81,9 @@
       "StarterPlayerScripts": {
         "EggShopClient": {
           "$path": "src/client/EggShopClient.client.lua"
+        },
+        "InventoryClient": {
+          "$path": "src/client/InventoryClient.client.lua"
         }
       }
     },
