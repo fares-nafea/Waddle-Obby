@@ -31,7 +31,7 @@ local function retry(fn)
 end
 
 local function defaultData()
-	return { Coins = 0, Inventory = {} }
+	return { Coins = 0, Inventory = {}, Equipped = "" }
 end
 
 --=============== LOAD ===============--
@@ -53,6 +53,7 @@ local function loadData(player)
 
 	loaded.Coins = loaded.Coins or 0
 	loaded.Inventory = loaded.Inventory or {}
+	loaded.Equipped = loaded.Equipped or ""
 	return loaded
 end
 
@@ -80,6 +81,12 @@ local function setupPlayer(player)
 	end
 	inv.Parent = player
 
+	-- currently equipped trail (EquipService reads/writes this)
+	local equipped = Instance.new("StringValue")
+	equipped.Name = "EquippedTrail"
+	equipped.Value = data.Equipped or ""
+	equipped.Parent = player
+
 	player:SetAttribute("DataLoaded", true)
 	print("[DataService] loaded " .. player.Name .. " (" .. data.Coins .. " coins, " .. #data.Inventory .. " items)")
 end
@@ -103,6 +110,11 @@ local function saveData(player)
 		for _, child in ipairs(inv:GetChildren()) do
 			table.insert(data.Inventory, child.Name)
 		end
+	end
+
+	local equipped = player:FindFirstChild("EquippedTrail")
+	if equipped then
+		data.Equipped = equipped.Value
 	end
 
 	local ok = retry(function()

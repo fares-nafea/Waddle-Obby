@@ -47,6 +47,9 @@
         },
         "EggEvent": {
           "$className": "RemoteEvent"
+        },
+        "EquipEvent": {
+          "$className": "RemoteEvent"
         }
       },
       "Shared": {
@@ -71,6 +74,9 @@
       },
       "EggService": {
         "$path": "src/server/EggService.server.lua"
+      },
+      "EquipService": {
+        "$path": "src/server/EquipService.server.lua"
       }
     },
 

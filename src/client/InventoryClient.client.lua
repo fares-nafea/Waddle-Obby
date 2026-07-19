@@ -12,9 +12,15 @@ local playerGui = player:WaitForChild("PlayerGui")
 
 local Catalog = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("RewardsCatalog"))
 local EggEvent = ReplicatedStorage:WaitForChild("Events"):WaitForChild("EggEvent")
+local EquipEvent = ReplicatedStorage:WaitForChild("Events"):WaitForChild("EquipEvent")
 
 local RARITY = Catalog.RarityColors
 local inventory = player:WaitForChild("Inventory")
+local equippedTrail = player:WaitForChild("EquippedTrail", 10)
+
+local function equippedName()
+	return equippedTrail and equippedTrail.Value or ""
+end
 
 --============================ GUI ============================--
 local gui = Instance.new("ScreenGui")
@@ -133,7 +139,7 @@ scroll.CanvasSize = UDim2.new()
 scroll.AutomaticCanvasSize = Enum.AutomaticSize.Y
 scroll.Parent = panel
 local grid = Instance.new("UIGridLayout", scroll)
-grid.CellSize = UDim2.fromOffset(120, 150)
+grid.CellSize = UDim2.fromOffset(120, 182)
 grid.CellPadding = UDim2.fromOffset(12, 12)
 grid.SortOrder = Enum.SortOrder.LayoutOrder
 
@@ -200,13 +206,35 @@ local function render()
 
 			local rarityLbl = Instance.new("TextLabel")
 			rarityLbl.BackgroundTransparency = 1
-			rarityLbl.Size = UDim2.new(1, -12, 0, 20)
-			rarityLbl.Position = UDim2.fromOffset(6, 120)
+			rarityLbl.Size = UDim2.new(1, -12, 0, 18)
+			rarityLbl.Position = UDim2.fromOffset(6, 118)
 			rarityLbl.Font = Enum.Font.GothamMedium
 			rarityLbl.TextScaled = true
 			rarityLbl.TextColor3 = owned and rarityColor or Color3.fromRGB(90, 96, 116)
 			rarityLbl.Text = item.rarity
 			rarityLbl.Parent = card
+
+			-- Equip button (owned trails only)
+			if owned and item.type == "Trail" then
+				local isOn = equippedName() == item.name
+
+				local equipBtn = Instance.new("TextButton")
+				equipBtn.Size = UDim2.new(1, -16, 0, 30)
+				equipBtn.Position = UDim2.fromOffset(8, 144)
+				equipBtn.BackgroundColor3 = isOn and Color3.fromRGB(60, 190, 110) or Color3.fromRGB(80, 140, 255)
+				equipBtn.Text = isOn and "Equipped" or "Equip"
+				equipBtn.Font = Enum.Font.GothamBold
+				equipBtn.TextScaled = true
+				equipBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+				equipBtn.Parent = card
+				Instance.new("UICorner", equipBtn).CornerRadius = UDim.new(0, 8)
+				local ep = Instance.new("UIPadding", equipBtn)
+				ep.PaddingTop = UDim.new(0, 6); ep.PaddingBottom = UDim.new(0, 6)
+
+				equipBtn.MouseButton1Click:Connect(function()
+					EquipEvent:FireServer(item.name)
+				end)
+			end
 
 			cardByName[item.name] = card
 		end
@@ -253,6 +281,13 @@ setFilter("All")
 inventory.ChildAdded:Connect(function()
 	if panel.Visible then render() end
 end)
+
+-- refresh equip buttons when the equipped trail changes
+if equippedTrail then
+	equippedTrail.Changed:Connect(function()
+		if panel.Visible then render() end
+	end)
+end
 
 --============================ EGG REVEAL → SHOW UI ============================--
 local function pulseCard(itemName)
