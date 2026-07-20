@@ -1,6 +1,6 @@
 --// Egg Shop Client
 --// Place in: StarterPlayer > StarterPlayerScripts
---// Builds a small result popup and shows what you rolled.
+--// Shows the result popup (built in StarterGui.EggPopup) when you roll an egg.
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -16,50 +16,12 @@ local RARITY_COLORS = {
 	Legendary = Color3.fromRGB(255, 200, 40),
 }
 
--- Build the popup once
-local gui = Instance.new("ScreenGui")
-gui.Name = "EggPopup"
-gui.ResetOnSpawn = false
-gui.IgnoreGuiInset = true
-gui.Parent = player:WaitForChild("PlayerGui")
-
-local frame = Instance.new("Frame")
-frame.AnchorPoint = Vector2.new(0.5, 0.5)
-frame.Position = UDim2.fromScale(0.5, 0.35)
-frame.Size = UDim2.fromOffset(340, 130)
-frame.BackgroundColor3 = Color3.fromRGB(25, 30, 45)
-frame.BackgroundTransparency = 0.05
-frame.Visible = false
-frame.Parent = gui
-
-local corner = Instance.new("UICorner")
-corner.CornerRadius = UDim.new(0, 16)
-corner.Parent = frame
-
-local stroke = Instance.new("UIStroke")
-stroke.Thickness = 3
-stroke.Color = Color3.fromRGB(255, 255, 255)
-stroke.Parent = frame
-
-local title = Instance.new("TextLabel")
-title.BackgroundTransparency = 1
-title.Size = UDim2.new(1, -24, 0, 36)
-title.Position = UDim2.fromOffset(12, 14)
-title.Font = Enum.Font.GothamBold
-title.TextScaled = true
-title.TextColor3 = Color3.fromRGB(255, 255, 255)
-title.Text = ""
-title.Parent = frame
-
-local sub = Instance.new("TextLabel")
-sub.BackgroundTransparency = 1
-sub.Size = UDim2.new(1, -24, 0, 54)
-sub.Position = UDim2.fromOffset(12, 58)
-sub.Font = Enum.Font.GothamMedium
-sub.TextScaled = true
-sub.TextColor3 = Color3.fromRGB(230, 230, 230)
-sub.Text = ""
-sub.Parent = frame
+local playerGui = player:WaitForChild("PlayerGui")
+local gui = playerGui:WaitForChild("EggPopup")
+local frame = gui:WaitForChild("Popup")
+local stroke = frame:WaitForChild("UIStroke")
+local title = frame:WaitForChild("Title")
+local sub = frame:WaitForChild("Sub")
 
 local showToken = 0
 local function show(color, titleText, subText)
