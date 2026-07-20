@@ -151,6 +151,224 @@
             }
           }
         }
+      },
+      "Trails": {
+        "$className": "Folder",
+        "Frost Trail": {
+          "$className": "Folder",
+          "Attachment0": {
+            "$className": "Attachment",
+            "$properties": { "Position": [0, 1, 0] }
+          },
+          "Attachment1": {
+            "$className": "Attachment",
+            "$properties": { "Position": [0, -1.5, 0] }
+          },
+          "Trail": {
+            "$className": "Trail",
+            "$properties": {
+              "Color": {
+                "ColorSequence": {
+                  "keypoints": [
+                    { "time": 0.0, "color": [0.5882353, 0.8627451, 1.0] },
+                    { "time": 1.0, "color": [0.5882353, 0.8627451, 1.0] }
+                  ]
+                }
+              },
+              "Lifetime": 0.6,
+              "MinLength": 0.05,
+              "WidthScale": {
+                "NumberSequence": {
+                  "keypoints": [
+                    { "time": 0.0, "value": 1.0, "envelope": 0.0 },
+                    { "time": 1.0, "value": 0.0, "envelope": 0.0 }
+                  ]
+                }
+              },
+              "Transparency": {
+                "NumberSequence": {
+                  "keypoints": [
+                    { "time": 0.0, "value": 0.1, "envelope": 0.0 },
+                    { "time": 1.0, "value": 1.0, "envelope": 0.0 }
+                  ]
+                }
+              },
+              "FaceCamera": true
+            }
+          }
+        },
+        "Snow Trail": {
+          "$className": "Folder",
+          "Attachment0": {
+            "$className": "Attachment",
+            "$properties": { "Position": [0, 1, 0] }
+          },
+          "Attachment1": {
+            "$className": "Attachment",
+            "$properties": { "Position": [0, -1.5, 0] }
+          },
+          "Trail": {
+            "$className": "Trail",
+            "$properties": {
+              "Color": {
+                "ColorSequence": {
+                  "keypoints": [
+                    { "time": 0.0, "color": [0.9411765, 0.972549, 1.0] },
+                    { "time": 1.0, "color": [0.9411765, 0.972549, 1.0] }
+                  ]
+                }
+              },
+              "Lifetime": 0.6,
+              "MinLength": 0.05,
+              "WidthScale": {
+                "NumberSequence": {
+                  "keypoints": [
+                    { "time": 0.0, "value": 1.0, "envelope": 0.0 },
+                    { "time": 1.0, "value": 0.0, "envelope": 0.0 }
+                  ]
+                }
+              },
+              "Transparency": {
+                "NumberSequence": {
+                  "keypoints": [
+                    { "time": 0.0, "value": 0.1, "envelope": 0.0 },
+                    { "time": 1.0, "value": 1.0, "envelope": 0.0 }
+                  ]
+                }
+              },
+              "FaceCamera": true
+            }
+          }
+        },
+        "Aqua Trail": {
+          "$className": "Folder",
+          "Attachment0": {
+            "$className": "Attachment",
+            "$properties": { "Position": [0, 1, 0] }
+          },
+          "Attachment1": {
+            "$className": "Attachment",
+            "$properties": { "Position": [0, -1.5, 0] }
+          },
+          "Trail": {
+            "$className": "Trail",
+            "$properties": {
+              "Color": {
+                "ColorSequence": {
+                  "keypoints": [
+                    { "time": 0.0, "color": [0.2352941, 0.7843137, 0.8627451] },
+                    { "time": 1.0, "color": [0.2352941, 0.7843137, 0.8627451] }
+                  ]
+                }
+              },
+              "Lifetime": 0.6,
+              "MinLength": 0.05,
+              "WidthScale": {
+                "NumberSequence": {
+                  "keypoints": [
+                    { "time": 0.0, "value": 1.0, "envelope": 0.0 },
+                    { "time": 1.0, "value": 0.0, "envelope": 0.0 }
+                  ]
+                }
+              },
+              "Transparency": {
+                "NumberSequence": {
+                  "keypoints": [
+                    { "time": 0.0, "value": 0.1, "envelope": 0.0 },
+                    { "time": 1.0, "value": 1.0, "envelope": 0.0 }
+                  ]
+                }
+              },
+              "FaceCamera": true
+            }
+          }
+        },
+        "Rainbow Trail": {
+          "$className": "Folder",
+          "Attachment0": {
+            "$className": "Attachment",
+            "$properties": { "Position": [0, 1, 0] }
+          },
+          "Attachment1": {
+            "$className": "Attachment",
+            "$properties": { "Position": [0, -1.5, 0] }
+          },
+          "Trail": {
+            "$className": "Trail",
+            "$properties": {
+              "Color": {
+                "ColorSequence": {
+                  "keypoints": [
+                    { "time": 0.0, "color": [1.0, 0.4705882, 0.7843137] },
+                    { "time": 1.0, "color": [1.0, 0.4705882, 0.7843137] }
+                  ]
+                }
+              },
+              "Lifetime": 0.6,
+              "MinLength": 0.05,
+              "WidthScale": {
+                "NumberSequence": {
+                  "keypoints": [
+                    { "time": 0.0, "value": 1.0, "envelope": 0.0 },
+                    { "time": 1.0, "value": 0.0, "envelope": 0.0 }
+                  ]
+                }
+              },
+              "Transparency": {
+                "NumberSequence": {
+                  "keypoints": [
+                    { "time": 0.0, "value": 0.1, "envelope": 0.0 },
+                    { "time": 1.0, "value": 1.0, "envelope": 0.0 }
+                  ]
+                }
+              },
+              "FaceCamera": true
+            }
+          }
+        },
+        "Aurora Trail": {
+          "$className": "Folder",
+          "Attachment0": {
+            "$className": "Attachment",
+            "$properties": { "Position": [0, 1, 0] }
+          },
+          "Attachment1": {
+            "$className": "Attachment",
+            "$properties": { "Position": [0, -1.5, 0] }
+          },
+          "Trail": {
+            "$className": "Trail",
+            "$properties": {
+              "Color": {
+                "ColorSequence": {
+                  "keypoints": [
+                    { "time": 0.0, "color": [0.4705882, 1.0, 0.7058824] },
+                    { "time": 1.0, "color": [0.4705882, 1.0, 0.7058824] }
+                  ]
+                }
+              },
+              "Lifetime": 0.6,
+              "MinLength": 0.05,
+              "WidthScale": {
+                "NumberSequence": {
+                  "keypoints": [
+                    { "time": 0.0, "value": 1.0, "envelope": 0.0 },
+                    { "time": 1.0, "value": 0.0, "envelope": 0.0 }
+                  ]
+                }
+              },
+              "Transparency": {
+                "NumberSequence": {
+                  "keypoints": [
+                    { "time": 0.0, "value": 0.1, "envelope": 0.0 },
+                    { "time": 1.0, "value": 1.0, "envelope": 0.0 }
+                  ]
+                }
+              },
+              "FaceCamera": true
+            }
+          }
+        }
       }
     },
     "ServerScriptService": {
