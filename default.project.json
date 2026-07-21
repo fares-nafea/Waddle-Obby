@@ -928,9 +928,6 @@
         },
         "ObbyClient": {
           "$path": "src/client/ObbyClient.client.lua"
-        },
-        "TimerDebug": {
-          "$path": "src/client/TimerDebug.client.lua"
         }
       }
     },
