@@ -31,7 +31,7 @@ local function retry(fn)
 end
 
 local function defaultData()
-	return { Coins = 0, Inventory = {}, Equipped = "" }
+	return { Coins = 0, Inventory = {}, Equipped = "", BestTimes = {} }
 end
 
 --=============== LOAD ===============--
@@ -54,6 +54,7 @@ local function loadData(player)
 	loaded.Coins = loaded.Coins or 0
 	loaded.Inventory = loaded.Inventory or {}
 	loaded.Equipped = loaded.Equipped or ""
+	loaded.BestTimes = loaded.BestTimes or {}
 	return loaded
 end
 
@@ -87,6 +88,17 @@ local function setupPlayer(player)
 	equipped.Value = data.Equipped or ""
 	equipped.Parent = player
 
+	-- one IntValue per Obby (milliseconds) - TimeService reads/writes these
+	local bestTimes = Instance.new("Folder")
+	bestTimes.Name = "BestTimes"
+	for obbyId, timeMs in pairs(data.BestTimes) do
+		local entry = Instance.new("IntValue")
+		entry.Name = obbyId
+		entry.Value = timeMs
+		entry.Parent = bestTimes
+	end
+	bestTimes.Parent = player
+
 	player:SetAttribute("DataLoaded", true)
 	print("[DataService] loaded " .. player.Name .. " (" .. data.Coins .. " coins, " .. #data.Inventory .. " items)")
 end
@@ -115,6 +127,13 @@ local function saveData(player)
 	local equipped = player:FindFirstChild("EquippedTrail")
 	if equipped then
 		data.Equipped = equipped.Value
+	end
+
+	local bestTimes = player:FindFirstChild("BestTimes")
+	if bestTimes then
+		for _, entry in ipairs(bestTimes:GetChildren()) do
+			data.BestTimes[entry.Name] = entry.Value
+		end
 	end
 
 	local ok = retry(function()

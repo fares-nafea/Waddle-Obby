@@ -1,0 +1,146 @@
+--// Obby Client
+--// Place in: StarterPlayer > StarterPlayerScripts
+--// Drives the Timer UI (StarterGui.TimerGui) while a run is active, and the
+--// Result UI (StarterGui.ResultGui) - time, best time, "NEW BEST TIME!" and
+--// that Obby's live leaderboard - when a run finishes.
+--// All times shown come from the server (TimerEvent); this script never
+--// computes an authoritative time, only renders one.
+
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
+
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+local Events = ReplicatedStorage:WaitForChild("Events")
+local TimerEvent = Events:WaitForChild("TimerEvent")
+local LeaderboardEvent = Events:WaitForChild("LeaderboardEvent")
+
+local Shared = ReplicatedStorage:WaitForChild("Shared")
+local ObbyConfig = require(Shared:WaitForChild("ObbyConfig"))
+local rowTemplate = Shared:WaitForChild("Templates"):WaitForChild("LeaderboardRow")
+
+--============================ GUI ============================--
+local timerGui = playerGui:WaitForChild("TimerGui")
+local timerFrame = timerGui:WaitForChild("TimerFrame")
+local timerObbyLbl = timerFrame:WaitForChild("ObbyLbl")
+local timerTimeLbl = timerFrame:WaitForChild("TimeLbl")
+
+local resultGui = playerGui:WaitForChild("ResultGui")
+local dim = resultGui:WaitForChild("Dim")
+local panel = resultGui:WaitForChild("Panel")
+local closeBtn = panel:WaitForChild("CloseBtn")
+local bestBanner = panel:WaitForChild("BestBanner")
+local titleLbl = panel:WaitForChild("Title")
+local timeLbl = panel:WaitForChild("TimeLbl")
+local bestLbl = panel:WaitForChild("BestLbl")
+local rewardLbl = panel:WaitForChild("RewardLbl")
+local list = panel:WaitForChild("List")
+
+--============================ TIME FORMATTING ============================--
+-- ms -> "00:24.35"
+local function formatMs(ms)
+	local totalSeconds = ms / 1000
+	local minutes = math.floor(totalSeconds / 60)
+	local secs = totalSeconds % 60
+	return string.format("%02d:%05.2f", minutes, secs)
+end
+
+--============================ TIMER UI ============================--
+local running = false
+local runStart = 0
+local heartbeatConn = nil
+
+local function stopTimerDisplay()
+	running = false
+	timerFrame.Visible = false
+	if heartbeatConn then
+		heartbeatConn:Disconnect()
+		heartbeatConn = nil
+	end
+end
+
+local function startTimerDisplay(obbyId)
+	stopTimerDisplay()
+
+	running = true
+	runStart = os.clock()
+	timerObbyLbl.Text = ObbyConfig.getDisplayName(obbyId)
+	timerTimeLbl.Text = "00:00.00"
+	timerFrame.Visible = true
+
+	-- purely cosmetic local stopwatch; the server's "Finish" value is authoritative
+	heartbeatConn = RunService.Heartbeat:Connect(function()
+		if not running then return end
+		timerTimeLbl.Text = formatMs((os.clock() - runStart) * 1000)
+	end)
+end
+
+--============================ LEADERBOARD ============================--
+local function renderLeaderboard(entries)
+	for _, child in ipairs(list:GetChildren()) do
+		if child:IsA("Frame") then child:Destroy() end
+	end
+
+	for _, entry in ipairs(entries) do
+		local row = rowTemplate:Clone()
+		row.LayoutOrder = entry.rank
+		row:WaitForChild("RankLbl").Text = "#" .. entry.rank
+		row:WaitForChild("NameLbl").Text = entry.name
+		row:WaitForChild("TimeLbl").Text = formatMs(entry.timeMs)
+		row.Parent = list
+	end
+end
+
+--============================ RESULT UI ============================--
+local function showResult(obbyId, timeMs, reward, isNewBest, bestMs)
+	titleLbl.Text = ObbyConfig.getDisplayName(obbyId) .. " Complete!"
+	timeLbl.Text = "Your Time: " .. formatMs(timeMs)
+	bestLbl.Text = "Best Time: " .. formatMs(bestMs)
+	rewardLbl.Text = "+" .. reward .. " Coins"
+	bestBanner.Visible = isNewBest
+
+	renderLeaderboard({}) -- clear stale rows while the fresh list loads
+	dim.Visible = true
+	panel.Visible = true
+
+	LeaderboardEvent:FireServer(obbyId)
+end
+
+local function hideResult()
+	dim.Visible = false
+	panel.Visible = false
+end
+
+closeBtn.MouseButton1Click:Connect(hideResult)
+dim.MouseButton1Click:Connect(hideResult)
+
+--============================ SERVER EVENTS ============================--
+TimerEvent.OnClientEvent:Connect(function(action, obbyId, ...)
+	if action == "Start" then
+		startTimerDisplay(obbyId)
+
+	elseif action == "Reset" then
+		stopTimerDisplay()
+
+	elseif action == "Finish" then
+		local timeMs, reward, isNewBest, bestMs = ...
+		stopTimerDisplay()
+
+		-- guard against a malformed/stale payload instead of erroring mid-render
+		-- (a silent error here would leave Title/Your Time set but Best Time blank)
+		if type(bestMs) ~= "number" then
+			warn("[ObbyClient] Finish payload missing bestMs for " .. tostring(obbyId) .. " - ignoring")
+			return
+		end
+
+		showResult(obbyId, timeMs, reward, isNewBest, bestMs)
+	end
+end)
+
+LeaderboardEvent.OnClientEvent:Connect(function(action, obbyId, entries)
+	if action ~= "Data" then return end
+	if not panel.Visible then return end -- ignore late responses after the panel closed
+	renderLeaderboard(entries)
+end)
