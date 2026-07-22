@@ -21,6 +21,12 @@ local REQUEST_COOLDOWN = 2  -- min seconds between leaderboard requests per play
 
 local Leaderboard = {}
 
+-- fired (obbyId) whenever a report actually lands a new best time, so other
+-- systems (e.g. WorldLeaderboardService) can refresh instantly instead of
+-- polling
+local recordUpdated = Instance.new("BindableEvent")
+Leaderboard.OnRecordUpdated = recordUpdated.Event
+
 local orderedStores = {}    -- obbyId -> OrderedDataStore
 local cache = {}            -- obbyId -> { entries = {...}, fetchedAt = os.clock() }
 local lastRequest = {}       -- player -> os.clock()
@@ -39,11 +45,20 @@ local function getStore(obbyId)
 	return store
 end
 
--- every Obby folder currently in workspace.Stages - used to reject bogus
--- obbyId strings a client might send
+-- true if some workspace.Stages folder currently resolves to this ObbyId -
+-- used to reject bogus obbyId strings a client might send. Folder names are
+-- just labels (e.g. "Stage 1"); Config.getObbyId extracts the real ObbyId,
+-- so this can't do a direct FindFirstChild(obbyId) lookup
 local function isKnownObby(obbyId)
 	local stages = Workspace:FindFirstChild("Stages")
-	return stages ~= nil and stages:FindFirstChild(obbyId) ~= nil
+	if not stages then return false end
+
+	for _, stage in ipairs(stages:GetChildren()) do
+		if Config.getObbyId(stage.Name) == obbyId then
+			return true
+		end
+	end
+	return false
 end
 
 -- record a new best time; safe to call even if it isn't actually better,
@@ -69,6 +84,7 @@ function Leaderboard.ReportTime(player, obbyId, timeMs)
 	end
 
 	cache[obbyId] = nil -- invalidate so the next fetch picks up the new entry
+	recordUpdated:Fire(obbyId)
 end
 
 -- fetch (with caching) the top N {rank, name, timeMs} for an Obby

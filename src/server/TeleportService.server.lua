@@ -31,7 +31,9 @@ for _, gate in ipairs(GatesFolder:GetChildren()) do
 		local stageNum = portal:GetAttribute("Stage-Num")
 
 		if stageNum then
-			local stage = StagesFolder:FindFirstChild(tostring(stageNum))
+			local stageName = "Stage " .. stageNum
+			print("[TeleportService] Searching for stage folder: " .. stageName)
+			local stage = StagesFolder:FindFirstChild(stageName)
 
 			if stage then
 				local tpPart = stage:FindFirstChild("TpPart")
@@ -53,76 +55,94 @@ for _, gate in ipairs(GatesFolder:GetChildren()) do
 	end)
 end
 
+-- "Stage 1" -> "Gate1": pulls the number out of the stage folder's Name and
+-- rebuilds it in Gates' naming convention (no space, "Gate" prefix)
+local function getGateNameForStage(stage)
+	local stageNumber = stage.Name:match("%d+")
+	if not stageNumber then
+		return nil
+	end
+	return "Gate" .. stageNumber
+end
+
 for _, stage in ipairs(StagesFolder:GetChildren()) do
-	local exitPart = stage:WaitForChild("ExitPart")
+	local exitPart = stage:FindFirstChild("ExitPart")
+	if not exitPart then
+		warn("[TeleportService] " .. stage.Name .. " has no ExitPart - its exit teleport won't be wired up")
+	end
+
 	local FinishPart = stage:WaitForChild("FinishPart")
-	
-	exitPart.Touched:Connect(function(hit)
-		local character = hit.Parent
-		local player = Players:GetPlayerFromCharacter(character)
 
-		if not player then
-			return
-		end
+	if exitPart then
+		exitPart.Touched:Connect(function(hit)
+			local character = hit.Parent
+			local player = Players:GetPlayerFromCharacter(character)
 
-		if debounce[player] then
-			return
-		end
-
-		debounce[player] = true
-
-		local gate = GatesFolder:FindFirstChild("Gate" .. stage.Name)
-
-		if gate then
-			local spawnPart = gate:FindFirstChild("SpawnPart")
-
-			if spawnPart then
-				character:PivotTo(spawnPart.CFrame + Vector3.new(0, 3, 0))
-			else
-				warn("SpawnPart Not Found in " .. gate.Name)
+			if not player then
+				return
 			end
-		else
-			warn("Gate" .. stage.Name .. " Not Found")
-		end
-		
-		warn("Leaved Stage")
 
-		task.wait(1)
-		debounce[player] = nil
-	end)
-	
+			if debounce[player] then
+				return
+			end
+
+			debounce[player] = true
+
+			local gateName = getGateNameForStage(stage)
+			local gate = gateName and GatesFolder:FindFirstChild(gateName)
+
+			if gate then
+				local spawnPart = gate:FindFirstChild("SpawnPart")
+
+				if spawnPart then
+					character:PivotTo(spawnPart.CFrame + Vector3.new(0, 3, 0))
+				else
+					warn("SpawnPart Not Found in " .. gate.Name)
+				end
+			else
+				warn(tostring(gateName) .. " Not Found for " .. stage.Name)
+			end
+
+			warn("Leaved Stage")
+
+			task.wait(1)
+			debounce[player] = nil
+		end)
+	end
+
 	FinishPart.Touched:Connect(function(hit)
 		local character = hit.Parent
 		local player = Players:GetPlayerFromCharacter(character)
-		
+
 		if not player then
 			return
 		end
-		
+
 		if debounce[player] then
 			return
 		end
-		
+
 		debounce[player] = true
-		
-		local gate = GatesFolder:FindFirstChild("Gate" .. stage.Name)
-		
+
+		local gateName = getGateNameForStage(stage)
+		local gate = gateName and GatesFolder:FindFirstChild(gateName)
+
 		if gate then
 			local spawnPart = gate:FindFirstChild("SpawnPart")
-			
+
 			if spawnPart then
 				character:PivotTo(spawnPart.CFrame + Vector3.new(0, 3, 0))
 			else
-				print("spawnpart not found in ", stage.Name)
+				print("spawnpart not found in ", gate.Name)
 			end
 		else
-			print("gate not found ", stage.Name)
+			print("gate not found ", tostring(gateName))
 		end
-		
+
 		warn("Finished")
-		
+
 		task.wait(1)
 		debounce[player] = nil
 	end)
-	
+
 end

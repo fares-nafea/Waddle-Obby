@@ -208,6 +208,107 @@
                 }
               }
             }
+          },
+          "LeaderboardBoard": {
+            "$className": "Part",
+            "$properties": {
+              "Size": [8, 6, 0.4],
+              "Anchored": true,
+              "CanCollide": false,
+              "CanQuery": false,
+              "CastShadow": false,
+              "Material": "SmoothPlastic",
+              "Color": [0.0980392, 0.1058824, 0.1372549]
+            },
+            "WorldLeaderboardGui": {
+              "$className": "SurfaceGui",
+              "$properties": {
+                "Face": "Front",
+                "SizingMode": "PixelsPerStud",
+                "PixelsPerStud": 50,
+                "LightInfluence": 0,
+                "AlwaysOnTop": false,
+                "ClipsDescendants": true
+              },
+              "Board": {
+                "$className": "Frame",
+                "$properties": {
+                  "Size": { "UDim2": [[1, 0], [1, 0]] },
+                  "BackgroundColor3": [0.0784314, 0.1019608, 0.1647059],
+                  "BackgroundTransparency": 0.08,
+                  "BorderSizePixel": 0
+                },
+                "UIStroke": {
+                  "$className": "UIStroke",
+                  "$properties": {
+                    "Color": [0.2156863, 0.2431373, 0.3294118],
+                    "Thickness": 2
+                  }
+                },
+                "Title": {
+                  "$className": "TextLabel",
+                  "$properties": {
+                    "BackgroundTransparency": 1,
+                    "Size": { "UDim2": [[0.92, 0], [0.115, 0]] },
+                    "Position": { "UDim2": [[0.04, 0], [0.035, 0]] },
+                    "Font": "GothamBold",
+                    "TextScaled": true,
+                    "TextColor3": [1.0, 0.8156863, 0.1568628],
+                    "Text": "🏆 Fastest Players"
+                  }
+                },
+                "Subtitle": {
+                  "$className": "TextLabel",
+                  "$properties": {
+                    "BackgroundTransparency": 1,
+                    "Size": { "UDim2": [[0.92, 0], [0.07, 0]] },
+                    "Position": { "UDim2": [[0.04, 0], [0.155, 0]] },
+                    "Font": "GothamMedium",
+                    "TextScaled": true,
+                    "TextColor3": [0.6666667, 0.6901961, 0.7607843],
+                    "Text": ""
+                  }
+                },
+                "Divider": {
+                  "$className": "Frame",
+                  "$properties": {
+                    "BackgroundColor3": [0.2156863, 0.2431373, 0.3294118],
+                    "BorderSizePixel": 0,
+                    "Size": { "UDim2": [[0.92, 0], [0.006, 0]] },
+                    "Position": { "UDim2": [[0.04, 0], [0.235, 0]] }
+                  }
+                },
+                "List": {
+                  "$className": "Frame",
+                  "$properties": {
+                    "BackgroundTransparency": 1,
+                    "Size": { "UDim2": [[0.92, 0], [0.72, 0]] },
+                    "Position": { "UDim2": [[0.04, 0], [0.265, 0]] },
+                    "ClipsDescendants": true
+                  },
+                  "UIListLayout": {
+                    "$className": "UIListLayout",
+                    "$properties": {
+                      "Padding": { "UDim": [0.006, 0] },
+                      "SortOrder": "LayoutOrder"
+                    }
+                  },
+                  "EmptyLbl": {
+                    "$className": "TextLabel",
+                    "$properties": {
+                      "BackgroundTransparency": 1,
+                      "Size": { "UDim2": [[1, 0], [0.1, 0]] },
+                      "LayoutOrder": 0,
+                      "Font": "GothamMedium",
+                      "TextScaled": true,
+                      "TextColor3": [0.4705882, 0.5019608, 0.5803922],
+                      "Text": "No times yet - be the first!",
+                      "Visible": false
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -224,35 +325,7 @@
             "$properties": { "Position": [0, -1.5, 0] }
           },
           "Trail": {
-            "$className": "Trail",
-            "$properties": {
-              "Color": {
-                "ColorSequence": {
-                  "keypoints": [
-                    { "time": 0.0, "color": [0.5882353, 0.8627451, 1.0] },
-                    { "time": 1.0, "color": [0.5882353, 0.8627451, 1.0] }
-                  ]
-                }
-              },
-              "Lifetime": 0.6,
-              "MinLength": 0.05,
-              "WidthScale": {
-                "NumberSequence": {
-                  "keypoints": [
-                    { "time": 0.0, "value": 1.0, "envelope": 0.0 },
-                    { "time": 1.0, "value": 0.0, "envelope": 0.0 }
-                  ]
-                }
-              },
-              "Transparency": {
-                "NumberSequence": {
-                  "keypoints": [
-                    { "time": 0.0, "value": 0.1, "envelope": 0.0 },
-                    { "time": 1.0, "value": 1.0, "envelope": 0.0 }
-                  ]
-                }
-              },
-              "FaceCamera": true
+            "$className": "Trail"
             }
           }
         },
@@ -267,36 +340,7 @@
             "$properties": { "Position": [0, -1.5, 0] }
           },
           "Trail": {
-            "$className": "Trail",
-            "$properties": {
-              "Color": {
-                "ColorSequence": {
-                  "keypoints": [
-                    { "time": 0.0, "color": [0.9411765, 0.972549, 1.0] },
-                    { "time": 1.0, "color": [0.9411765, 0.972549, 1.0] }
-                  ]
-                }
-              },
-              "Lifetime": 0.6,
-              "MinLength": 0.05,
-              "WidthScale": {
-                "NumberSequence": {
-                  "keypoints": [
-                    { "time": 0.0, "value": 1.0, "envelope": 0.0 },
-                    { "time": 1.0, "value": 0.0, "envelope": 0.0 }
-                  ]
-                }
-              },
-              "Transparency": {
-                "NumberSequence": {
-                  "keypoints": [
-                    { "time": 0.0, "value": 0.1, "envelope": 0.0 },
-                    { "time": 1.0, "value": 1.0, "envelope": 0.0 }
-                  ]
-                }
-              },
-              "FaceCamera": true
-            }
+            "$className": "Trail"
           }
         },
         "Aqua Trail": {
@@ -310,36 +354,7 @@
             "$properties": { "Position": [0, -1.5, 0] }
           },
           "Trail": {
-            "$className": "Trail",
-            "$properties": {
-              "Color": {
-                "ColorSequence": {
-                  "keypoints": [
-                    { "time": 0.0, "color": [0.2352941, 0.7843137, 0.8627451] },
-                    { "time": 1.0, "color": [0.2352941, 0.7843137, 0.8627451] }
-                  ]
-                }
-              },
-              "Lifetime": 0.6,
-              "MinLength": 0.05,
-              "WidthScale": {
-                "NumberSequence": {
-                  "keypoints": [
-                    { "time": 0.0, "value": 1.0, "envelope": 0.0 },
-                    { "time": 1.0, "value": 0.0, "envelope": 0.0 }
-                  ]
-                }
-              },
-              "Transparency": {
-                "NumberSequence": {
-                  "keypoints": [
-                    { "time": 0.0, "value": 0.1, "envelope": 0.0 },
-                    { "time": 1.0, "value": 1.0, "envelope": 0.0 }
-                  ]
-                }
-              },
-              "FaceCamera": true
-            }
+            "$className": "Trail"
           }
         },
         "Rainbow Trail": {
@@ -353,36 +368,7 @@
             "$properties": { "Position": [0, -1.5, 0] }
           },
           "Trail": {
-            "$className": "Trail",
-            "$properties": {
-              "Color": {
-                "ColorSequence": {
-                  "keypoints": [
-                    { "time": 0.0, "color": [1.0, 0.4705882, 0.7843137] },
-                    { "time": 1.0, "color": [1.0, 0.4705882, 0.7843137] }
-                  ]
-                }
-              },
-              "Lifetime": 0.6,
-              "MinLength": 0.05,
-              "WidthScale": {
-                "NumberSequence": {
-                  "keypoints": [
-                    { "time": 0.0, "value": 1.0, "envelope": 0.0 },
-                    { "time": 1.0, "value": 0.0, "envelope": 0.0 }
-                  ]
-                }
-              },
-              "Transparency": {
-                "NumberSequence": {
-                  "keypoints": [
-                    { "time": 0.0, "value": 0.1, "envelope": 0.0 },
-                    { "time": 1.0, "value": 1.0, "envelope": 0.0 }
-                  ]
-                }
-              },
-              "FaceCamera": true
-            }
+            "$className": "Trail"
           }
         },
         "Aurora Trail": {
@@ -396,36 +382,7 @@
             "$properties": { "Position": [0, -1.5, 0] }
           },
           "Trail": {
-            "$className": "Trail",
-            "$properties": {
-              "Color": {
-                "ColorSequence": {
-                  "keypoints": [
-                    { "time": 0.0, "color": [0.4705882, 1.0, 0.7058824] },
-                    { "time": 1.0, "color": [0.4705882, 1.0, 0.7058824] }
-                  ]
-                }
-              },
-              "Lifetime": 0.6,
-              "MinLength": 0.05,
-              "WidthScale": {
-                "NumberSequence": {
-                  "keypoints": [
-                    { "time": 0.0, "value": 1.0, "envelope": 0.0 },
-                    { "time": 1.0, "value": 0.0, "envelope": 0.0 }
-                  ]
-                }
-              },
-              "Transparency": {
-                "NumberSequence": {
-                  "keypoints": [
-                    { "time": 0.0, "value": 0.1, "envelope": 0.0 },
-                    { "time": 1.0, "value": 1.0, "envelope": 0.0 }
-                  ]
-                }
-              },
-              "FaceCamera": true
-            }
+            "$className": "Trail"
           }
         }
       }
@@ -446,6 +403,9 @@
       "LeaderboardService": {
         "$path": "src/server/LeaderboardService.lua"
       },
+      "WorldLeaderboardService": {
+        "$path": "src/server/WorldLeaderboardService.server.lua"
+      },
       "EggService": {
         "$path": "src/server/EggService.server.lua"
       },
@@ -453,10 +413,8 @@
         "$path": "src/server/EquipService.server.lua"
       }
     },
-
     "SoundService": {
     },
-
     "StarterGui": {
       "EggPopup": {
         "$className": "ScreenGui",
@@ -917,7 +875,6 @@
         }
       }
     },
-
     "StarterPlayer": {
       "StarterPlayerScripts": {
         "EggShopClient": {

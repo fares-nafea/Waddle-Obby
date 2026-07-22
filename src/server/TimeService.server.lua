@@ -54,7 +54,7 @@ end
 
 --=============== SETUP ===============--
 local function setupStage(stage)
-	local obbyId = stage.Name
+	local obbyId = Config.getObbyId(stage.Name)
 	local StartPart = stage:FindFirstChild("StartTimer")
 	local StopPart = stage:FindFirstChild("StopTimer")
 	local ExitPart = stage:FindFirstChild("ExitPart")
