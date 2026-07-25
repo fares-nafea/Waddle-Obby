@@ -63,6 +63,12 @@
         "ObbyConfig": {
           "$path": "src/shared/ObbyConfig.lua"
         },
+        "ShopConfig": {
+          "$path": "src/shared/ShopConfig.lua"
+        },
+        "RewardConfig": {
+          "$path": "src/shared/RewardConfig.lua"
+        },
         "Templates": {
           "$className": "Folder",
           "LeaderboardRow": {
@@ -326,7 +332,6 @@
           },
           "Trail": {
             "$className": "Trail"
-            }
           }
         },
         "Snow Trail": {
@@ -411,6 +416,9 @@
       },
       "EquipService": {
         "$path": "src/server/EquipService.server.lua"
+      },
+      "ShopService": {
+        "$path": "src/server/ShopService.server.lua"
       }
     },
     "SoundService": {
@@ -885,6 +893,9 @@
         },
         "ObbyClient": {
           "$path": "src/client/ObbyClient.client.lua"
+        },
+        "ShopClient": {
+          "$path": "src/client/ShopClient.client.lua"
         }
       }
     },

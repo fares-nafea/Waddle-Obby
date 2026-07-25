@@ -31,7 +31,7 @@ local function retry(fn)
 end
 
 local function defaultData()
-	return { Coins = 0, Inventory = {}, Equipped = "", BestTimes = {} }
+	return { Coins = 0, Inventory = {}, Equipped = "", BestTimes = {}, EquippedItems = {} }
 end
 
 --=============== LOAD ===============--
@@ -55,6 +55,7 @@ local function loadData(player)
 	loaded.Inventory = loaded.Inventory or {}
 	loaded.Equipped = loaded.Equipped or ""
 	loaded.BestTimes = loaded.BestTimes or {}
+	loaded.EquippedItems = loaded.EquippedItems or {}
 	return loaded
 end
 
@@ -99,6 +100,19 @@ local function setupPlayer(player)
 	end
 	bestTimes.Parent = player
 
+	-- shop items currently equipped (ShopService reads/writes these) - kept
+	-- separate from the single EquippedTrail slot above since a player can
+	-- have more than one shop item equipped at once
+	local equippedItems = Instance.new("Folder")
+	equippedItems.Name = "EquippedItems"
+	for _, itemName in ipairs(data.EquippedItems) do
+		local b = Instance.new("BoolValue")
+		b.Name = itemName
+		b.Value = true
+		b.Parent = equippedItems
+	end
+	equippedItems.Parent = player
+
 	player:SetAttribute("DataLoaded", true)
 	print("[DataService] loaded " .. player.Name .. " (" .. data.Coins .. " coins, " .. #data.Inventory .. " items)")
 end
@@ -133,6 +147,13 @@ local function saveData(player)
 	if bestTimes then
 		for _, entry in ipairs(bestTimes:GetChildren()) do
 			data.BestTimes[entry.Name] = entry.Value
+		end
+	end
+
+	local equippedItems = player:FindFirstChild("EquippedItems")
+	if equippedItems then
+		for _, entry in ipairs(equippedItems:GetChildren()) do
+			table.insert(data.EquippedItems, entry.Name)
 		end
 	end
 

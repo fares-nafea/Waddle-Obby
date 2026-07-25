@@ -11,11 +11,16 @@ local ServerScriptService = game:GetService("ServerScriptService")
 
 local TimerEvent = ReplicatedStorage:WaitForChild("Events"):WaitForChild("TimerEvent")
 local Config = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("ObbyConfig"))
+local RewardConfig = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("RewardConfig"))
 local Leaderboard = require(ServerScriptService:WaitForChild("LeaderboardService"))
 
 -- activeRuns[player] = { obbyId = string, startTick = number }
 local activeRuns = {}
-local debounce = {}
+-- separate debounce per touch part: a StopPart touch must never be blocked
+-- by a StartPart debounce still cooling down from a few hundred ms earlier
+-- (a legitimate finish can land well within 0.5s of the start on short obbys)
+local startDebounce = {}
+local stopDebounce = {}
 
 --=============== BEST TIME (backed by the BestTimes folder DataService loads/saves) ===============--
 local function getBestTimesFolder(player)
@@ -92,14 +97,14 @@ local function setupStage(stage)
 		-- don't let anyone start until their real save data (best times) has loaded
 		if not player:GetAttribute("DataLoaded") then return end
 
-		if debounce[player] then return end
-		debounce[player] = true
+		if startDebounce[player] then return end
+		startDebounce[player] = true
 
 		activeRuns[player] = { obbyId = obbyId, startTick = os.clock() }
 		TimerEvent:FireClient(player, "Start", obbyId)
 
 		task.wait(0.5)
-		debounce[player] = nil
+		startDebounce[player] = nil
 	end)
 
 	StopPart.Touched:Connect(function(hit)
@@ -107,12 +112,12 @@ local function setupStage(stage)
 		local player = Players:GetPlayerFromCharacter(character)
 		if not player then return end
 
-		if debounce[player] then return end
+		if stopDebounce[player] then return end
 
 		local run = activeRuns[player]
 		if not run or run.obbyId ~= obbyId then return end
 
-		debounce[player] = true
+		stopDebounce[player] = true
 
 		local elapsed = os.clock() - run.startTick
 		activeRuns[player] = nil
@@ -122,15 +127,15 @@ local function setupStage(stage)
 			warn(player.Name .. " rejected finish on " .. obbyId .. " (" .. formatSeconds(elapsed) .. " - too fast)")
 			TimerEvent:FireClient(player, "Reset", obbyId)
 			task.wait(0.5)
-			debounce[player] = nil
+			stopDebounce[player] = nil
 			return
 		end
 
 		local timeMs = math.floor(elapsed * 1000)
 		print(player.Name .. " finished " .. obbyId .. " in " .. formatSeconds(elapsed))
 
-		-- reward formula unchanged from the original TimerService
-		local reward = math.max(math.floor((5000 / elapsed) + math.random(-50, 50)), 0)
+		-- reward scales with how fast this run was relative to the Obby's TargetTime
+		local reward = RewardConfig.GetReward(obbyId, elapsed)
 		local leaderstats = player:FindFirstChild("leaderstats")
 		if leaderstats then
 			local coins = leaderstats:FindFirstChild("Coins")
@@ -154,7 +159,7 @@ local function setupStage(stage)
 		TimerEvent:FireClient(player, "Finish", obbyId, timeMs, reward, isNewBest, bestMs)
 
 		task.wait(0.5)
-		debounce[player] = nil
+		stopDebounce[player] = nil
 	end)
 end
 
@@ -175,7 +180,8 @@ Players.PlayerAdded:Connect(function(player)
 		humanoid.Died:Connect(function()
 			local run = activeRuns[player]
 			activeRuns[player] = nil
-			debounce[player] = nil
+			startDebounce[player] = nil
+			stopDebounce[player] = nil
 
 			if run then
 				TimerEvent:FireClient(player, "Reset", run.obbyId)
@@ -186,5 +192,6 @@ end)
 
 Players.PlayerRemoving:Connect(function(player)
 	activeRuns[player] = nil
-	debounce[player] = nil
+	startDebounce[player] = nil
+	stopDebounce[player] = nil
 end)

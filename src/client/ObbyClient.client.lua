@@ -47,6 +47,14 @@ local function formatMs(ms)
 	return string.format("%02d:%05.2f", minutes, secs)
 end
 
+-- ms -> "01:23.456" (millisecond-precise, for the completion notification)
+local function formatMsPrecise(ms)
+	local minutes = math.floor(ms / 60000)
+	local secs = math.floor(ms % 60000 / 1000)
+	local millis = ms % 1000
+	return string.format("%02d:%02d.%03d", minutes, secs, millis)
+end
+
 --============================ TIMER UI ============================--
 local running = false
 local runStart = 0
@@ -95,10 +103,10 @@ end
 
 --============================ RESULT UI ============================--
 local function showResult(obbyId, timeMs, reward, isNewBest, bestMs)
-	titleLbl.Text = ObbyConfig.getDisplayName(obbyId) .. " Complete!"
+	titleLbl.Text = "Completed in " .. formatMsPrecise(timeMs)
 	timeLbl.Text = "Your Time: " .. formatMs(timeMs)
 	bestLbl.Text = "Best Time: " .. formatMs(bestMs)
-	rewardLbl.Text = "+" .. reward .. " Coins"
+	rewardLbl.Text = "Reward: +" .. reward .. " Coins"
 	bestBanner.Visible = isNewBest
 
 	renderLeaderboard({}) -- clear stale rows while the fresh list loads
