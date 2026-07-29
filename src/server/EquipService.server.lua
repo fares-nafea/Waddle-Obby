@@ -4,13 +4,31 @@
 --// it re-checks ownership from the Inventory folder and never trusts the client.
 --// Trail templates (Trail + Attachment0 + Attachment1, fully configured) live in
 --// ReplicatedStorage.Trails; this script only clones and wires them onto a character.
+--//
+--// A trail name is valid whether it was won from an Egg (RewardsCatalog) or
+--// bought directly in the Shop (TrailConfig) - either registry is enough,
+--// since both ultimately just point at the same ReplicatedStorage.Trails
+--// template. This is the one place equip state lives, which is also what
+--// guarantees a player can only ever have one trail equipped at a time.
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local EquipEvent = ReplicatedStorage:WaitForChild("Events"):WaitForChild("EquipEvent")
-local Catalog = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("RewardsCatalog"))
+local Shared = ReplicatedStorage:WaitForChild("Shared")
+local Catalog = require(Shared:WaitForChild("RewardsCatalog"))
+local TrailConfig = require(Shared:WaitForChild("TrailConfig"))
 local Trails = ReplicatedStorage:WaitForChild("Trails")
+
+-- true if `trailName` is a real, equippable trail - either won from an Egg
+-- (RewardsCatalog) or sold directly in the Shop (TrailConfig)
+local function isValidTrail(trailName)
+	local rewardItem = Catalog.get(trailName)
+	if rewardItem and rewardItem.type == "Trail" then
+		return true
+	end
+	return TrailConfig.get(trailName) ~= nil
+end
 
 local function getRoot(character)
 	return character:FindFirstChild("HumanoidRootPart")
@@ -39,8 +57,7 @@ local function applyTrail(character, trailName)
 
 	if trailName == "" then return end
 
-	local item = Catalog.get(trailName)
-	if not item or item.type ~= "Trail" then return end
+	if not isValidTrail(trailName) then return end
 
 	local template = Trails:FindFirstChild(trailName)
 	if not template then return end
@@ -75,8 +92,7 @@ EquipEvent.OnServerEvent:Connect(function(player, trailName)
 		local inv = player:FindFirstChild("Inventory")
 		if not (inv and inv:FindFirstChild(trailName)) then return end
 
-		local item = Catalog.get(trailName)
-		if not item or item.type ~= "Trail" then return end
+		if not isValidTrail(trailName) then return end
 
 		-- clicking the one you already wear = take it off
 		if equipped.Value == trailName then

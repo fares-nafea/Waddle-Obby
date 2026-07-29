@@ -2,14 +2,38 @@
 local Players = game:GetService("Players")
 local DataStoreService = game:GetService("DataStoreService")
 local RunService = game:GetService("RunService")
+local HttpService = game:GetService("HttpService")
 
 local store = DataStoreService:GetDataStore("PlayerData_v1")
 
 local MAX_RETRIES = 5
 local AUTOSAVE_EVERY = 60 -- seconds
 
+--// SESSION LOCKING
+--// Two servers must never hold the same player's data at the same time. If they
+--// do, the older server's autosave overwrites the newer server's progress -
+--// that's the classic Roblox rollback / item-duplication bug, and it usually
+--// shows up on rejoins and teleports rather than in testing.
+--//
+--// Every write stamps the key with this server's SESSION_ID and the time, and a
+--// server only ever writes to a key it still owns. The autosave loop refreshes
+--// SessionStamp, so a stamp older than LOCK_STALE_AFTER means that server
+--// crashed without releasing the lock and it's safe to take over.
+local SESSION_ID = (game.JobId ~= "" and game.JobId) or HttpService:GenerateGUID(false)
+local LOCK_STALE_AFTER = 180 -- seconds; 3 missed autosaves = the owner is gone
+local LOCK_ATTEMPTS = 5      -- how many times to wait for a live lock to release
+local LOCK_RETRY_WAIT = 3    -- seconds between those attempts
+
 local sessionData = {}
 local cantSave = {}
+
+-- true if this server is allowed to write to `old` (nobody owns it, we already
+-- own it, or the previous owner's lock has gone stale)
+local function canClaim(old)
+	if not old or not old.SessionId then return true end
+	if old.SessionId == SESSION_ID then return true end
+	return (os.time() - (old.SessionStamp or 0)) >= LOCK_STALE_AFTER
+end
 
 local function keyFor(player)
 	return "player_" .. player.UserId
@@ -31,36 +55,100 @@ local function retry(fn)
 end
 
 local function defaultData()
-	return { Coins = 0, Inventory = {}, Equipped = "", BestTimes = {}, EquippedItems = {} }
+	return { Coins = 0, Inventory = {}, Equipped = "", BestTimes = {} }
 end
 
 --=============== LOAD ===============--
+-- Read + take ownership in a single UpdateAsync. This replaces the old GetAsync
+-- because reading and locking have to be one atomic operation - with a separate
+-- read there's a window where two servers both read the same data before either
+-- claims it. Returns the player's data, or nil + a reason if we couldn't claim it.
+local function claimData(player)
+	local key = keyFor(player)
+
+	for attempt = 1, LOCK_ATTEMPTS do
+		local claimed
+
+		local ok = retry(function()
+			claimed = nil
+
+			store:UpdateAsync(key, function(old)
+				if not canClaim(old) then
+					-- another live server owns this key - returning nil cancels the
+					-- write, so we never touch data we don't own. `claimed` stays nil.
+					return nil
+				end
+
+				local data = old or defaultData()
+				data.Coins = data.Coins or 0
+				data.Inventory = data.Inventory or {}
+				data.Equipped = data.Equipped or ""
+				data.BestTimes = data.BestTimes or {}
+
+				data.SessionId = SESSION_ID
+				data.SessionStamp = os.time()
+
+				claimed = data
+				return data
+			end)
+		end)
+
+		if not ok then
+			return nil, "datastore request failed"
+		end
+		if claimed then
+			return claimed
+		end
+
+		-- held by a live server: it's probably mid-shutdown and about to release
+		if attempt < LOCK_ATTEMPTS then
+			task.wait(LOCK_RETRY_WAIT)
+		end
+	end
+
+	return nil, "data is locked by another server"
+end
+
 local function loadData(player)
-	local loaded
-	local ok = retry(function()
-		loaded = store:GetAsync(keyFor(player))
-	end)
+	local data, reason = claimData(player)
 
-	if not ok then
+	if not data then
 		cantSave[player] = true
-		warn("[DataService] LOAD FAILED for " .. player.Name .. " - progress won't save this session")
+		warn("[DataService] LOAD FAILED for " .. player.Name .. " (" .. reason .. ") - progress won't save this session")
 		return defaultData()
 	end
 
-	if loaded == nil then
-		return defaultData()
-	end
+	return data
+end
 
-	loaded.Coins = loaded.Coins or 0
-	loaded.Inventory = loaded.Inventory or {}
-	loaded.Equipped = loaded.Equipped or ""
-	loaded.BestTimes = loaded.BestTimes or {}
-	loaded.EquippedItems = loaded.EquippedItems or {}
-	return loaded
+-- hand the key back so a rejoin isn't blocked until the lock goes stale. Only
+-- clears the lock if we're actually the owner, so it's safe to call blindly.
+local function releaseKey(player)
+	retry(function()
+		store:UpdateAsync(keyFor(player), function(old)
+			if old and old.SessionId == SESSION_ID then
+				old.SessionId = nil
+				return old
+			end
+			return nil
+		end)
+	end)
 end
 
 local function setupPlayer(player)
 	local data = loadData(player)
+
+	-- claimData can wait on a live lock, so the player may have already left by
+	-- the time we get here. Building Instances for them would be pointless, and
+	-- PlayerRemoving has already run (skipping the save, correctly, because
+	-- DataLoaded was never set) - so release the lock here or it leaks.
+	if player.Parent == nil then
+		releaseKey(player)
+		sessionData[player] = nil
+		cantSave[player] = nil
+		return
+	end
+
 	sessionData[player] = data
 
 	local leaderstats = Instance.new("Folder")
@@ -100,25 +188,25 @@ local function setupPlayer(player)
 	end
 	bestTimes.Parent = player
 
-	-- shop items currently equipped (ShopService reads/writes these) - kept
-	-- separate from the single EquippedTrail slot above since a player can
-	-- have more than one shop item equipped at once
-	local equippedItems = Instance.new("Folder")
-	equippedItems.Name = "EquippedItems"
-	for _, itemName in ipairs(data.EquippedItems) do
-		local b = Instance.new("BoolValue")
-		b.Name = itemName
-		b.Value = true
-		b.Parent = equippedItems
-	end
-	equippedItems.Parent = player
-
 	player:SetAttribute("DataLoaded", true)
 	print("[DataService] loaded " .. player.Name .. " (" .. data.Coins .. " coins, " .. #data.Inventory .. " items)")
 end
 
 --=============== SAVE ===============--
-local function saveData(player)
+-- releaseLock: pass true on the final save (leaving / shutdown) so the key is
+-- freed immediately and the player can rejoin another server without waiting
+-- LOCK_STALE_AFTER for the lock to expire.
+local function saveData(player, releaseLock)
+	-- NEVER save before the load finished. This function builds its payload by
+	-- reading Instances (leaderstats, Inventory, EquippedTrail, BestTimes)
+	-- starting from defaultData(), so if those Instances don't exist yet it
+	-- writes 0 coins and an empty inventory straight over the player's real
+	-- save. The window is real: loadData can spend seconds retrying while the
+	-- autosave loop and PlayerRemoving are both free to fire.
+	if not player:GetAttribute("DataLoaded") then
+		return
+	end
+
 	if cantSave[player] then
 		warn("[DataService] skipping save for " .. player.Name .. " (load had failed)")
 		return
@@ -150,19 +238,38 @@ local function saveData(player)
 		end
 	end
 
-	local equippedItems = player:FindFirstChild("EquippedItems")
-	if equippedItems then
-		for _, entry in ipairs(equippedItems:GetChildren()) do
-			table.insert(data.EquippedItems, entry.Name)
-		end
-	end
+	-- A real UpdateAsync: the transform inspects `old` and refuses to write when
+	-- this server no longer owns the key. (Returning `data` unconditionally
+	-- ignored `old` entirely, which made this identical to SetAsync and left
+	-- concurrent writes able to clobber each other.)
+	local lostLock = false
 
 	local ok = retry(function()
-		-- UpdateAsync is safer than SetAsync against concurrent writes
-		store:UpdateAsync(keyFor(player), function()
+		lostLock = false
+
+		store:UpdateAsync(keyFor(player), function(old)
+			if old and old.SessionId and old.SessionId ~= SESSION_ID then
+				lostLock = true
+				return nil -- cancel the write; this data belongs to another server
+			end
+
+			if releaseLock then
+				data.SessionId = nil
+			else
+				data.SessionId = SESSION_ID
+			end
+			data.SessionStamp = os.time()
+
 			return data
 		end)
 	end)
+
+	if lostLock then
+		-- don't keep fighting a server that legitimately owns this player now
+		cantSave[player] = true
+		warn("[DataService] lost the session lock for " .. player.Name .. " - another server owns this data, save aborted")
+		return
+	end
 
 	if ok then
 		print("[DataService] saved " .. player.Name)
@@ -180,7 +287,7 @@ for _, player in ipairs(Players:GetPlayers()) do
 end
 
 Players.PlayerRemoving:Connect(function(player)
-	saveData(player)
+	saveData(player, true) -- final save: write and release the lock
 	sessionData[player] = nil
 	cantSave[player] = nil
 end)
@@ -201,7 +308,7 @@ game:BindToClose(function()
 		task.wait(1) -- give Studio a moment
 	end
 	for _, player in ipairs(Players:GetPlayers()) do
-		task.spawn(saveData, player)
+		task.spawn(saveData, player, true) -- release locks so rejoins aren't blocked
 	end
 	task.wait(3) -- let the saves finish
 end)
