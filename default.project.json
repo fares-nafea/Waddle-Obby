@@ -48,9 +48,6 @@
         "LeaderboardEvent": {
           "$className": "RemoteEvent"
         },
-        "EggEvent": {
-          "$className": "RemoteEvent"
-        },
         "EquipEvent": {
           "$className": "RemoteEvent"
         }
@@ -63,9 +60,6 @@
       },
       "Shared": {
         "$className": "Folder",
-        "RewardsCatalog": {
-          "$path": "src/shared/RewardsCatalog.lua"
-        },
         "ObbyConfig": {
           "$path": "src/shared/ObbyConfig.lua"
         },
@@ -127,97 +121,6 @@
                 "TextScaled": true,
                 "TextColor3": [0.6666667, 0.8666667, 1.0],
                 "Text": ""
-              }
-            }
-          },
-          "RewardCard": {
-            "$className": "Frame",
-            "$properties": {
-              "Size": { "UDim2": [[0, 120], [0, 182]] },
-              "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902],
-              "Visible": true
-            },
-            "UICorner": {
-              "$className": "UICorner",
-              "$properties": { "CornerRadius": { "UDim": [0, 12] } }
-            },
-            "UIStroke": {
-              "$className": "UIStroke",
-              "$properties": {
-                "Color": [0.2156863, 0.2431373, 0.3294118],
-                "Thickness": 1
-              }
-            },
-            "Swatch": {
-              "$className": "Frame",
-              "$properties": {
-                "Size": { "UDim2": [[1, -20], [0, 66]] },
-                "Position": { "UDim2": [[0, 10], [0, 10]] },
-                "BackgroundColor3": [0.1490196, 0.1725490, 0.2352941]
-              },
-              "UICorner": {
-                "$className": "UICorner",
-                "$properties": { "CornerRadius": { "UDim": [0, 8] } }
-              },
-              "TypeTag": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "BackgroundTransparency": 1,
-                  "Size": { "UDim2": [[1, 0], [1, 0]] },
-                  "Font": "GothamBold",
-                  "TextScaled": true,
-                  "TextColor3": [1, 1, 1],
-                  "TextTransparency": 0.15,
-                  "Text": ""
-                }
-              }
-            },
-            "NameLbl": {
-              "$className": "TextLabel",
-              "$properties": {
-                "BackgroundTransparency": 1,
-                "Size": { "UDim2": [[1, -12], [0, 34]] },
-                "Position": { "UDim2": [[0, 6], [0, 82]] },
-                "Font": "GothamBold",
-                "TextScaled": true,
-                "TextWrapped": true,
-                "TextColor3": [1, 1, 1],
-                "Text": ""
-              }
-            },
-            "RarityLbl": {
-              "$className": "TextLabel",
-              "$properties": {
-                "BackgroundTransparency": 1,
-                "Size": { "UDim2": [[1, -12], [0, 18]] },
-                "Position": { "UDim2": [[0, 6], [0, 118]] },
-                "Font": "GothamMedium",
-                "TextScaled": true,
-                "TextColor3": [1, 1, 1],
-                "Text": ""
-              }
-            },
-            "EquipBtn": {
-              "$className": "TextButton",
-              "$properties": {
-                "Size": { "UDim2": [[1, -16], [0, 30]] },
-                "Position": { "UDim2": [[0, 8], [0, 144]] },
-                "Font": "GothamBold",
-                "TextScaled": true,
-                "TextColor3": [1, 1, 1],
-                "Visible": false,
-                "Text": ""
-              },
-              "UICorner": {
-                "$className": "UICorner",
-                "$properties": { "CornerRadius": { "UDim": [0, 8] } }
-              },
-              "UIPadding": {
-                "$className": "UIPadding",
-                "$properties": {
-                  "PaddingTop": { "UDim": [0, 6] },
-                  "PaddingBottom": { "UDim": [0, 6] }
-                }
               }
             }
           },
@@ -486,9 +389,6 @@
       },
       "WorldLeaderboardService": {
         "$path": "src/server/WorldLeaderboardService.server.lua"
-      },
-      "EggService": {
-        "$path": "src/server/EggService.server.lua"
       },
       "EquipService": {
         "$path": "src/server/EquipService.server.lua"
@@ -1653,260 +1553,6 @@
           }
         }
       },
-      "EggPopup": {
-        "$className": "ScreenGui",
-        "$properties": {
-          "ResetOnSpawn": false,
-          "IgnoreGuiInset": true
-        },
-        "Popup": {
-          "$className": "Frame",
-          "$properties": {
-            "AnchorPoint": [0.5, 0.5],
-            "Position": { "UDim2": [[0.5, 0], [0.35, 0]] },
-            "Size": { "UDim2": [[0, 340], [0, 130]] },
-            "BackgroundColor3": [0.0980392, 0.1176471, 0.1764706],
-            "BackgroundTransparency": 0.05,
-            "Visible": false
-          },
-          "UICorner": {
-            "$className": "UICorner",
-            "$properties": { "CornerRadius": { "UDim": [0, 16] } }
-          },
-          "UIStroke": {
-            "$className": "UIStroke",
-            "$properties": {
-              "Thickness": 3,
-              "Color": [1, 1, 1]
-            }
-          },
-          "Title": {
-            "$className": "TextLabel",
-            "$properties": {
-              "BackgroundTransparency": 1,
-              "Size": { "UDim2": [[1, -24], [0, 36]] },
-              "Position": { "UDim2": [[0, 12], [0, 14]] },
-              "Font": "GothamBold",
-              "TextScaled": true,
-              "TextColor3": [1, 1, 1],
-              "Text": ""
-            }
-          },
-          "Sub": {
-            "$className": "TextLabel",
-            "$properties": {
-              "BackgroundTransparency": 1,
-              "Size": { "UDim2": [[1, -24], [0, 54]] },
-              "Position": { "UDim2": [[0, 12], [0, 58]] },
-              "Font": "GothamMedium",
-              "TextScaled": true,
-              "TextColor3": [0.9019608, 0.9019608, 0.9019608],
-              "Text": ""
-            }
-          }
-        }
-      },
-      "CollectionGui": {
-        "$className": "ScreenGui",
-        "$properties": {
-          "ResetOnSpawn": false,
-          "IgnoreGuiInset": true
-        },
-        "OpenBtn": {
-          "$className": "TextButton",
-          "$properties": {
-            "Size": { "UDim2": [[0, 140], [0, 46]] },
-            "Position": { "UDim2": [[0, 16], [1, -70]] },
-            "BackgroundColor3": [0.1372549, 0.1764706, 0.2745098],
-            "Text": "Collection",
-            "Font": "GothamBold",
-            "TextScaled": true,
-            "TextColor3": [1, 1, 1]
-          },
-          "UICorner": {
-            "$className": "UICorner",
-            "$properties": { "CornerRadius": { "UDim": [0, 12] } }
-          },
-          "UIPadding": {
-            "$className": "UIPadding",
-            "$properties": {
-              "PaddingTop": { "UDim": [0, 10] },
-              "PaddingBottom": { "UDim": [0, 10] }
-            }
-          }
-        },
-        "Dim": {
-          "$className": "TextButton",
-          "$properties": {
-            "Size": { "UDim2": [[1, 0], [1, 0]] },
-            "BackgroundColor3": [0, 0, 0],
-            "BackgroundTransparency": 0.5,
-            "Text": "",
-            "AutoButtonColor": false,
-            "Visible": false
-          }
-        },
-        "Panel": {
-          "$className": "Frame",
-          "$properties": {
-            "AnchorPoint": [0.5, 0.5],
-            "Position": { "UDim2": [[0.5, 0], [0.5, 0]] },
-            "Size": { "UDim2": [[0, 560], [0, 400]] },
-            "BackgroundColor3": [0.0784314, 0.1019608, 0.1647059],
-            "Visible": false
-          },
-          "UICorner": {
-            "$className": "UICorner",
-            "$properties": { "CornerRadius": { "UDim": [0, 18] } }
-          },
-          "Title": {
-            "$className": "TextLabel",
-            "$properties": {
-              "BackgroundTransparency": 1,
-              "Size": { "UDim2": [[1, -120], [0, 44]] },
-              "Position": { "UDim2": [[0, 20], [0, 12]] },
-              "TextXAlignment": "Left",
-              "Font": "GothamBold",
-              "TextScaled": true,
-              "TextColor3": [1, 1, 1],
-              "Text": "My Collection"
-            }
-          },
-          "Counter": {
-            "$className": "TextLabel",
-            "$properties": {
-              "BackgroundTransparency": 1,
-              "Size": { "UDim2": [[0, 120], [0, 24]] },
-              "Position": { "UDim2": [[0, 20], [0, 54]] },
-              "TextXAlignment": "Left",
-              "Font": "GothamMedium",
-              "TextScaled": true,
-              "TextColor3": [0.6666667, 0.7058824, 0.7843137],
-              "Text": "0 / 0 unlocked"
-            }
-          },
-          "CloseBtn": {
-            "$className": "TextButton",
-            "$properties": {
-              "Size": { "UDim2": [[0, 40], [0, 40]] },
-              "Position": { "UDim2": [[1, -52], [0, 14]] },
-              "BackgroundColor3": [0.8627451, 0.2745098, 0.2745098],
-              "Text": "X",
-              "Font": "GothamBold",
-              "TextScaled": true,
-              "TextColor3": [1, 1, 1]
-            },
-            "UICorner": {
-              "$className": "UICorner",
-              "$properties": { "CornerRadius": { "UDim": [0, 10] } }
-            }
-          },
-          "TabsHolder": {
-            "$className": "Frame",
-            "$properties": {
-              "BackgroundTransparency": 1,
-              "Size": { "UDim2": [[1, -40], [0, 34]] },
-              "Position": { "UDim2": [[0, 20], [0, 84]] }
-            },
-            "UIListLayout": {
-              "$className": "UIListLayout",
-              "$properties": {
-                "FillDirection": "Horizontal",
-                "Padding": { "UDim": [0, 8] }
-              }
-            },
-            "All": {
-              "$className": "TextButton",
-              "$properties": {
-                "LayoutOrder": 1,
-                "Size": { "UDim2": [[0, 100], [0, 34]] },
-                "BackgroundColor3": [0.1372549, 0.1764706, 0.2745098],
-                "Text": "All",
-                "Font": "GothamBold",
-                "TextScaled": true,
-                "TextColor3": [1, 1, 1]
-              },
-              "UICorner": {
-                "$className": "UICorner",
-                "$properties": { "CornerRadius": { "UDim": [0, 8] } }
-              },
-              "UIPadding": {
-                "$className": "UIPadding",
-                "$properties": {
-                  "PaddingTop": { "UDim": [0, 8] },
-                  "PaddingBottom": { "UDim": [0, 8] }
-                }
-              }
-            },
-            "Trail": {
-              "$className": "TextButton",
-              "$properties": {
-                "LayoutOrder": 2,
-                "Size": { "UDim2": [[0, 100], [0, 34]] },
-                "BackgroundColor3": [0.1372549, 0.1764706, 0.2745098],
-                "Text": "Trail",
-                "Font": "GothamBold",
-                "TextScaled": true,
-                "TextColor3": [1, 1, 1]
-              },
-              "UICorner": {
-                "$className": "UICorner",
-                "$properties": { "CornerRadius": { "UDim": [0, 8] } }
-              },
-              "UIPadding": {
-                "$className": "UIPadding",
-                "$properties": {
-                  "PaddingTop": { "UDim": [0, 8] },
-                  "PaddingBottom": { "UDim": [0, 8] }
-                }
-              }
-            },
-            "Skin": {
-              "$className": "TextButton",
-              "$properties": {
-                "LayoutOrder": 3,
-                "Size": { "UDim2": [[0, 100], [0, 34]] },
-                "BackgroundColor3": [0.1372549, 0.1764706, 0.2745098],
-                "Text": "Skin",
-                "Font": "GothamBold",
-                "TextScaled": true,
-                "TextColor3": [1, 1, 1]
-              },
-              "UICorner": {
-                "$className": "UICorner",
-                "$properties": { "CornerRadius": { "UDim": [0, 8] } }
-              },
-              "UIPadding": {
-                "$className": "UIPadding",
-                "$properties": {
-                  "PaddingTop": { "UDim": [0, 8] },
-                  "PaddingBottom": { "UDim": [0, 8] }
-                }
-              }
-            }
-          },
-          "Grid": {
-            "$className": "ScrollingFrame",
-            "$properties": {
-              "Size": { "UDim2": [[1, -40], [1, -140]] },
-              "Position": { "UDim2": [[0, 20], [0, 128]] },
-              "BackgroundTransparency": 1,
-              "BorderSizePixel": 0,
-              "ScrollBarThickness": 6,
-              "CanvasSize": { "UDim2": [[0, 0], [0, 0]] },
-              "AutomaticCanvasSize": "Y"
-            },
-            "UIGridLayout": {
-              "$className": "UIGridLayout",
-              "$properties": {
-                "CellSize": { "UDim2": [[0, 120], [0, 182]] },
-                "CellPadding": { "UDim2": [[0, 12], [0, 12]] },
-                "SortOrder": "LayoutOrder"
-              }
-            }
-          }
-        }
-      },
       "TimerGui": {
         "$className": "ScreenGui",
         "$properties": {
@@ -2114,12 +1760,6 @@
     },
     "StarterPlayer": {
       "StarterPlayerScripts": {
-        "EggShopClient": {
-          "$path": "src/client/EggShopClient.client.lua"
-        },
-        "InventoryClient": {
-          "$path": "src/client/InventoryClient.client.lua"
-        },
         "ObbyClient": {
           "$path": "src/client/ObbyClient.client.lua"
         },

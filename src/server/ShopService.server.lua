@@ -5,9 +5,9 @@
 --// ownership are always re-checked here, never trusted from the client.
 --//
 --// This is Buy-only. Trails aren't Tools - they're visual attachments handled
---// entirely by the existing EquipService (same EquipEvent the Collection UI
---// already uses), so ShopService never grants Backpack items and never
---// touches equip state. Buying just marks a trail as owned in Inventory;
+--// entirely by the existing EquipService (same EquipEvent), so ShopService
+--// never grants Backpack items and never touches equip state. Buying just
+--// marks a trail as owned in Inventory;
 --// EquipService is the single place that decides what's actually equipped,
 --// which is also what already guarantees only one trail at a time.
 

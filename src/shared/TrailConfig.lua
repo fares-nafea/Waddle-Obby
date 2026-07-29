@@ -3,8 +3,7 @@
 --// the single source of truth for what's directly purchasable with Coins, in
 --// shop display order. Used by ShopService (server) to price/validate
 --// purchases, by EquipService (server) to recognize a name as a valid,
---// equippable trail alongside the existing egg-only trails in
---// RewardsCatalog, and by ShopClient (client) to render each card.
+--// equippable trail, and by ShopClient (client) to render each card.
 --//
 --// To add a new trail: build its Trail template (Attachment0/Attachment1/
 --// Trail, same shape as the others) in ReplicatedStorage.Trails, build its
@@ -15,11 +14,6 @@
 --//            the ownership marker tracked under a player's Inventory.
 --// CardName - the card's Instance name under ShopFrame.Grid (built in Studio).
 --// Color    - swatch color for the card's Trail preview.
---//
---// Note: "Rainbow Trail" is intentionally the SAME trail RewardsCatalog
---// already offers as a rare Egg drop (same ReplicatedStorage.Trails
---// template, same Inventory key) - buying it here is just a guaranteed,
---// non-RNG way to get it. Every other name below is Shop-exclusive.
 
 local TrailConfig = {}
 

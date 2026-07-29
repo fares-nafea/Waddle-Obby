@@ -5,28 +5,21 @@
 --// Trail templates (Trail + Attachment0 + Attachment1, fully configured) live in
 --// ReplicatedStorage.Trails; this script only clones and wires them onto a character.
 --//
---// A trail name is valid whether it was won from an Egg (RewardsCatalog) or
---// bought directly in the Shop (TrailConfig) - either registry is enough,
---// since both ultimately just point at the same ReplicatedStorage.Trails
---// template. This is the one place equip state lives, which is also what
---// guarantees a player can only ever have one trail equipped at a time.
+--// A trail name is valid when it's sold in the Shop (TrailConfig), which is
+--// also what it's checked against. This is the one place equip state lives,
+--// which is also what guarantees a player can only ever have one trail
+--// equipped at a time.
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local EquipEvent = ReplicatedStorage:WaitForChild("Events"):WaitForChild("EquipEvent")
 local Shared = ReplicatedStorage:WaitForChild("Shared")
-local Catalog = require(Shared:WaitForChild("RewardsCatalog"))
 local TrailConfig = require(Shared:WaitForChild("TrailConfig"))
 local Trails = ReplicatedStorage:WaitForChild("Trails")
 
--- true if `trailName` is a real, equippable trail - either won from an Egg
--- (RewardsCatalog) or sold directly in the Shop (TrailConfig)
+-- true if `trailName` is a real, equippable trail sold in the Shop (TrailConfig)
 local function isValidTrail(trailName)
-	local rewardItem = Catalog.get(trailName)
-	if rewardItem and rewardItem.type == "Trail" then
-		return true
-	end
 	return TrailConfig.get(trailName) ~= nil
 end
 

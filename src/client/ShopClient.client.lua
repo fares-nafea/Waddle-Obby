@@ -7,10 +7,10 @@
 --// reads/writes their properties; it never creates an Instance.
 --//
 --// The Shop sells ONLY cosmetic trails. Buying goes through ShopRemote (server
---// checks Coins, marks it owned). Equipping goes through the SAME EquipEvent
---// InventoryClient/CollectionGui already uses - EquipService is the one place
---// that enforces "only one trail at a time" (via the single EquippedTrail
---// value), so this script never tracks equip state itself, just reads it.
+--// checks Coins, marks it owned). Equipping goes through EquipEvent -
+--// EquipService is the one place that enforces "only one trail at a time"
+--// (via the single EquippedTrail value), so this script never tracks equip
+--// state itself, just reads it.
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -251,9 +251,8 @@ for trailName, card in pairs(cards) do
 		ShopRemote:FireServer("Buy", trailName)
 	end)
 
-	-- same EquipEvent the Collection UI fires - EquipService toggles it off
-	-- if you click the one you're already wearing, and guarantees only one
-	-- trail is ever equipped at a time
+	-- EquipService toggles it off if you click the one you're already wearing,
+	-- and guarantees only one trail is ever equipped at a time
 	card:WaitForChild("EquipButton").MouseButton1Click:Connect(function()
 		EquipEvent:FireServer(trailName)
 	end)
