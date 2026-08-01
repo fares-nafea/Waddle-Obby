@@ -2519,6 +2519,9 @@
         },
         "ObbyLockedClient": {
           "$path": "src/client/ObbyLockedClient.client.lua"
+        },
+        "GateColorClient": {
+          "$path": "src/client/GateColorClient.client.lua"
         }
       }
     },
