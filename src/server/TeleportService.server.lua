@@ -1,6 +1,10 @@
 --// Teleport Service
 
 local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local Config = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("ObbyConfig"))
+local ObbyLockedEvent = ReplicatedStorage:WaitForChild("Events"):WaitForChild("ObbyLockedEvent")
 
 local GatesFolder = workspace:WaitForChild("Gates")
 local StagesFolder = workspace:WaitForChild("Stages")
@@ -31,6 +35,20 @@ for _, gate in ipairs(GatesFolder:GetChildren()) do
 		local stageNum = portal:GetAttribute("Stage-Num")
 
 		if stageNum then
+			-- Sequential Obby Unlock: block entry into an Obby the player hasn't
+			-- reached yet. UnlockedObby defaults to missing-means-1 so a player
+			-- whose data hasn't loaded yet can still only reach Obby 1, never
+			-- something further in - fails safe, not open.
+			local unlockedObby = player:FindFirstChild("UnlockedObby")
+			local unlockedValue = unlockedObby and unlockedObby.Value or 1
+
+			if stageNum > unlockedValue then
+				ObbyLockedEvent:FireClient(player, "Complete Obby " .. (stageNum - 1) .. " first!")
+				task.wait(1)
+				debounce[player] = nil
+				return
+			end
+
 			local stageName = "Stage " .. stageNum
 			print("[TeleportService] Searching for stage folder: " .. stageName)
 			local stage = StagesFolder:FindFirstChild(stageName)

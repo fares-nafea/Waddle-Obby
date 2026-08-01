@@ -17,7 +17,7 @@
 local Config = {}
 
 Config.Defaults = {
-	MinTime = .3,          -- fastest a finish can legally be, in seconds (anti-exploit floor)
+	MinTime = .1,          -- fastest a finish can legally be, in seconds (anti-exploit floor)
 	LeaderboardSize = 10,  -- how many entries to show per Obby
 	SafetyFactor = 0.6,    -- MinTime = RecordTime * this, when RecordTime is set
 }
@@ -27,8 +27,8 @@ Config.Defaults = {
 --// tier fields (Fast/Normal/Slow) of its own - same fallback philosophy as
 --// MinTime/LeaderboardSize above.
 Config.RewardDefaults = {
-	FastTime = 60,
-	SlowTime = 120,
+	FastTime = .1,
+	SlowTime = 60,
 	Fast   = { Min = 150, Max = 400 },
 	Normal = { Min = 75,  Max = 250 },
 	Slow   = { Min = 25,  Max = 100 },
@@ -63,11 +63,12 @@ Config.RewardDefaults = {
 --// ############################################################################
 Config.Overrides = {
 	["1"] = {
-		RecordTime = 40,  -- placeholder: was RewardConfig FastTime = 60
+		RecordTime = .1,  -- placeholder: was RewardConfig FastTime = 60
 		FastTime = .1, SlowTime = 120,
 		Fast   = { Min = 200, Max = 700 },
 		Normal = { Min = 100, Max = 400 },
 		Slow   = { Min = 50,  Max = 200 },
+		UnlocksNext = "2",
 	},
 	["2"] = {
 		RecordTime = 40,  -- placeholder: uncalibrated
@@ -75,6 +76,7 @@ Config.Overrides = {
 		Fast   = { Min = 200, Max = 700 },
 		Normal = { Min = 100, Max = 400 },
 		Slow   = { Min = 50,  Max = 200 },
+		UnlocksNext = "3",
 	},
 	["3"] = {
 		RecordTime = 40, -- placeholder: was RewardConfig FastTime = 180
@@ -82,6 +84,7 @@ Config.Overrides = {
 		Fast   = { Min = 500, Max = 1500 },
 		Normal = { Min = 300, Max = 900 },
 		Slow   = { Min = 100, Max = 500 },
+		UnlocksNext = "4",
 	},
 	["4"] = {
 		RecordTime = 40,  -- placeholder: uncalibrated
@@ -89,9 +92,13 @@ Config.Overrides = {
 		Fast   = { Min = 500, Max = 1500 },
 		Normal = { Min = 300, Max = 900 },
 		Slow   = { Min = 100, Max = 500 },
+		UnlocksNext = "5",
 	},
-	["5"] = { RecordTime = 40 },  -- placeholder: uncalibrated; no reward tier -> Config.RewardDefaults
-	["6"] = { RecordTime = 40 },  -- placeholder: uncalibrated; no reward tier -> Config.RewardDefaults
+	["5"] = {
+		RecordTime = 40,  -- placeholder: uncalibrated; no reward tier -> Config.RewardDefaults
+		UnlocksNext = "6",
+	},
+	["6"] = { RecordTime = 40 },  -- placeholder: uncalibrated; no reward tier -> Config.RewardDefaults; last Obby, nothing to unlock
 }
 
 -- the canonical ObbyId for a stage folder: the first run of digits in its
@@ -121,6 +128,34 @@ end
 function Config.getLeaderboardSize(obbyId)
 	local override = Config.Overrides[obbyId]
 	return (override and override.LeaderboardSize) or Config.Defaults.LeaderboardSize
+end
+
+-- the ObbyId that completing `obbyId` unlocks, or nil if it's the last one.
+-- An explicit UnlocksNext override wins; otherwise it's the next number in
+-- sequence IF a workspace.Stages folder for it actually exists (same
+-- auto-discovery this file's header describes for getDisplayName) - so the
+-- last real Obby correctly unlocks nothing instead of pointing at a
+-- non-existent stage, and a newly added Obby chains automatically.
+function Config.getUnlocksNext(obbyId)
+	local override = Config.Overrides[obbyId]
+	if override and override.UnlocksNext then
+		return override.UnlocksNext
+	end
+
+	local n = tonumber(obbyId)
+	if not n then return nil end
+	local nextId = tostring(n + 1)
+
+	local stages = workspace:FindFirstChild("Stages")
+	if stages then
+		for _, stage in ipairs(stages:GetChildren()) do
+			if Config.getObbyId(stage.Name) == nextId then
+				return nextId
+			end
+		end
+	end
+
+	return nil
 end
 
 -- rolls the coin reward for finishing `obbyId` in `completionTime` seconds -

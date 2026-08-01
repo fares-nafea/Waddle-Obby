@@ -4,10 +4,11 @@ local DataStoreService = game:GetService("DataStoreService")
 local RunService = game:GetService("RunService")
 local HttpService = game:GetService("HttpService")
 
-local store = DataStoreService:GetDataStore("PlayerData_v1")
+local store = DataStoreService:GetDataStore("PlayerData_v2")
 
 local MAX_RETRIES = 5
 local AUTOSAVE_EVERY = 60 -- seconds
+local MAX_OBBY = 6 -- highest ObbyId in ObbyConfig.Overrides; keep in sync with it
 
 --// SESSION LOCKING
 --// Two servers must never hold the same player's data at the same time. If they
@@ -55,7 +56,25 @@ local function retry(fn)
 end
 
 local function defaultData()
-	return { Coins = 0, Inventory = {}, Equipped = "", BestTimes = {} }
+	return { Coins = 0, Inventory = {}, Equipped = "", BestTimes = {}, UnlockedObby = 1 }
+end
+
+-- one-time migration for saves written before the Sequential Obby Unlock
+-- System existed: derive starting progress from BestTimes instead of
+-- defaulting to 1, so a returning player who already beat Obby 4 isn't
+-- relocked out of it. Never runs again once UnlockedObby is actually set.
+local function migrateUnlockedObby(data)
+	if data.UnlockedObby ~= nil then return end
+
+	local highestCompleted = 0
+	for obbyId in pairs(data.BestTimes) do
+		local n = tonumber(obbyId)
+		if n and n > highestCompleted then
+			highestCompleted = n
+		end
+	end
+
+	data.UnlockedObby = math.min(highestCompleted + 1, MAX_OBBY)
 end
 
 --=============== LOAD ===============--
@@ -84,6 +103,7 @@ local function claimData(player)
 				data.Inventory = data.Inventory or {}
 				data.Equipped = data.Equipped or ""
 				data.BestTimes = data.BestTimes or {}
+				migrateUnlockedObby(data)
 
 				data.SessionId = SESSION_ID
 				data.SessionStamp = os.time()
@@ -188,6 +208,13 @@ local function setupPlayer(player)
 	end
 	bestTimes.Parent = player
 
+	-- highest ObbyId the player can currently enter - TeleportService gates
+	-- Portal teleports on this, TimeService advances it on completion
+	local unlockedObby = Instance.new("IntValue")
+	unlockedObby.Name = "UnlockedObby"
+	unlockedObby.Value = data.UnlockedObby
+	unlockedObby.Parent = player
+
 	player:SetAttribute("DataLoaded", true)
 	print("[DataService] loaded " .. player.Name .. " (" .. data.Coins .. " coins, " .. #data.Inventory .. " items)")
 end
@@ -236,6 +263,11 @@ local function saveData(player, releaseLock)
 		for _, entry in ipairs(bestTimes:GetChildren()) do
 			data.BestTimes[entry.Name] = entry.Value
 		end
+	end
+
+	local unlockedObby = player:FindFirstChild("UnlockedObby")
+	if unlockedObby then
+		data.UnlockedObby = unlockedObby.Value
 	end
 
 	-- A real UpdateAsync: the transform inspects `old` and refuses to write when

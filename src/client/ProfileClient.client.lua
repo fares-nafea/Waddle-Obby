@@ -8,10 +8,10 @@
 --// creates or writes to a single one. No RemoteEvents needed: those Instances
 --// already replicate to the client the same way ShopClient reads them.
 --//
---// Obby Progress: there is no unlock/lock gameplay system anywhere in this
---// game (TeleportService lets you reach any Stage freely) - so "locked" here
---// means "no BestTimes entry yet", not "not accessible". An ObbyId counts as
---// completed the instant BestTimes has an IntValue for it.
+--// Obby Progress: the Sequential Obby Unlock System (TeleportService +
+--// TimeService) gates entry via the player's UnlockedObby IntValue - an
+--// ObbyId is locked until UnlockedObby reaches it, unlocked once reachable,
+--// and completed the instant BestTimes has an IntValue for it.
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -27,6 +27,7 @@ local OBBY_COUNT = 6
 local inventory = player:WaitForChild("Inventory")
 local equippedTrail = player:WaitForChild("EquippedTrail", 10)
 local bestTimes = player:WaitForChild("BestTimes", 10)
+local unlockedObby = player:WaitForChild("UnlockedObby", 10)
 
 --============================ GUI ============================--
 local profileGui = playerGui:WaitForChild("ProfileUI")
@@ -121,21 +122,29 @@ end
 
 --============================ OBBY PROGRESS SECTION ============================--
 local DONE_COLOR = Color3.fromRGB(78, 214, 144)
+local UNLOCKED_COLOR = Color3.fromRGB(108, 140, 255)
 local LOCKED_COLOR = Color3.fromRGB(125, 133, 156)
 
 local function refreshObbies()
+	local unlockedValue = (unlockedObby and unlockedObby.Value) or 1
+
 	for obbyId, row in pairs(obbyRows) do
 		local displayName = ObbyConfig.getDisplayName(obbyId)
 		local entry = bestTimes and bestTimes:FindFirstChild(obbyId)
+		local obbyNum = tonumber(obbyId)
 
 		if entry then
 			row.status.Text = displayName .. " ✅"
 			row.status.TextColor3 = DONE_COLOR
 			row.time.Text = "Best Time: " .. formatSecondsShort(entry.Value)
+		elseif obbyNum and obbyNum <= unlockedValue then
+			row.status.Text = displayName .. " 🔓"
+			row.status.TextColor3 = UNLOCKED_COLOR
+			row.time.Text = "Not completed yet"
 		else
 			row.status.Text = displayName .. " 🔒"
 			row.status.TextColor3 = LOCKED_COLOR
-			row.time.Text = "Not completed yet"
+			row.time.Text = "Locked"
 		end
 	end
 end
@@ -239,4 +248,8 @@ if bestTimes then
 		hookEntry(entry)
 		refreshObbies()
 	end)
+end
+
+if unlockedObby then
+	unlockedObby.Changed:Connect(refreshObbies)
 end
