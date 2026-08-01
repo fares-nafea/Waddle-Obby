@@ -2,7 +2,10 @@
 --// Optional per-Obby overrides. Obbys are auto-discovered from workspace.Stages
 --// (one child folder = one Obby) so adding a new Obby needs zero code changes.
 --// Only add an entry here if an Obby needs a non-default minimum time,
---// leaderboard size, or display name.
+--// leaderboard size, display name, or reward tiers.
+--//
+--// Single source of truth for all per-Obby data (merged from the former
+--// RewardConfig.lua - reward tiers now live in Config.Overrides too).
 --//
 --// ObbyId vs folder name: the folder Name (e.g. "Stage 1") is just a label -
 --// it can be renamed freely for readability. The canonical ObbyId used
@@ -14,9 +17,21 @@
 local Config = {}
 
 Config.Defaults = {
-	MinTime = 15,          -- fastest a finish can legally be, in seconds (anti-exploit floor)
+	MinTime = .3,          -- fastest a finish can legally be, in seconds (anti-exploit floor)
 	LeaderboardSize = 10,  -- how many entries to show per Obby
 	SafetyFactor = 0.6,    -- MinTime = RecordTime * this, when RecordTime is set
+}
+
+--// REWARD DEFAULTS (was RewardConfig.Default)
+--// Used by getReward() for any ObbyId whose Overrides entry has no reward
+--// tier fields (Fast/Normal/Slow) of its own - same fallback philosophy as
+--// MinTime/LeaderboardSize above.
+Config.RewardDefaults = {
+	FastTime = 60,
+	SlowTime = 120,
+	Fast   = { Min = 150, Max = 400 },
+	Normal = { Min = 75,  Max = 250 },
+	Slow   = { Min = 25,  Max = 100 },
 }
 
 --// ANTI-EXPLOIT FLOOR
@@ -47,12 +62,36 @@ Config.Defaults = {
 --// # finish, so watch the server log during playtests.                        #
 --// ############################################################################
 Config.Overrides = {
-	["1"] = { RecordTime = 40 },  -- placeholder: RewardConfig FastTime = 60
-	["2"] = { RecordTime = 40 },  -- placeholder: uncalibrated
-	["3"] = { RecordTime = 120 }, -- placeholder: RewardConfig FastTime = 180
-	["4"] = { RecordTime = 40 },  -- placeholder: uncalibrated
-	["5"] = { RecordTime = 40 },  -- placeholder: uncalibrated
-	["6"] = { RecordTime = 40 },  -- placeholder: uncalibrated
+	["1"] = {
+		RecordTime = 40,  -- placeholder: was RewardConfig FastTime = 60
+		FastTime = .1, SlowTime = 120,
+		Fast   = { Min = 200, Max = 700 },
+		Normal = { Min = 100, Max = 400 },
+		Slow   = { Min = 50,  Max = 200 },
+	},
+	["2"] = {
+		RecordTime = 40,  -- placeholder: uncalibrated
+		FastTime = .1, SlowTime = 120,
+		Fast   = { Min = 200, Max = 700 },
+		Normal = { Min = 100, Max = 400 },
+		Slow   = { Min = 50,  Max = 200 },
+	},
+	["3"] = {
+		RecordTime = 40, -- placeholder: was RewardConfig FastTime = 180
+		FastTime = .1, SlowTime = 120,
+		Fast   = { Min = 500, Max = 1500 },
+		Normal = { Min = 300, Max = 900 },
+		Slow   = { Min = 100, Max = 500 },
+	},
+	["4"] = {
+		RecordTime = 40,  -- placeholder: uncalibrated
+		FastTime = .1, SlowTime = 120,
+		Fast   = { Min = 500, Max = 1500 },
+		Normal = { Min = 300, Max = 900 },
+		Slow   = { Min = 100, Max = 500 },
+	},
+	["5"] = { RecordTime = 40 },  -- placeholder: uncalibrated; no reward tier -> Config.RewardDefaults
+	["6"] = { RecordTime = 40 },  -- placeholder: uncalibrated; no reward tier -> Config.RewardDefaults
 }
 
 -- the canonical ObbyId for a stage folder: the first run of digits in its
@@ -82,6 +121,25 @@ end
 function Config.getLeaderboardSize(obbyId)
 	local override = Config.Overrides[obbyId]
 	return (override and override.LeaderboardSize) or Config.Defaults.LeaderboardSize
+end
+
+-- rolls the coin reward for finishing `obbyId` in `completionTime` seconds -
+-- completionTime must be a server-computed elapsed time (see TimeService),
+-- never a client-supplied value. Was RewardConfig.GetReward.
+function Config.getReward(obbyId, completionTime)
+	local override = Config.Overrides[obbyId]
+	local cfg = (override and override.Fast) and override or Config.RewardDefaults
+
+	local tier
+	if completionTime <= cfg.FastTime then
+		tier = cfg.Fast
+	elseif completionTime <= cfg.SlowTime then
+		tier = cfg.Normal
+	else
+		tier = cfg.Slow
+	end
+
+	return math.random(tier.Min, tier.Max)
 end
 
 -- player-facing label for an ObbyId: an explicit override wins, otherwise

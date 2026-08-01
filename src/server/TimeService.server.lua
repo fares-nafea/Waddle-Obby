@@ -11,7 +11,6 @@ local ServerScriptService = game:GetService("ServerScriptService")
 
 local TimerEvent = ReplicatedStorage:WaitForChild("Events"):WaitForChild("TimerEvent")
 local Config = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("ObbyConfig"))
-local RewardConfig = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("RewardConfig"))
 local Leaderboard = require(ServerScriptService:WaitForChild("LeaderboardService"))
 
 -- activeRuns[player] = { obbyId = string, startTick = number }
@@ -135,7 +134,7 @@ local function setupStage(stage)
 		print(player.Name .. " finished " .. obbyId .. " in " .. formatSeconds(elapsed))
 
 		-- reward scales with how fast this run was relative to the Obby's TargetTime
-		local reward = RewardConfig.GetReward(obbyId, elapsed)
+		local reward = Config.getReward(obbyId, elapsed)
 		local leaderstats = player:FindFirstChild("leaderstats")
 		if leaderstats then
 			local coins = leaderstats:FindFirstChild("Coins")

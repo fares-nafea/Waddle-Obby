@@ -20,15 +20,29 @@ local RewardConfig = {}
 -- Fast/Normal/Slow = { Min, Max } passed straight to math.random(Min, Max)
 RewardConfig.Rewards = {
 	["1"] = {
-		FastTime = 60,
+		FastTime = .1,
+		SlowTime = 120,
+		Fast   = { Min = 200, Max = 700 },
+		Normal = { Min = 100, Max = 400 },
+		Slow   = { Min = 50,  Max = 200 },
+	},
+	["2"] = {
+		FastTime = .1,
 		SlowTime = 120,
 		Fast   = { Min = 200, Max = 700 },
 		Normal = { Min = 100, Max = 400 },
 		Slow   = { Min = 50,  Max = 200 },
 	},
 	["3"] = {
-		FastTime = 180,
-		SlowTime = 300,
+		FastTime = .1,
+		SlowTime = 120,
+		Fast   = { Min = 500, Max = 1500 },
+		Normal = { Min = 300, Max = 900 },
+		Slow   = { Min = 100, Max = 500 },
+	},
+	["4"] = {
+		FastTime = .1,
+		SlowTime = 120,
 		Fast   = { Min = 500, Max = 1500 },
 		Normal = { Min = 300, Max = 900 },
 		Slow   = { Min = 100, Max = 500 },
@@ -36,7 +50,7 @@ RewardConfig.Rewards = {
 }
 
 RewardConfig.Default = {
-	FastTime = 60,
+	FastTime = .1,
 	SlowTime = 120,
 	Fast   = { Min = 150, Max = 400 },
 	Normal = { Min = 75,  Max = 250 },
