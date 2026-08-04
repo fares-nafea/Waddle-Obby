@@ -56,7 +56,10 @@ local function retry(fn)
 end
 
 local function defaultData()
-	return { Coins = 0, Inventory = {}, Equipped = "", BestTimes = {}, UnlockedObby = 1 }
+	return {
+		Coins = 0, Inventory = {}, Equipped = "", BestTimes = {}, UnlockedObby = 1,
+		LastClaimTime = 0, DailyStreak = 0,
+	}
 end
 
 -- one-time migration for saves written before the Sequential Obby Unlock
@@ -104,6 +107,10 @@ local function claimData(player)
 				data.Equipped = data.Equipped or ""
 				data.BestTimes = data.BestTimes or {}
 				migrateUnlockedObby(data)
+				-- Daily Reward System fields, added after launch - old saves
+				-- have neither, so this backfills "never claimed" once
+				data.LastClaimTime = data.LastClaimTime or 0
+				data.DailyStreak = data.DailyStreak or 0
 
 				data.SessionId = SESSION_ID
 				data.SessionStamp = os.time()
@@ -215,6 +222,20 @@ local function setupPlayer(player)
 	unlockedObby.Value = data.UnlockedObby
 	unlockedObby.Parent = player
 
+	-- unix timestamp (seconds) of the player's last Daily Reward claim; 0 = never
+	-- claimed - DailyRewardService reads/writes this, entirely isolated from the
+	-- rest of DataService otherwise
+	local lastClaimTime = Instance.new("NumberValue")
+	lastClaimTime.Name = "LastClaimTime"
+	lastClaimTime.Value = data.LastClaimTime
+	lastClaimTime.Parent = player
+
+	-- consecutive Daily Reward claims - DailyRewardService reads/writes this
+	local dailyStreak = Instance.new("IntValue")
+	dailyStreak.Name = "DailyStreak"
+	dailyStreak.Value = data.DailyStreak
+	dailyStreak.Parent = player
+
 	player:SetAttribute("DataLoaded", true)
 	print("[DataService] loaded " .. player.Name .. " (" .. data.Coins .. " coins, " .. #data.Inventory .. " items)")
 end
@@ -268,6 +289,16 @@ local function saveData(player, releaseLock)
 	local unlockedObby = player:FindFirstChild("UnlockedObby")
 	if unlockedObby then
 		data.UnlockedObby = unlockedObby.Value
+	end
+
+	local lastClaimTime = player:FindFirstChild("LastClaimTime")
+	if lastClaimTime then
+		data.LastClaimTime = lastClaimTime.Value
+	end
+
+	local dailyStreak = player:FindFirstChild("DailyStreak")
+	if dailyStreak then
+		data.DailyStreak = dailyStreak.Value
 	end
 
 	-- A real UpdateAsync: the transform inspects `old` and refuses to write when

@@ -59,6 +59,9 @@
         "$className": "Folder",
         "ShopRemote": {
           "$className": "RemoteEvent"
+        },
+        "DailyRewardRemote": {
+          "$className": "RemoteEvent"
         }
       },
       "Shared": {
@@ -69,8 +72,26 @@
         "TrailConfig": {
           "$path": "src/shared/TrailConfig.lua"
         },
+        "DailyRewardConfig": {
+          "$path": "src/shared/DailyRewardConfig.lua"
+        },
         "Templates": {
           "$className": "Folder",
+          "CoinToast": {
+            "$className": "TextLabel",
+            "$properties": {
+              "AnchorPoint": [0.5, 0.5],
+              "Size": { "UDim2": [[1, -16], [0, 30]] },
+              "BackgroundTransparency": 1,
+              "Text": "+0",
+              "Font": "GothamBlack",
+              "TextScaled": true,
+              "TextColor3": [1.0, 0.8156863, 0.1568628],
+              "TextStrokeTransparency": 0.5,
+              "TextStrokeColor3": [0, 0, 0],
+              "ZIndex": 5
+            }
+          },
           "LeaderboardRow": {
             "$className": "Frame",
             "$properties": {
@@ -395,9 +416,19 @@
       },
       "ShopService": {
         "$path": "src/server/ShopService.server.lua"
+      },
+      "DailyRewardService": {
+        "$path": "src/server/DailyRewardService.server.lua"
       }
     },
     "SoundService": {
+      "DailyRewardClaimSound": {
+        "$className": "Sound",
+        "$properties": {
+          "SoundId": "",
+          "Volume": 0.6
+        }
+      }
     },
     "StarterGui": {
       "ShopUI": {
@@ -2504,6 +2535,724 @@
             }
           }
         }
+      },
+      "DailyRewardGiftButtonUI": {
+        "$className": "ScreenGui",
+        "$properties": {
+          "ResetOnSpawn": false,
+          "IgnoreGuiInset": true
+        },
+        "GiftButton": {
+          "$className": "TextButton",
+          "$properties": {
+            "AnchorPoint": [0, 1],
+            "Position": { "UDim2": [[0, 16], [1, -236]] },
+            "Size": { "UDim2": [[0, 46], [0, 46]] },
+            "BackgroundColor3": [0.1372549, 0.1764706, 0.2745098],
+            "Text": "🎁",
+            "Font": "GothamBold",
+            "TextScaled": true,
+            "TextColor3": [1, 1, 1]
+          },
+          "UICorner": {
+            "$className": "UICorner",
+            "$properties": { "CornerRadius": { "UDim": [1, 0] } }
+          },
+          "UIStroke": {
+            "$className": "UIStroke",
+            "$properties": {
+              "Thickness": 1,
+              "Color": [1.0, 0.8156863, 0.1568628],
+              "Transparency": 0.4
+            }
+          },
+          "UIScale": {
+            "$className": "UIScale",
+            "$properties": { "Scale": 1 }
+          },
+          "NotifyDot": {
+            "$className": "Frame",
+            "$properties": {
+              "AnchorPoint": [1, 0],
+              "Position": { "UDim2": [[1, 2], [0, -2]] },
+              "Size": { "UDim2": [[0, 14], [0, 14]] },
+              "BackgroundColor3": [0.8627451, 0.2745098, 0.2745098],
+              "Visible": false
+            },
+            "UICorner": {
+              "$className": "UICorner",
+              "$properties": { "CornerRadius": { "UDim": [1, 0] } }
+            },
+            "UIStroke": {
+              "$className": "UIStroke",
+              "$properties": {
+                "Thickness": 1.5,
+                "Color": [0.0784314, 0.1019608, 0.1647059]
+              }
+            }
+          }
+        }
+      },
+      "DailyRewardUI": {
+        "$className": "ScreenGui",
+        "$properties": {
+          "ResetOnSpawn": false,
+          "IgnoreGuiInset": true
+        },
+        "Dim": {
+          "$className": "TextButton",
+          "$properties": {
+            "Size": { "UDim2": [[1, 0], [1, 0]] },
+            "BackgroundColor3": [0, 0, 0],
+            "BackgroundTransparency": 0.5,
+            "Text": "",
+            "AutoButtonColor": false,
+            "Visible": false
+          }
+        },
+        "DailyRewardFrame": {
+          "$className": "Frame",
+          "$properties": {
+            "AnchorPoint": [0.5, 0.5],
+            "Position": { "UDim2": [[0.5, 0], [0.5, 0]] },
+            "Size": { "UDim2": [[0.86, 0], [0.62, 0]] },
+            "BackgroundColor3": [0.0784314, 0.1019608, 0.1647059],
+            "BorderSizePixel": 0,
+            "ClipsDescendants": true,
+            "Visible": false
+          },
+          "UICorner": {
+            "$className": "UICorner",
+            "$properties": { "CornerRadius": { "UDim": [0, 20] } }
+          },
+          "UIStroke": {
+            "$className": "UIStroke",
+            "$properties": {
+              "Thickness": 1.5,
+              "Color": [0.2156863, 0.2431373, 0.3294118],
+              "Transparency": 0.1
+            }
+          },
+          "UIGradient": {
+            "$className": "UIGradient",
+            "$properties": { "Rotation": 90 }
+          },
+          "UIPadding": {
+            "$className": "UIPadding",
+            "$properties": {
+              "PaddingTop": { "UDim": [0, 22] },
+              "PaddingBottom": { "UDim": [0, 22] },
+              "PaddingLeft": { "UDim": [0, 22] },
+              "PaddingRight": { "UDim": [0, 22] }
+            }
+          },
+          "UISizeConstraint": {
+            "$className": "UISizeConstraint",
+            "$properties": {
+              "MinSize": [360, 340],
+              "MaxSize": [660, 460]
+            }
+          },
+          "Header": {
+            "$className": "Frame",
+            "$properties": {
+              "Position": { "UDim2": [[0, 0], [0, 0]] },
+              "Size": { "UDim2": [[1, 0], [0, 40]] },
+              "BackgroundTransparency": 1
+            },
+            "Title": {
+              "$className": "TextLabel",
+              "$properties": {
+                "Position": { "UDim2": [[0, 0], [0, 0]] },
+                "Size": { "UDim2": [[0.7, 0], [1, 0]] },
+                "BackgroundTransparency": 1,
+                "Text": "Daily Rewards",
+                "Font": "GothamBlack",
+                "TextScaled": true,
+                "TextColor3": [1, 1, 1],
+                "TextXAlignment": "Left"
+              }
+            },
+            "CloseBtn": {
+              "$className": "TextButton",
+              "$properties": {
+                "AnchorPoint": [1, 0.5],
+                "Position": { "UDim2": [[1, 0], [0.5, 0]] },
+                "Size": { "UDim2": [[0, 28], [0, 28]] },
+                "BackgroundColor3": [0.8627451, 0.2745098, 0.2745098],
+                "Text": "X",
+                "Font": "GothamBold",
+                "TextScaled": true,
+                "TextColor3": [1, 1, 1]
+              },
+              "UICorner": {
+                "$className": "UICorner",
+                "$properties": { "CornerRadius": { "UDim": [0, 10] } }
+              },
+              "UIScale": {
+                "$className": "UIScale",
+                "$properties": { "Scale": 1 }
+              }
+            }
+          },
+          "StreakLbl": {
+            "$className": "TextLabel",
+            "$properties": {
+              "Position": { "UDim2": [[0, 0], [0, 44]] },
+              "Size": { "UDim2": [[1, 0], [0, 22]] },
+              "BackgroundTransparency": 1,
+              "Text": "🔥 Streak: 0 Days",
+              "Font": "GothamMedium",
+              "TextScaled": true,
+              "TextColor3": [1.0, 0.8156863, 0.1568628],
+              "TextXAlignment": "Left"
+            }
+          },
+          "CardsRow": {
+            "$className": "ScrollingFrame",
+            "$properties": {
+              "Position": { "UDim2": [[0, 0], [0, 76]] },
+              "Size": { "UDim2": [[1, 0], [1, -118]] },
+              "BackgroundTransparency": 1,
+              "BorderSizePixel": 0,
+              "ScrollBarThickness": 6,
+              "ScrollingDirection": "X",
+              "CanvasSize": { "UDim2": [[0, 0], [0, 0]] },
+              "AutomaticCanvasSize": "X"
+            },
+            "UIListLayout": {
+              "$className": "UIListLayout",
+              "$properties": {
+                "FillDirection": "Horizontal",
+                "Padding": { "UDim": [0, 10] },
+                "VerticalAlignment": "Center",
+                "SortOrder": "LayoutOrder"
+              }
+            },
+            "DayCard1": {
+              "$className": "Frame",
+              "$properties": {
+                "LayoutOrder": 1,
+                "Size": { "UDim2": [[0, 92], [0, 140]] },
+                "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
+              },
+              "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 14] } } },
+              "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1, "Color": [0.2156863, 0.2431373, 0.3294118], "Transparency": 0.2 } },
+              "UIPadding": {
+                "$className": "UIPadding",
+                "$properties": {
+                  "PaddingTop": { "UDim": [0, 10] },
+                  "PaddingBottom": { "UDim": [0, 10] },
+                  "PaddingLeft": { "UDim": [0, 6] },
+                  "PaddingRight": { "UDim": [0, 6] }
+                }
+              },
+              "DayLabel": {
+                "$className": "TextLabel",
+                "$properties": {
+                  "Size": { "UDim2": [[1, 0], [0, 18]] },
+                  "BackgroundTransparency": 1,
+                  "Text": "Day 1",
+                  "Font": "GothamBold",
+                  "TextScaled": true,
+                  "TextColor3": [0.7647059, 0.7882353, 0.8627451]
+                }
+              },
+              "CoinGlyph": {
+                "$className": "Frame",
+                "$properties": {
+                  "AnchorPoint": [0.5, 0],
+                  "Position": { "UDim2": [[0.5, 0], [0, 26]] },
+                  "Size": { "UDim2": [[0, 34], [0, 34]] },
+                  "BackgroundColor3": [1.0, 0.8156863, 0.1568628]
+                },
+                "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [1, 0] } } },
+                "UIGradient": { "$className": "UIGradient", "$properties": { "Rotation": 45 } },
+                "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1.5, "Color": [0.6, 0.4156863, 0], "Transparency": 0.5 } }
+              },
+              "AmountLabel": {
+                "$className": "TextLabel",
+                "$properties": {
+                  "AnchorPoint": [0, 1],
+                  "Position": { "UDim2": [[0, 0], [1, 0]] },
+                  "Size": { "UDim2": [[1, 0], [0, 18]] },
+                  "BackgroundTransparency": 1,
+                  "Text": "0",
+                  "Font": "GothamBold",
+                  "TextScaled": true,
+                  "TextColor3": [1.0, 0.8156863, 0.1568628]
+                }
+              },
+              "CheckMark": {
+                "$className": "TextLabel",
+                "$properties": {
+                  "AnchorPoint": [1, 0],
+                  "Position": { "UDim2": [[1, -2], [0, -2]] },
+                  "Size": { "UDim2": [[0, 20], [0, 20]] },
+                  "BackgroundTransparency": 1,
+                  "Text": "✔",
+                  "Font": "GothamBlack",
+                  "TextScaled": true,
+                  "TextColor3": [0.3058824, 0.8392157, 0.5647059],
+                  "Visible": false
+                }
+              }
+            },
+            "DayCard2": {
+              "$className": "Frame",
+              "$properties": {
+                "LayoutOrder": 2,
+                "Size": { "UDim2": [[0, 92], [0, 140]] },
+                "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
+              },
+              "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 14] } } },
+              "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1, "Color": [0.2156863, 0.2431373, 0.3294118], "Transparency": 0.2 } },
+              "UIPadding": {
+                "$className": "UIPadding",
+                "$properties": {
+                  "PaddingTop": { "UDim": [0, 10] },
+                  "PaddingBottom": { "UDim": [0, 10] },
+                  "PaddingLeft": { "UDim": [0, 6] },
+                  "PaddingRight": { "UDim": [0, 6] }
+                }
+              },
+              "DayLabel": {
+                "$className": "TextLabel",
+                "$properties": {
+                  "Size": { "UDim2": [[1, 0], [0, 18]] },
+                  "BackgroundTransparency": 1,
+                  "Text": "Day 2",
+                  "Font": "GothamBold",
+                  "TextScaled": true,
+                  "TextColor3": [0.7647059, 0.7882353, 0.8627451]
+                }
+              },
+              "CoinGlyph": {
+                "$className": "Frame",
+                "$properties": {
+                  "AnchorPoint": [0.5, 0],
+                  "Position": { "UDim2": [[0.5, 0], [0, 26]] },
+                  "Size": { "UDim2": [[0, 34], [0, 34]] },
+                  "BackgroundColor3": [1.0, 0.8156863, 0.1568628]
+                },
+                "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [1, 0] } } },
+                "UIGradient": { "$className": "UIGradient", "$properties": { "Rotation": 45 } },
+                "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1.5, "Color": [0.6, 0.4156863, 0], "Transparency": 0.5 } }
+              },
+              "AmountLabel": {
+                "$className": "TextLabel",
+                "$properties": {
+                  "AnchorPoint": [0, 1],
+                  "Position": { "UDim2": [[0, 0], [1, 0]] },
+                  "Size": { "UDim2": [[1, 0], [0, 18]] },
+                  "BackgroundTransparency": 1,
+                  "Text": "0",
+                  "Font": "GothamBold",
+                  "TextScaled": true,
+                  "TextColor3": [1.0, 0.8156863, 0.1568628]
+                }
+              },
+              "CheckMark": {
+                "$className": "TextLabel",
+                "$properties": {
+                  "AnchorPoint": [1, 0],
+                  "Position": { "UDim2": [[1, -2], [0, -2]] },
+                  "Size": { "UDim2": [[0, 20], [0, 20]] },
+                  "BackgroundTransparency": 1,
+                  "Text": "✔",
+                  "Font": "GothamBlack",
+                  "TextScaled": true,
+                  "TextColor3": [0.3058824, 0.8392157, 0.5647059],
+                  "Visible": false
+                }
+              }
+            },
+            "DayCard3": {
+              "$className": "Frame",
+              "$properties": {
+                "LayoutOrder": 3,
+                "Size": { "UDim2": [[0, 92], [0, 140]] },
+                "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
+              },
+              "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 14] } } },
+              "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1, "Color": [0.2156863, 0.2431373, 0.3294118], "Transparency": 0.2 } },
+              "UIPadding": {
+                "$className": "UIPadding",
+                "$properties": {
+                  "PaddingTop": { "UDim": [0, 10] },
+                  "PaddingBottom": { "UDim": [0, 10] },
+                  "PaddingLeft": { "UDim": [0, 6] },
+                  "PaddingRight": { "UDim": [0, 6] }
+                }
+              },
+              "DayLabel": {
+                "$className": "TextLabel",
+                "$properties": {
+                  "Size": { "UDim2": [[1, 0], [0, 18]] },
+                  "BackgroundTransparency": 1,
+                  "Text": "Day 3",
+                  "Font": "GothamBold",
+                  "TextScaled": true,
+                  "TextColor3": [0.7647059, 0.7882353, 0.8627451]
+                }
+              },
+              "CoinGlyph": {
+                "$className": "Frame",
+                "$properties": {
+                  "AnchorPoint": [0.5, 0],
+                  "Position": { "UDim2": [[0.5, 0], [0, 26]] },
+                  "Size": { "UDim2": [[0, 34], [0, 34]] },
+                  "BackgroundColor3": [1.0, 0.8156863, 0.1568628]
+                },
+                "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [1, 0] } } },
+                "UIGradient": { "$className": "UIGradient", "$properties": { "Rotation": 45 } },
+                "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1.5, "Color": [0.6, 0.4156863, 0], "Transparency": 0.5 } }
+              },
+              "AmountLabel": {
+                "$className": "TextLabel",
+                "$properties": {
+                  "AnchorPoint": [0, 1],
+                  "Position": { "UDim2": [[0, 0], [1, 0]] },
+                  "Size": { "UDim2": [[1, 0], [0, 18]] },
+                  "BackgroundTransparency": 1,
+                  "Text": "0",
+                  "Font": "GothamBold",
+                  "TextScaled": true,
+                  "TextColor3": [1.0, 0.8156863, 0.1568628]
+                }
+              },
+              "CheckMark": {
+                "$className": "TextLabel",
+                "$properties": {
+                  "AnchorPoint": [1, 0],
+                  "Position": { "UDim2": [[1, -2], [0, -2]] },
+                  "Size": { "UDim2": [[0, 20], [0, 20]] },
+                  "BackgroundTransparency": 1,
+                  "Text": "✔",
+                  "Font": "GothamBlack",
+                  "TextScaled": true,
+                  "TextColor3": [0.3058824, 0.8392157, 0.5647059],
+                  "Visible": false
+                }
+              }
+            },
+            "DayCard4": {
+              "$className": "Frame",
+              "$properties": {
+                "LayoutOrder": 4,
+                "Size": { "UDim2": [[0, 92], [0, 140]] },
+                "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
+              },
+              "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 14] } } },
+              "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1, "Color": [0.2156863, 0.2431373, 0.3294118], "Transparency": 0.2 } },
+              "UIPadding": {
+                "$className": "UIPadding",
+                "$properties": {
+                  "PaddingTop": { "UDim": [0, 10] },
+                  "PaddingBottom": { "UDim": [0, 10] },
+                  "PaddingLeft": { "UDim": [0, 6] },
+                  "PaddingRight": { "UDim": [0, 6] }
+                }
+              },
+              "DayLabel": {
+                "$className": "TextLabel",
+                "$properties": {
+                  "Size": { "UDim2": [[1, 0], [0, 18]] },
+                  "BackgroundTransparency": 1,
+                  "Text": "Day 4",
+                  "Font": "GothamBold",
+                  "TextScaled": true,
+                  "TextColor3": [0.7647059, 0.7882353, 0.8627451]
+                }
+              },
+              "CoinGlyph": {
+                "$className": "Frame",
+                "$properties": {
+                  "AnchorPoint": [0.5, 0],
+                  "Position": { "UDim2": [[0.5, 0], [0, 26]] },
+                  "Size": { "UDim2": [[0, 34], [0, 34]] },
+                  "BackgroundColor3": [1.0, 0.8156863, 0.1568628]
+                },
+                "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [1, 0] } } },
+                "UIGradient": { "$className": "UIGradient", "$properties": { "Rotation": 45 } },
+                "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1.5, "Color": [0.6, 0.4156863, 0], "Transparency": 0.5 } }
+              },
+              "AmountLabel": {
+                "$className": "TextLabel",
+                "$properties": {
+                  "AnchorPoint": [0, 1],
+                  "Position": { "UDim2": [[0, 0], [1, 0]] },
+                  "Size": { "UDim2": [[1, 0], [0, 18]] },
+                  "BackgroundTransparency": 1,
+                  "Text": "0",
+                  "Font": "GothamBold",
+                  "TextScaled": true,
+                  "TextColor3": [1.0, 0.8156863, 0.1568628]
+                }
+              },
+              "CheckMark": {
+                "$className": "TextLabel",
+                "$properties": {
+                  "AnchorPoint": [1, 0],
+                  "Position": { "UDim2": [[1, -2], [0, -2]] },
+                  "Size": { "UDim2": [[0, 20], [0, 20]] },
+                  "BackgroundTransparency": 1,
+                  "Text": "✔",
+                  "Font": "GothamBlack",
+                  "TextScaled": true,
+                  "TextColor3": [0.3058824, 0.8392157, 0.5647059],
+                  "Visible": false
+                }
+              }
+            },
+            "DayCard5": {
+              "$className": "Frame",
+              "$properties": {
+                "LayoutOrder": 5,
+                "Size": { "UDim2": [[0, 92], [0, 140]] },
+                "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
+              },
+              "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 14] } } },
+              "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1, "Color": [0.2156863, 0.2431373, 0.3294118], "Transparency": 0.2 } },
+              "UIPadding": {
+                "$className": "UIPadding",
+                "$properties": {
+                  "PaddingTop": { "UDim": [0, 10] },
+                  "PaddingBottom": { "UDim": [0, 10] },
+                  "PaddingLeft": { "UDim": [0, 6] },
+                  "PaddingRight": { "UDim": [0, 6] }
+                }
+              },
+              "DayLabel": {
+                "$className": "TextLabel",
+                "$properties": {
+                  "Size": { "UDim2": [[1, 0], [0, 18]] },
+                  "BackgroundTransparency": 1,
+                  "Text": "Day 5",
+                  "Font": "GothamBold",
+                  "TextScaled": true,
+                  "TextColor3": [0.7647059, 0.7882353, 0.8627451]
+                }
+              },
+              "CoinGlyph": {
+                "$className": "Frame",
+                "$properties": {
+                  "AnchorPoint": [0.5, 0],
+                  "Position": { "UDim2": [[0.5, 0], [0, 26]] },
+                  "Size": { "UDim2": [[0, 34], [0, 34]] },
+                  "BackgroundColor3": [1.0, 0.8156863, 0.1568628]
+                },
+                "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [1, 0] } } },
+                "UIGradient": { "$className": "UIGradient", "$properties": { "Rotation": 45 } },
+                "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1.5, "Color": [0.6, 0.4156863, 0], "Transparency": 0.5 } }
+              },
+              "AmountLabel": {
+                "$className": "TextLabel",
+                "$properties": {
+                  "AnchorPoint": [0, 1],
+                  "Position": { "UDim2": [[0, 0], [1, 0]] },
+                  "Size": { "UDim2": [[1, 0], [0, 18]] },
+                  "BackgroundTransparency": 1,
+                  "Text": "0",
+                  "Font": "GothamBold",
+                  "TextScaled": true,
+                  "TextColor3": [1.0, 0.8156863, 0.1568628]
+                }
+              },
+              "CheckMark": {
+                "$className": "TextLabel",
+                "$properties": {
+                  "AnchorPoint": [1, 0],
+                  "Position": { "UDim2": [[1, -2], [0, -2]] },
+                  "Size": { "UDim2": [[0, 20], [0, 20]] },
+                  "BackgroundTransparency": 1,
+                  "Text": "✔",
+                  "Font": "GothamBlack",
+                  "TextScaled": true,
+                  "TextColor3": [0.3058824, 0.8392157, 0.5647059],
+                  "Visible": false
+                }
+              }
+            },
+            "DayCard6": {
+              "$className": "Frame",
+              "$properties": {
+                "LayoutOrder": 6,
+                "Size": { "UDim2": [[0, 92], [0, 140]] },
+                "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
+              },
+              "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 14] } } },
+              "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1, "Color": [0.2156863, 0.2431373, 0.3294118], "Transparency": 0.2 } },
+              "UIPadding": {
+                "$className": "UIPadding",
+                "$properties": {
+                  "PaddingTop": { "UDim": [0, 10] },
+                  "PaddingBottom": { "UDim": [0, 10] },
+                  "PaddingLeft": { "UDim": [0, 6] },
+                  "PaddingRight": { "UDim": [0, 6] }
+                }
+              },
+              "DayLabel": {
+                "$className": "TextLabel",
+                "$properties": {
+                  "Size": { "UDim2": [[1, 0], [0, 18]] },
+                  "BackgroundTransparency": 1,
+                  "Text": "Day 6",
+                  "Font": "GothamBold",
+                  "TextScaled": true,
+                  "TextColor3": [0.7647059, 0.7882353, 0.8627451]
+                }
+              },
+              "CoinGlyph": {
+                "$className": "Frame",
+                "$properties": {
+                  "AnchorPoint": [0.5, 0],
+                  "Position": { "UDim2": [[0.5, 0], [0, 26]] },
+                  "Size": { "UDim2": [[0, 34], [0, 34]] },
+                  "BackgroundColor3": [1.0, 0.8156863, 0.1568628]
+                },
+                "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [1, 0] } } },
+                "UIGradient": { "$className": "UIGradient", "$properties": { "Rotation": 45 } },
+                "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1.5, "Color": [0.6, 0.4156863, 0], "Transparency": 0.5 } }
+              },
+              "AmountLabel": {
+                "$className": "TextLabel",
+                "$properties": {
+                  "AnchorPoint": [0, 1],
+                  "Position": { "UDim2": [[0, 0], [1, 0]] },
+                  "Size": { "UDim2": [[1, 0], [0, 18]] },
+                  "BackgroundTransparency": 1,
+                  "Text": "0",
+                  "Font": "GothamBold",
+                  "TextScaled": true,
+                  "TextColor3": [1.0, 0.8156863, 0.1568628]
+                }
+              },
+              "CheckMark": {
+                "$className": "TextLabel",
+                "$properties": {
+                  "AnchorPoint": [1, 0],
+                  "Position": { "UDim2": [[1, -2], [0, -2]] },
+                  "Size": { "UDim2": [[0, 20], [0, 20]] },
+                  "BackgroundTransparency": 1,
+                  "Text": "✔",
+                  "Font": "GothamBlack",
+                  "TextScaled": true,
+                  "TextColor3": [0.3058824, 0.8392157, 0.5647059],
+                  "Visible": false
+                }
+              }
+            },
+            "DayCard7": {
+              "$className": "Frame",
+              "$properties": {
+                "LayoutOrder": 7,
+                "Size": { "UDim2": [[0, 92], [0, 140]] },
+                "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
+              },
+              "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 14] } } },
+              "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1, "Color": [0.2156863, 0.2431373, 0.3294118], "Transparency": 0.2 } },
+              "UIPadding": {
+                "$className": "UIPadding",
+                "$properties": {
+                  "PaddingTop": { "UDim": [0, 10] },
+                  "PaddingBottom": { "UDim": [0, 10] },
+                  "PaddingLeft": { "UDim": [0, 6] },
+                  "PaddingRight": { "UDim": [0, 6] }
+                }
+              },
+              "DayLabel": {
+                "$className": "TextLabel",
+                "$properties": {
+                  "Size": { "UDim2": [[1, 0], [0, 18]] },
+                  "BackgroundTransparency": 1,
+                  "Text": "Day 7",
+                  "Font": "GothamBold",
+                  "TextScaled": true,
+                  "TextColor3": [0.7647059, 0.7882353, 0.8627451]
+                }
+              },
+              "CoinGlyph": {
+                "$className": "Frame",
+                "$properties": {
+                  "AnchorPoint": [0.5, 0],
+                  "Position": { "UDim2": [[0.5, 0], [0, 26]] },
+                  "Size": { "UDim2": [[0, 34], [0, 34]] },
+                  "BackgroundColor3": [1.0, 0.8156863, 0.1568628]
+                },
+                "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [1, 0] } } },
+                "UIGradient": { "$className": "UIGradient", "$properties": { "Rotation": 45 } },
+                "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1.5, "Color": [0.6, 0.4156863, 0], "Transparency": 0.5 } }
+              },
+              "AmountLabel": {
+                "$className": "TextLabel",
+                "$properties": {
+                  "AnchorPoint": [0, 1],
+                  "Position": { "UDim2": [[0, 0], [1, 0]] },
+                  "Size": { "UDim2": [[1, 0], [0, 18]] },
+                  "BackgroundTransparency": 1,
+                  "Text": "0",
+                  "Font": "GothamBold",
+                  "TextScaled": true,
+                  "TextColor3": [1.0, 0.8156863, 0.1568628]
+                }
+              },
+              "CheckMark": {
+                "$className": "TextLabel",
+                "$properties": {
+                  "AnchorPoint": [1, 0],
+                  "Position": { "UDim2": [[1, -2], [0, -2]] },
+                  "Size": { "UDim2": [[0, 20], [0, 20]] },
+                  "BackgroundTransparency": 1,
+                  "Text": "✔",
+                  "Font": "GothamBlack",
+                  "TextScaled": true,
+                  "TextColor3": [0.3058824, 0.8392157, 0.5647059],
+                  "Visible": false
+                }
+              }
+            }
+          },
+          "CountdownLbl": {
+            "$className": "TextLabel",
+            "$properties": {
+              "AnchorPoint": [0, 1],
+              "Position": { "UDim2": [[0, 0], [1, -64]] },
+              "Size": { "UDim2": [[1, 0], [0, 18]] },
+              "BackgroundTransparency": 1,
+              "Text": "",
+              "Font": "GothamMedium",
+              "TextScaled": true,
+              "TextColor3": [0.6666667, 0.6901961, 0.7607843],
+              "Visible": false
+            }
+          },
+          "ClaimButton": {
+            "$className": "TextButton",
+            "$properties": {
+              "AnchorPoint": [0, 1],
+              "Position": { "UDim2": [[0, 0], [1, 0]] },
+              "Size": { "UDim2": [[1, 0], [0, 46]] },
+              "BackgroundColor3": [0.3568627, 0.4862745, 0.9803922],
+              "Text": "Claim",
+              "Font": "GothamBold",
+              "TextScaled": true,
+              "TextColor3": [1, 1, 1]
+            },
+            "UICorner": {
+              "$className": "UICorner",
+              "$properties": { "CornerRadius": { "UDim": [0, 12] } }
+            },
+            "UIGradient": {
+              "$className": "UIGradient",
+              "$properties": { "Rotation": 90 }
+            },
+            "UIScale": {
+              "$className": "UIScale",
+              "$properties": { "Scale": 1 }
+            }
+          }
+        }
       }
     },
     "StarterPlayer": {
@@ -2522,6 +3271,9 @@
         },
         "GateColorClient": {
           "$path": "src/client/GateColorClient.client.lua"
+        },
+        "DailyRewardClient": {
+          "$path": "src/client/DailyRewardClient.client.lua"
         }
       }
     },
