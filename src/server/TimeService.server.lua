@@ -12,6 +12,7 @@ local ServerScriptService = game:GetService("ServerScriptService")
 local TimerEvent = ReplicatedStorage:WaitForChild("Events"):WaitForChild("TimerEvent")
 local Config = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("ObbyConfig"))
 local Leaderboard = require(ServerScriptService:WaitForChild("LeaderboardService"))
+local BoostService = require(ServerScriptService:WaitForChild("BoostService"))
 
 -- activeRuns[player] = { obbyId = string, startTick = number }
 local activeRuns = {}
@@ -164,15 +165,12 @@ local function setupStage(stage)
 		local timeMs = math.floor(elapsed * 1000)
 		print(player.Name .. " finished " .. obbyId .. " in " .. formatSeconds(elapsed))
 
-		-- reward scales with how fast this run was relative to the Obby's TargetTime
-		local reward = Config.getReward(obbyId, elapsed)
-		local leaderstats = player:FindFirstChild("leaderstats")
-		if leaderstats then
-			local coins = leaderstats:FindFirstChild("Coins")
-			if coins then
-				coins.Value += reward
-			end
-		end
+		-- reward scales with how fast this run was relative to the Obby's TargetTime -
+		-- GrantCoins applies the 2X Coins multiplier (if active) and returns the
+		-- actual amount awarded, so everything below (the print, the "Finish"
+		-- payload) reports the real, possibly-doubled number
+		local baseReward = Config.getReward(obbyId, elapsed)
+		local reward = BoostService.GrantCoins(player, baseReward)
 
 		-- Sequential Obby Unlock: any legitimate completion counts, not just a
 		-- new best - a replay of an already-cleared Obby shouldn't matter, but

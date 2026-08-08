@@ -59,6 +59,7 @@ local function defaultData()
 	return {
 		Coins = 0, Inventory = {}, Equipped = "", BestTimes = {}, UnlockedObby = 1,
 		LastClaimTime = 0, DailyStreak = 0,
+		BoostRemainingSeconds = 0, BoostPermanent = false,
 	}
 end
 
@@ -111,6 +112,10 @@ local function claimData(player)
 				-- have neither, so this backfills "never claimed" once
 				data.LastClaimTime = data.LastClaimTime or 0
 				data.DailyStreak = data.DailyStreak or 0
+				-- 2X Coins Boost fields, added after launch - old saves have
+				-- neither, so this backfills "no boost" once
+				data.BoostRemainingSeconds = data.BoostRemainingSeconds or 0
+				data.BoostPermanent = data.BoostPermanent or false
 
 				data.SessionId = SESSION_ID
 				data.SessionStamp = os.time()
@@ -236,6 +241,21 @@ local function setupPlayer(player)
 	dailyStreak.Value = data.DailyStreak
 	dailyStreak.Parent = player
 
+	-- banked 2X Coins time, in seconds - BoostService reads/writes this. Only
+	-- ticks down while this player is online (see BoostService); a leave
+	-- freezes it exactly where it was, same as any other saved field
+	local boostRemainingSeconds = Instance.new("IntValue")
+	boostRemainingSeconds.Name = "BoostRemainingSeconds"
+	boostRemainingSeconds.Value = data.BoostRemainingSeconds
+	boostRemainingSeconds.Parent = player
+
+	-- true once the player owns the permanent 2X Coins Forever product -
+	-- BoostService reads/writes this
+	local boostPermanent = Instance.new("BoolValue")
+	boostPermanent.Name = "BoostPermanent"
+	boostPermanent.Value = data.BoostPermanent
+	boostPermanent.Parent = player
+
 	player:SetAttribute("DataLoaded", true)
 	print("[DataService] loaded " .. player.Name .. " (" .. data.Coins .. " coins, " .. #data.Inventory .. " items)")
 end
@@ -299,6 +319,16 @@ local function saveData(player, releaseLock)
 	local dailyStreak = player:FindFirstChild("DailyStreak")
 	if dailyStreak then
 		data.DailyStreak = dailyStreak.Value
+	end
+
+	local boostRemainingSeconds = player:FindFirstChild("BoostRemainingSeconds")
+	if boostRemainingSeconds then
+		data.BoostRemainingSeconds = boostRemainingSeconds.Value
+	end
+
+	local boostPermanent = player:FindFirstChild("BoostPermanent")
+	if boostPermanent then
+		data.BoostPermanent = boostPermanent.Value
 	end
 
 	-- A real UpdateAsync: the transform inspects `old` and refuses to write when

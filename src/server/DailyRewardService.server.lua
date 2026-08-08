@@ -17,13 +17,18 @@
 --// dispatched through the RewardHandlers table below instead of an
 --// if/elseif chain - adding a new Type later (e.g. "SpinTicket") is one
 --// handler function here plus one DailyRewardConfig entry, no existing
---// handler or dispatch code changes.
+--// handler or dispatch code changes. A handler returns the amount it
+--// actually granted (post-multiplier for Coins) so grantReward can report
+--// the real number to the client - see grantReward for why that can't just
+--// be written back into rewardData.
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ServerScriptService = game:GetService("ServerScriptService")
 
 local DailyRewardRemote = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("DailyRewardRemote")
 local DailyRewardConfig = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("DailyRewardConfig"))
+local BoostService = require(ServerScriptService:WaitForChild("BoostService"))
 
 local CLAIM_INTERVAL = 24 * 60 * 60 -- seconds until the next reward becomes claimable
 local STREAK_GRACE = 48 * 60 * 60   -- claim within this window of the last one to keep the streak alive; beyond it, the streak resets to 1
@@ -35,12 +40,11 @@ local debounce = {}
 -- by adding one function here and one matching Type in DailyRewardConfig
 local RewardHandlers = {}
 
+-- routes through BoostService.GrantCoins (the one place the 2X Coins
+-- multiplier is ever applied) instead of writing coins.Value directly, same
+-- integration point TimeService's Obby-completion reward uses
 function RewardHandlers.Coins(player, rewardData)
-	local leaderstats = player:FindFirstChild("leaderstats")
-	local coins = leaderstats and leaderstats:FindFirstChild("Coins")
-	if not coins then return end
-
-	coins.Value += rewardData.Amount
+	return BoostService.GrantCoins(player, rewardData.Amount)
 end
 
 local function grantReward(player, day)
@@ -52,8 +56,14 @@ local function grantReward(player, day)
 		return nil
 	end
 
-	handler(player, rewardData)
-	return rewardData
+	local awarded = handler(player, rewardData)
+
+	-- a fresh table, never rewardData itself: DailyRewardConfig.getReward
+	-- returns the actual shared config table (DailyRewardConfig.Days[day]),
+	-- reused for every player and every future claim - writing the doubled
+	-- amount back into it would permanently corrupt the reward ladder for
+	-- everyone after the first 2X claim
+	return { Type = rewardData.Type, Amount = awarded or rewardData.Amount }
 end
 
 --=============== CLAIM ===============--
