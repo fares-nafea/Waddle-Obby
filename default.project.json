@@ -75,6 +75,9 @@
         "DailyRewardConfig": {
           "$path": "src/shared/DailyRewardConfig.lua"
         },
+        "GlobalLeaderboardConfig": {
+          "$path": "src/shared/GlobalLeaderboardConfig.lua"
+        },
         "Templates": {
           "$className": "Folder",
           "CoinToast": {
@@ -142,6 +145,230 @@
                 "TextScaled": true,
                 "TextColor3": [0.6666667, 0.8666667, 1.0],
                 "Text": ""
+              }
+            }
+          },
+          "GlobalLeaderboardRow": {
+            "$className": "Frame",
+            "$properties": {
+              "Size": { "UDim2": [[1, 0], [0.084, 0]] },
+              "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902],
+              "BackgroundTransparency": 0.15,
+              "BorderSizePixel": 0,
+              "Visible": true
+            },
+            "UICorner": {
+              "$className": "UICorner",
+              "$properties": { "CornerRadius": { "UDim": [0, 10] } }
+            },
+            "UIStroke": {
+              "$className": "UIStroke",
+              "$properties": {
+                "Thickness": 1,
+                "Color": [0.2156863, 0.2431373, 0.3294118],
+                "Transparency": 0.2
+              }
+            },
+            "UIPadding": {
+              "$className": "UIPadding",
+              "$properties": {
+                "PaddingLeft": { "UDim": [0, 14] },
+                "PaddingRight": { "UDim": [0, 14] }
+              }
+            },
+            "UIScale": {
+              "$className": "UIScale",
+              "$properties": { "Scale": 1 }
+            },
+            "RankLbl": {
+              "$className": "TextLabel",
+              "$properties": {
+                "BackgroundTransparency": 1,
+                "Size": { "UDim2": [[0, 70], [1, 0]] },
+                "Position": { "UDim2": [[0, 0], [0, 0]] },
+                "TextXAlignment": "Left",
+                "Font": "GothamBlack",
+                "TextScaled": true,
+                "TextColor3": [1, 1, 1],
+                "Text": ""
+              }
+            },
+            "NameLbl": {
+              "$className": "TextLabel",
+              "$properties": {
+                "BackgroundTransparency": 1,
+                "Size": { "UDim2": [[1, -260], [1, 0]] },
+                "Position": { "UDim2": [[0, 78], [0, 0]] },
+                "TextXAlignment": "Left",
+                "TextTruncate": "AtEnd",
+                "Font": "GothamMedium",
+                "TextScaled": true,
+                "TextColor3": [1, 1, 1],
+                "Text": ""
+              }
+            },
+            "CoinsLbl": {
+              "$className": "TextLabel",
+              "$properties": {
+                "BackgroundTransparency": 1,
+                "Size": { "UDim2": [[0, 170], [1, 0]] },
+                "Position": { "UDim2": [[1, -170], [0, 0]] },
+                "TextXAlignment": "Right",
+                "Font": "GothamBold",
+                "TextScaled": true,
+                "TextColor3": [1.0, 0.8156863, 0.1568628],
+                "Text": ""
+              }
+            }
+          },
+          "GlobalLeaderboardBoard": {
+            "$className": "Model",
+            "BoardPart": {
+              "$className": "Part",
+              "$properties": {
+                "Size": [14, 10, 0.6],
+                "Anchored": true,
+                "CanCollide": false,
+                "CanQuery": false,
+                "CastShadow": false,
+                "Material": "SmoothPlastic",
+                "Color": [0.0980392, 0.1058824, 0.1372549]
+              },
+              "WorldLeaderboardGui": {
+                "$className": "SurfaceGui",
+                "$properties": {
+                  "Face": "Front",
+                  "SizingMode": "PixelsPerStud",
+                  "PixelsPerStud": 50,
+                  "LightInfluence": 0,
+                  "AlwaysOnTop": false,
+                  "ClipsDescendants": true
+                },
+                "Board": {
+                  "$className": "Frame",
+                  "$properties": {
+                    "Size": { "UDim2": [[1, 0], [1, 0]] },
+                    "BackgroundColor3": [0.0784314, 0.1019608, 0.1647059],
+                    "BackgroundTransparency": 0.05,
+                    "BorderSizePixel": 0
+                  },
+                  "UIStroke": {
+                    "$className": "UIStroke",
+                    "$properties": {
+                      "Color": [1.0, 0.8156863, 0.1568628],
+                      "Thickness": 3,
+                      "Transparency": 0.35
+                    }
+                  },
+                  "UIGradient": {
+                    "$className": "UIGradient",
+                    "$properties": { "Rotation": 90 }
+                  },
+                  "Title": {
+                    "$className": "TextLabel",
+                    "$properties": {
+                      "BackgroundTransparency": 1,
+                      "Size": { "UDim2": [[0.92, 0], [0.1, 0]] },
+                      "Position": { "UDim2": [[0.04, 0], [0.03, 0]] },
+                      "Font": "GothamBlack",
+                      "TextScaled": true,
+                      "TextColor3": [1.0, 0.8156863, 0.1568628],
+                      "TextStrokeTransparency": 0.6,
+                      "Text": "GLOBAL COIN LEADERBOARD"
+                    }
+                  },
+                  "Subtitle": {
+                    "$className": "TextLabel",
+                    "$properties": {
+                      "BackgroundTransparency": 1,
+                      "Size": { "UDim2": [[0.92, 0], [0.06, 0]] },
+                      "Position": { "UDim2": [[0.04, 0], [0.135, 0]] },
+                      "Font": "GothamMedium",
+                      "TextScaled": true,
+                      "TextColor3": [0.6666667, 0.6901961, 0.7607843],
+                      "Text": "🏆 Ranked by Total Coins Earned"
+                    }
+                  },
+                  "Divider": {
+                    "$className": "Frame",
+                    "$properties": {
+                      "BackgroundColor3": [1.0, 0.8156863, 0.1568628],
+                      "BackgroundTransparency": 0.5,
+                      "BorderSizePixel": 0,
+                      "Size": { "UDim2": [[0.92, 0], [0.006, 0]] },
+                      "Position": { "UDim2": [[0.04, 0], [0.205, 0]] }
+                    }
+                  },
+                  "List": {
+                    "$className": "Frame",
+                    "$properties": {
+                      "BackgroundTransparency": 1,
+                      "Size": { "UDim2": [[0.92, 0], [0.75, 0]] },
+                      "Position": { "UDim2": [[0.04, 0], [0.235, 0]] },
+                      "ClipsDescendants": true
+                    },
+                    "UIListLayout": {
+                      "$className": "UIListLayout",
+                      "$properties": {
+                        "Padding": { "UDim": [0.006, 0] },
+                        "SortOrder": "LayoutOrder"
+                      }
+                    },
+                    "EmptyLbl": {
+                      "$className": "TextLabel",
+                      "$properties": {
+                        "BackgroundTransparency": 1,
+                        "Size": { "UDim2": [[1, 0], [0.1, 0]] },
+                        "LayoutOrder": 0,
+                        "Font": "GothamMedium",
+                        "TextScaled": true,
+                        "TextColor3": [0.4705882, 0.5019608, 0.5803922],
+                        "Text": "No rankings yet - be the first!",
+                        "Visible": false
+                      }
+                    }
+                  }
+                }
+              },
+              "GlowAttachment": {
+                "$className": "Attachment",
+                "$properties": {
+                  "Position": [0, 0, -0.35]
+                },
+                "Sparkles": {
+                  "$className": "ParticleEmitter",
+                  "$properties": {
+                    "Texture": "rbxasset://textures/particles/sparkles_main.dds",
+                    "Rate": 6,
+                    "Enabled": true
+                  }
+                }
+              },
+              "AccentLight": {
+                "$className": "SpotLight",
+                "$properties": {
+                  "Color": [1.0, 0.8862745, 0.6],
+                  "Brightness": 3,
+                  "Range": 20,
+                  "Angle": 90,
+                  "Face": "Front",
+                  "Enabled": true
+                }
+              }
+            },
+            "CoinDecoration": {
+              "$className": "Part",
+              "$properties": {
+                "Shape": "Cylinder",
+                "Size": [0.5, 3, 3],
+                "Orientation": [0, 90, 0],
+                "Position": [0, 6.5, 0],
+                "Anchored": true,
+                "CanCollide": false,
+                "CanQuery": false,
+                "CastShadow": false,
+                "Material": "Neon",
+                "Color": [1.0, 0.8156863, 0.1568628]
               }
             }
           },
@@ -419,6 +646,12 @@
       },
       "DailyRewardService": {
         "$path": "src/server/DailyRewardService.server.lua"
+      },
+      "GlobalLeaderboardService": {
+        "$path": "src/server/GlobalLeaderboardService.lua"
+      },
+      "GlobalWorldLeaderboardService": {
+        "$path": "src/server/GlobalWorldLeaderboardService.server.lua"
       }
     },
     "SoundService": {
