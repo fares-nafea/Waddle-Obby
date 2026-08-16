@@ -4021,9 +4021,6 @@
         "$className": "ScreenGui",
         "StatusBadge": {
           "$className": "Frame",
-          "IconLbl": {
-            "$className": "TextLabel"
-          },
           "StatusLbl": {
             "$className": "TextLabel"
           },
@@ -4032,7 +4029,7 @@
           }
         },
         "OpenButton": {
-          "$className": "TextButton"
+          "$className": "ImageButton"
         },
         "Dim": {
           "$className": "TextButton"
@@ -4045,61 +4042,45 @@
               "$className": "TextLabel"
             },
             "CloseBtn": {
-              "$className": "TextButton"
+              "$className": "ImageButton"
             }
           },
           "List": {
             "$className": "Frame",
             "Boost10MinRow": {
               "$className": "Frame",
-              "UIPadding": {
-                "$className": "UIPadding",
-                "$properties": { "PaddingLeft": { "UDim": [0, 12] }, "PaddingRight": { "UDim": [0, 12] } }
-              },
-              "IconLbl": {
-                "$className": "TextLabel"
-              },
               "NameLbl": {
                 "$className": "TextLabel"
               },
               "BuyButton": {
-                "$className": "TextButton"
+                "$className": "ImageButton"
               }
             },
             "Boost30MinRow": {
               "$className": "Frame",
-              "IconLbl": {
-                "$className": "TextLabel"
-              },
               "NameLbl": {
                 "$className": "TextLabel"
               },
               "BuyButton": {
-                "$className": "TextButton"
+                "$className": "ImageButton"
               }
             },
             "Boost1HourRow": {
               "$className": "Frame",
-              "IconLbl": {
-                "$className": "TextLabel"
-              },
               "NameLbl": {
                 "$className": "TextLabel"
               },
               "BuyButton": {
-                "$className": "TextButton"
+                "$className": "ImageButton"
               }
             },
             "BoostForeverRow": {
               "$className": "Frame",
-              "IconLbl": {
-                "$className": "TextLabel"
-              },
               "NameLbl": {
                 "$className": "TextLabel"
               },
               "BuyButton": {
-                "$className": "TextButton"
+                "$className": "ImageButton"
               }
             }
           }
