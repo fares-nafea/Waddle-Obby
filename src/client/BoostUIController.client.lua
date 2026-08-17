@@ -35,7 +35,6 @@ local boostPermanent = player:WaitForChild("BoostPermanent", 10)
 local gui = playerGui:WaitForChild("BoostUI")
 
 local badge = gui:WaitForChild("StatusBadge")
-local iconLbl = badge:WaitForChild("IconLbl")
 local statusLbl = badge:WaitForChild("StatusLbl")
 local timeLbl = badge:WaitForChild("TimeLbl")
 
@@ -76,7 +75,6 @@ end
 
 local function showExpiredNotification()
 	badge.Visible = true
-	iconLbl.Text = "🪙"
 	statusLbl.Text = "Boost Expired"
 	timeLbl.Visible = false
 
@@ -99,7 +97,6 @@ local function refresh()
 	end
 
 	badge.Visible = true
-	iconLbl.Text = "🪙"
 	statusLbl.Text = "2X Coins Active"
 
 	if permanent then
