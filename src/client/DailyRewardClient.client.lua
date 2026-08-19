@@ -100,37 +100,37 @@ local function formatCountdown(seconds)
 end
 
 --============================ CARD STATES ============================--
-local CLAIMED_COLOR = Color3.fromRGB(78, 214, 144)
-local CURRENT_COLOR = Color3.fromRGB(255, 208, 40)
-local LOCKED_COLOR = Color3.fromRGB(55, 62, 84)
 
 local function applyCardState(card, state)
 	if state == "Claimed" then
 		card.checkMark.Visible = true
 		card.frame.BackgroundTransparency = 0
+
 		if card.stroke then
-			card.stroke.Color = CLAIMED_COLOR
 			card.stroke.Thickness = 1
 		end
+
 	elseif state == "ClaimedCurrent" then
 		card.checkMark.Visible = true
 		card.frame.BackgroundTransparency = 0
+
 		if card.stroke then
-			card.stroke.Color = CURRENT_COLOR
 			card.stroke.Thickness = 2
 		end
+
 	elseif state == "Current" then
 		card.checkMark.Visible = false
 		card.frame.BackgroundTransparency = 0
+
 		if card.stroke then
-			card.stroke.Color = CURRENT_COLOR
 			card.stroke.Thickness = 2
 		end
+
 	else -- Locked
 		card.checkMark.Visible = false
 		card.frame.BackgroundTransparency = 0.15
+
 		if card.stroke then
-			card.stroke.Color = LOCKED_COLOR
 			card.stroke.Thickness = 1
 		end
 	end
@@ -167,8 +167,8 @@ local function refreshCards()
 end
 
 --============================ CLAIM BUTTON + COUNTDOWN ============================--
-local CLAIM_ACTIVE_COLOR = Color3.fromRGB(91, 124, 250)
-local CLAIM_DISABLED_COLOR = Color3.fromRGB(35, 40, 58)
+local CLAIM_ACTIVE_COLOR = 1
+local CLAIM_DISABLED_COLOR = 0.7
 
 local function refreshClaimButton()
 	local remaining = secondsUntilClaimable()
@@ -176,8 +176,8 @@ local function refreshClaimButton()
 
 	claimButton.Active = claimableNow
 	claimButton.AutoButtonColor = claimableNow
-	claimButton.Text = claimableNow and "Claim" or "Claimed"
-	claimButton.BackgroundColor3 = claimableNow and CLAIM_ACTIVE_COLOR or CLAIM_DISABLED_COLOR
+	claimButton.Text.Text = claimableNow and "Claim" or "Claimed"
+	claimButton.Disabled.BackgroundTransparency = claimableNow and CLAIM_ACTIVE_COLOR or CLAIM_DISABLED_COLOR
 
 	countdownLbl.Visible = not claimableNow
 	if not claimableNow then

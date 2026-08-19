@@ -51,17 +51,16 @@ local trailCard = content:WaitForChild("TrailCard")
 local equippedLbl = trailCard:WaitForChild("EquippedLbl")
 local ownedCountLbl = trailCard:WaitForChild("OwnedCountLbl")
 
-local obbyList = content:WaitForChild("ObbyList")
 
 dim.Visible = false
 profileFrame.Visible = false
 
--- one row per Obby, found under ObbyList by "ObbyRow" .. ObbyId (built in Studio,
+-- one row per Obby, found under content by "ObbyRow" .. ObbyId (built in Studio,
 -- same lookup-by-name approach ShopClient uses for TrailConfig cards)
 local obbyRows = {}
 for i = 1, OBBY_COUNT do
 	local obbyId = tostring(i)
-	local row = obbyList:WaitForChild("ObbyRow" .. obbyId, 5)
+	local row = content:WaitForChild("ObbyRow" .. obbyId, 5)
 	if row then
 		obbyRows[obbyId] = {
 			frame = row,
@@ -69,7 +68,7 @@ for i = 1, OBBY_COUNT do
 			time = row:WaitForChild("TimeLbl"),
 		}
 	else
-		warn("[ProfileClient] ObbyList.ObbyRow" .. obbyId .. " not found - can't show Obby " .. obbyId)
+		warn("[ProfileClient] content.ObbyRow" .. obbyId .. " not found - can't show Obby " .. obbyId)
 	end
 end
 

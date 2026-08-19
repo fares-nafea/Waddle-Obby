@@ -4,7 +4,7 @@ local DataStoreService = game:GetService("DataStoreService")
 local RunService = game:GetService("RunService")
 local HttpService = game:GetService("HttpService")
 
-local store = DataStoreService:GetDataStore("PlayerData_v3")
+local store = DataStoreService:GetDataStore("PlayerData_v10")
 
 local MAX_RETRIES = 5
 local AUTOSAVE_EVERY = 60 -- seconds

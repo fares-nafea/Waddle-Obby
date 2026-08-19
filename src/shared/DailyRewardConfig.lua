@@ -23,6 +23,7 @@ Config.Days = {
 	[5] = { Type = "Coins", Amount = 1000 },
 	[6] = { Type = "Coins", Amount = 1500 },
 	[7] = { Type = "Coins", Amount = 2500 },
+	[8] = { Type = "Coins", Amount = 2500 },
 }
 
 -- the reward for `day`, clamped to MaxDay so a streak past Day 7 keeps

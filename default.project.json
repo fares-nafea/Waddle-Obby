@@ -2553,1466 +2553,352 @@
       },
       "ProfileUI": {
         "$className": "ScreenGui",
-        "$properties": {
-          "ResetOnSpawn": false,
-          "IgnoreGuiInset": true
-        },
         "OpenButton": {
-          "$className": "TextButton",
-          "$properties": {
-            "AnchorPoint": [0, 1],
-            "Position": { "UDim2": [[0, 16], [1, -182]] },
-            "Size": { "UDim2": [[0, 140], [0, 46]] },
-            "BackgroundColor3": [0.1372549, 0.1764706, 0.2745098],
-            "Text": "Profile",
-            "Font": "GothamBold",
-            "TextScaled": true,
-            "TextColor3": [1, 1, 1]
-          },
-          "UICorner": {
-            "$className": "UICorner",
-            "$properties": { "CornerRadius": { "UDim": [0, 12] } }
-          },
-          "UIStroke": {
-            "$className": "UIStroke",
-            "$properties": {
-              "Thickness": 1,
-              "Color": [0.4156863, 0.6666667, 1.0],
-              "Transparency": 0.5
-            }
-          }
+          "$className": "ImageButton"
         },
         "Dim": {
-          "$className": "TextButton",
-          "$properties": {
-            "Size": { "UDim2": [[1, 0], [1, 0]] },
-            "BackgroundColor3": [0, 0, 0],
-            "BackgroundTransparency": 0.5,
-            "Text": "",
-            "AutoButtonColor": false,
-            "Visible": false
-          }
+          "$className": "TextButton"
         },
         "ProfileFrame": {
           "$className": "Frame",
-          "$properties": {
-            "AnchorPoint": [0.5, 0.5],
-            "Position": { "UDim2": [[0.5, 0], [0.5, 0]] },
-            "Size": { "UDim2": [[0.86, 0], [0.82, 0]] },
-            "BackgroundColor3": [0.0784314, 0.1019608, 0.1647059],
-            "BorderSizePixel": 0,
-            "ClipsDescendants": true,
-            "Visible": false
-          },
-          "UICorner": {
-            "$className": "UICorner",
-            "$properties": { "CornerRadius": { "UDim": [0, 20] } }
-          },
-          "UIStroke": {
-            "$className": "UIStroke",
-            "$properties": {
-              "Thickness": 1.5,
-              "Color": [0.2156863, 0.2431373, 0.3294118],
-              "Transparency": 0.1
-            }
-          },
-          "UIGradient": {
-            "$className": "UIGradient",
-            "$properties": { "Rotation": 90 }
-          },
-          "UIPadding": {
-            "$className": "UIPadding",
-            "$properties": {
-              "PaddingTop": { "UDim": [0, 22] },
-              "PaddingBottom": { "UDim": [0, 22] },
-              "PaddingLeft": { "UDim": [0, 22] },
-              "PaddingRight": { "UDim": [0, 22] }
-            }
-          },
-          "UISizeConstraint": {
-            "$className": "UISizeConstraint",
-            "$properties": {
-              "MinSize": [340, 460],
-              "MaxSize": [640, 620]
-            }
+          "MainBG": {
+            "$className": "ImageLabel"
           },
           "Header": {
             "$className": "Frame",
-            "$properties": {
-              "Position": { "UDim2": [[0, 0], [0, 0]] },
-              "Size": { "UDim2": [[1, 0], [0, 44]] },
-              "BackgroundTransparency": 1
-            },
             "Title": {
-              "$className": "TextLabel",
-              "$properties": {
-                "Position": { "UDim2": [[0, 0], [0, 0]] },
-                "Size": { "UDim2": [[0.6, 0], [1, 0]] },
-                "BackgroundTransparency": 1,
-                "Text": "Profile",
-                "Font": "GothamBlack",
-                "TextScaled": true,
-                "TextColor3": [1, 1, 1],
-                "TextXAlignment": "Left"
-              }
+              "$className": "TextLabel"
             },
             "CloseBtn": {
-              "$className": "TextButton",
-              "$properties": {
-                "AnchorPoint": [1, 0.5],
-                "Position": { "UDim2": [[1, 0], [0.5, 0]] },
-                "Size": { "UDim2": [[0, 28], [0, 28]] },
-                "BackgroundColor3": [0.8627451, 0.2745098, 0.2745098],
-                "Text": "X",
-                "Font": "GothamBold",
-                "TextScaled": true,
-                "TextColor3": [1, 1, 1]
-              },
-              "UICorner": {
-                "$className": "UICorner",
-                "$properties": { "CornerRadius": { "UDim": [0, 10] } }
-              },
-              "UIScale": {
-                "$className": "UIScale",
-                "$properties": { "Scale": 1 }
-              }
+              "$className": "ImageButton"
             }
           },
           "Content": {
             "$className": "ScrollingFrame",
-            "$properties": {
-              "Position": { "UDim2": [[0, 0], [0, 58]] },
-              "Size": { "UDim2": [[1, 0], [1, -58]] },
-              "BackgroundTransparency": 1,
-              "BorderSizePixel": 0,
-              "ScrollBarThickness": 6,
-              "CanvasSize": { "UDim2": [[0, 0], [0, 0]] },
-              "AutomaticCanvasSize": "Y"
-            },
-            "UIListLayout": {
-              "$className": "UIListLayout",
-              "$properties": {
-                "Padding": { "UDim": [0, 14] },
-                "SortOrder": "LayoutOrder"
-              }
-            },
             "PlayerCard": {
               "$className": "Frame",
-              "$properties": {
-                "LayoutOrder": 1,
-                "Size": { "UDim2": [[1, 0], [0, 88]] },
-                "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
-              },
-              "UICorner": {
-                "$className": "UICorner",
-                "$properties": { "CornerRadius": { "UDim": [0, 14] } }
-              },
-              "UIStroke": {
-                "$className": "UIStroke",
-                "$properties": {
-                  "Thickness": 1,
-                  "Color": [0.2156863, 0.2431373, 0.3294118],
-                  "Transparency": 0.2
-                }
-              },
-              "UIPadding": {
-                "$className": "UIPadding",
-                "$properties": {
-                  "PaddingTop": { "UDim": [0, 12] },
-                  "PaddingBottom": { "UDim": [0, 12] },
-                  "PaddingLeft": { "UDim": [0, 12] },
-                  "PaddingRight": { "UDim": [0, 12] }
-                }
-              },
               "Avatar": {
-                "$className": "ImageLabel",
-                "$properties": {
-                  "AnchorPoint": [0, 0.5],
-                  "Position": { "UDim2": [[0, 0], [0.5, 0]] },
-                  "Size": { "UDim2": [[0, 64], [0, 64]] },
-                  "BackgroundColor3": [0.1372549, 0.1764706, 0.2745098],
-                  "Image": "",
-                  "ScaleType": "Crop"
-                },
-                "UICorner": {
-                  "$className": "UICorner",
-                  "$properties": { "CornerRadius": { "UDim": [1, 0] } }
-                }
+                "$className": "ImageLabel"
               },
               "Username": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "AnchorPoint": [0, 0.5],
-                  "Position": { "UDim2": [[0, 78], [0.5, 0]] },
-                  "Size": { "UDim2": [[1, -78], [0, 26]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "",
-                  "Font": "GothamBold",
-                  "TextScaled": true,
-                  "TextColor3": [1, 1, 1],
-                  "TextXAlignment": "Left"
-                }
+                "$className": "TextLabel"
+              },
+              "MainBG": {
+                "$className": "ImageLabel"
               }
             },
             "CurrencyCard": {
               "$className": "Frame",
-              "$properties": {
-                "LayoutOrder": 2,
-                "Size": { "UDim2": [[1, 0], [0, 50]] },
-                "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
-              },
-              "UICorner": {
-                "$className": "UICorner",
-                "$properties": { "CornerRadius": { "UDim": [0, 14] } }
-              },
-              "UIStroke": {
-                "$className": "UIStroke",
-                "$properties": {
-                  "Thickness": 1,
-                  "Color": [0.2156863, 0.2431373, 0.3294118],
-                  "Transparency": 0.2
-                }
-              },
-              "UIPadding": {
-                "$className": "UIPadding",
-                "$properties": {
-                  "PaddingLeft": { "UDim": [0, 14] },
-                  "PaddingRight": { "UDim": [0, 14] }
-                }
-              },
-              "UIListLayout": {
-                "$className": "UIListLayout",
-                "$properties": {
-                  "FillDirection": "Horizontal",
-                  "Padding": { "UDim": [0, 8] },
-                  "VerticalAlignment": "Center",
-                  "SortOrder": "LayoutOrder"
-                }
-              },
-              "CoinGlyph": {
-                "$className": "Frame",
-                "$properties": {
-                  "LayoutOrder": 1,
-                  "Size": { "UDim2": [[0, 20], [0, 20]] },
-                  "BackgroundColor3": [1.0, 0.8156863, 0.1568628]
-                },
-                "UICorner": {
-                  "$className": "UICorner",
-                  "$properties": { "CornerRadius": { "UDim": [1, 0] } }
-                },
-                "UIGradient": {
-                  "$className": "UIGradient",
-                  "$properties": { "Rotation": 45 }
-                },
-                "UIStroke": {
-                  "$className": "UIStroke",
-                  "$properties": {
-                    "Thickness": 1.5,
-                    "Color": [0.6, 0.4156863, 0],
-                    "Transparency": 0.5
-                  }
-                }
-              },
               "CoinsLabel": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "LayoutOrder": 2,
-                  "Size": { "UDim2": [[0, 60], [1, 0]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "Coins",
-                  "Font": "GothamMedium",
-                  "TextScaled": true,
-                  "TextColor3": [0.7647059, 0.7882353, 0.8627451],
-                  "TextXAlignment": "Left"
-                }
+                "$className": "TextLabel"
               },
               "CoinsAmount": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "LayoutOrder": 3,
-                  "Size": { "UDim2": [[1, -96], [1, 0]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "0",
-                  "Font": "GothamBold",
-                  "TextScaled": true,
-                  "TextColor3": [1.0, 0.8156863, 0.1568628],
-                  "TextXAlignment": "Right"
-                }
+                "$className": "TextLabel"
+              },
+              "MainBG": {
+                "$className": "ImageLabel"
               }
             },
             "TrailCard": {
               "$className": "Frame",
-              "$properties": {
-                "LayoutOrder": 3,
-                "Size": { "UDim2": [[1, 0], [0, 64]] },
-                "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
-              },
-              "UICorner": {
-                "$className": "UICorner",
-                "$properties": { "CornerRadius": { "UDim": [0, 14] } }
-              },
-              "UIStroke": {
-                "$className": "UIStroke",
-                "$properties": {
-                  "Thickness": 1,
-                  "Color": [0.2156863, 0.2431373, 0.3294118],
-                  "Transparency": 0.2
-                }
-              },
-              "UIPadding": {
-                "$className": "UIPadding",
-                "$properties": {
-                  "PaddingTop": { "UDim": [0, 10] },
-                  "PaddingBottom": { "UDim": [0, 10] },
-                  "PaddingLeft": { "UDim": [0, 14] },
-                  "PaddingRight": { "UDim": [0, 14] }
-                }
-              },
               "EquippedLbl": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "Position": { "UDim2": [[0, 0], [0, 0]] },
-                  "Size": { "UDim2": [[1, 0], [0, 20]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "Equipped: None",
-                  "Font": "GothamBold",
-                  "TextScaled": true,
-                  "TextColor3": [1, 1, 1],
-                  "TextXAlignment": "Left"
-                }
+                "$className": "TextLabel"
               },
               "OwnedCountLbl": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "Position": { "UDim2": [[0, 0], [0, 24]] },
-                  "Size": { "UDim2": [[1, 0], [0, 18]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "Owned Trails: 0",
-                  "Font": "GothamMedium",
-                  "TextScaled": true,
-                  "TextColor3": [0.6666667, 0.8666667, 1.0],
-                  "TextXAlignment": "Left"
-                }
+                "$className": "TextLabel"
+              },
+              "MainBG": {
+                "$className": "ImageLabel"
               }
             },
             "ObbyTitle": {
-              "$className": "TextLabel",
-              "$properties": {
-                "LayoutOrder": 4,
-                "Size": { "UDim2": [[1, 0], [0, 24]] },
-                "BackgroundTransparency": 1,
-                "Text": "Obby Progress",
-                "Font": "GothamBold",
-                "TextScaled": true,
-                "TextColor3": [1, 1, 1],
-                "TextXAlignment": "Left"
-              }
+              "$className": "TextLabel"
             },
-            "ObbyList": {
-              "$className": "Frame",
-              "$properties": {
-                "LayoutOrder": 5,
-                "Size": { "UDim2": [[1, 0], [0, 364]] },
-                "BackgroundTransparency": 1
-              },
-              "UIListLayout": {
-                "$className": "UIListLayout",
-                "$properties": {
-                  "Padding": { "UDim": [0, 8] },
-                  "SortOrder": "LayoutOrder"
-                }
-              },
-              "ObbyRow1": {
+            "ObbyRow1": {
                 "$className": "Frame",
-                "$properties": {
-                  "LayoutOrder": 1,
-                  "Size": { "UDim2": [[1, 0], [0, 54]] },
-                  "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
-                },
-                "UICorner": {
-                  "$className": "UICorner",
-                  "$properties": { "CornerRadius": { "UDim": [0, 12] } }
-                },
-                "UIStroke": {
-                  "$className": "UIStroke",
-                  "$properties": {
-                    "Thickness": 1,
-                    "Color": [0.2156863, 0.2431373, 0.3294118],
-                    "Transparency": 0.3
-                  }
-                },
-                "UIPadding": {
-                  "$className": "UIPadding",
-                  "$properties": {
-                    "PaddingLeft": { "UDim": [0, 12] },
-                    "PaddingRight": { "UDim": [0, 12] },
-                    "PaddingTop": { "UDim": [0, 6] },
-                    "PaddingBottom": { "UDim": [0, 6] }
-                  }
-                },
                 "StatusLbl": {
-                  "$className": "TextLabel",
-                  "$properties": {
-                    "Position": { "UDim2": [[0, 0], [0, 0]] },
-                    "Size": { "UDim2": [[1, 0], [0, 22]] },
-                    "BackgroundTransparency": 1,
-                    "Text": "",
-                    "Font": "GothamBold",
-                    "TextScaled": true,
-                    "TextColor3": [1, 1, 1],
-                    "TextXAlignment": "Left"
-                  }
+                  "$className": "TextLabel"
                 },
                 "TimeLbl": {
-                  "$className": "TextLabel",
-                  "$properties": {
-                    "Position": { "UDim2": [[0, 0], [0, 26]] },
-                    "Size": { "UDim2": [[1, 0], [0, 18]] },
-                    "BackgroundTransparency": 1,
-                    "Text": "",
-                    "Font": "GothamMedium",
-                    "TextScaled": true,
-                    "TextColor3": [0.6666667, 0.6901961, 0.7607843],
-                    "TextXAlignment": "Left"
-                  }
+                  "$className": "TextLabel"
+                },
+                "MainBG": {
+                  "$className": "ImageLabel"
                 }
               },
               "ObbyRow2": {
                 "$className": "Frame",
-                "$properties": {
-                  "LayoutOrder": 2,
-                  "Size": { "UDim2": [[1, 0], [0, 54]] },
-                  "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
-                },
-                "UICorner": {
-                  "$className": "UICorner",
-                  "$properties": { "CornerRadius": { "UDim": [0, 12] } }
-                },
-                "UIStroke": {
-                  "$className": "UIStroke",
-                  "$properties": {
-                    "Thickness": 1,
-                    "Color": [0.2156863, 0.2431373, 0.3294118],
-                    "Transparency": 0.3
-                  }
-                },
-                "UIPadding": {
-                  "$className": "UIPadding",
-                  "$properties": {
-                    "PaddingLeft": { "UDim": [0, 12] },
-                    "PaddingRight": { "UDim": [0, 12] },
-                    "PaddingTop": { "UDim": [0, 6] },
-                    "PaddingBottom": { "UDim": [0, 6] }
-                  }
-                },
                 "StatusLbl": {
-                  "$className": "TextLabel",
-                  "$properties": {
-                    "Position": { "UDim2": [[0, 0], [0, 0]] },
-                    "Size": { "UDim2": [[1, 0], [0, 22]] },
-                    "BackgroundTransparency": 1,
-                    "Text": "",
-                    "Font": "GothamBold",
-                    "TextScaled": true,
-                    "TextColor3": [1, 1, 1],
-                    "TextXAlignment": "Left"
-                  }
+                  "$className": "TextLabel"
                 },
                 "TimeLbl": {
-                  "$className": "TextLabel",
-                  "$properties": {
-                    "Position": { "UDim2": [[0, 0], [0, 26]] },
-                    "Size": { "UDim2": [[1, 0], [0, 18]] },
-                    "BackgroundTransparency": 1,
-                    "Text": "",
-                    "Font": "GothamMedium",
-                    "TextScaled": true,
-                    "TextColor3": [0.6666667, 0.6901961, 0.7607843],
-                    "TextXAlignment": "Left"
-                  }
+                  "$className": "TextLabel"
+                },
+                "MainBG": {
+                  "$className": "ImageLabel"
                 }
               },
               "ObbyRow3": {
                 "$className": "Frame",
-                "$properties": {
-                  "LayoutOrder": 3,
-                  "Size": { "UDim2": [[1, 0], [0, 54]] },
-                  "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
-                },
-                "UICorner": {
-                  "$className": "UICorner",
-                  "$properties": { "CornerRadius": { "UDim": [0, 12] } }
-                },
-                "UIStroke": {
-                  "$className": "UIStroke",
-                  "$properties": {
-                    "Thickness": 1,
-                    "Color": [0.2156863, 0.2431373, 0.3294118],
-                    "Transparency": 0.3
-                  }
-                },
-                "UIPadding": {
-                  "$className": "UIPadding",
-                  "$properties": {
-                    "PaddingLeft": { "UDim": [0, 12] },
-                    "PaddingRight": { "UDim": [0, 12] },
-                    "PaddingTop": { "UDim": [0, 6] },
-                    "PaddingBottom": { "UDim": [0, 6] }
-                  }
-                },
                 "StatusLbl": {
-                  "$className": "TextLabel",
-                  "$properties": {
-                    "Position": { "UDim2": [[0, 0], [0, 0]] },
-                    "Size": { "UDim2": [[1, 0], [0, 22]] },
-                    "BackgroundTransparency": 1,
-                    "Text": "",
-                    "Font": "GothamBold",
-                    "TextScaled": true,
-                    "TextColor3": [1, 1, 1],
-                    "TextXAlignment": "Left"
-                  }
+                  "$className": "TextLabel"
                 },
                 "TimeLbl": {
-                  "$className": "TextLabel",
-                  "$properties": {
-                    "Position": { "UDim2": [[0, 0], [0, 26]] },
-                    "Size": { "UDim2": [[1, 0], [0, 18]] },
-                    "BackgroundTransparency": 1,
-                    "Text": "",
-                    "Font": "GothamMedium",
-                    "TextScaled": true,
-                    "TextColor3": [0.6666667, 0.6901961, 0.7607843],
-                    "TextXAlignment": "Left"
-                  }
+                  "$className": "TextLabel"
+                },
+                "MainBG": {
+                  "$className": "ImageLabel"
                 }
               },
               "ObbyRow4": {
                 "$className": "Frame",
-                "$properties": {
-                  "LayoutOrder": 4,
-                  "Size": { "UDim2": [[1, 0], [0, 54]] },
-                  "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
-                },
-                "UICorner": {
-                  "$className": "UICorner",
-                  "$properties": { "CornerRadius": { "UDim": [0, 12] } }
-                },
-                "UIStroke": {
-                  "$className": "UIStroke",
-                  "$properties": {
-                    "Thickness": 1,
-                    "Color": [0.2156863, 0.2431373, 0.3294118],
-                    "Transparency": 0.3
-                  }
-                },
-                "UIPadding": {
-                  "$className": "UIPadding",
-                  "$properties": {
-                    "PaddingLeft": { "UDim": [0, 12] },
-                    "PaddingRight": { "UDim": [0, 12] },
-                    "PaddingTop": { "UDim": [0, 6] },
-                    "PaddingBottom": { "UDim": [0, 6] }
-                  }
-                },
                 "StatusLbl": {
-                  "$className": "TextLabel",
-                  "$properties": {
-                    "Position": { "UDim2": [[0, 0], [0, 0]] },
-                    "Size": { "UDim2": [[1, 0], [0, 22]] },
-                    "BackgroundTransparency": 1,
-                    "Text": "",
-                    "Font": "GothamBold",
-                    "TextScaled": true,
-                    "TextColor3": [1, 1, 1],
-                    "TextXAlignment": "Left"
-                  }
+                  "$className": "TextLabel"
                 },
                 "TimeLbl": {
-                  "$className": "TextLabel",
-                  "$properties": {
-                    "Position": { "UDim2": [[0, 0], [0, 26]] },
-                    "Size": { "UDim2": [[1, 0], [0, 18]] },
-                    "BackgroundTransparency": 1,
-                    "Text": "",
-                    "Font": "GothamMedium",
-                    "TextScaled": true,
-                    "TextColor3": [0.6666667, 0.6901961, 0.7607843],
-                    "TextXAlignment": "Left"
-                  }
+                  "$className": "TextLabel"
+                },
+                "MainBG": {
+                  "$className": "ImageLabel"
                 }
               },
               "ObbyRow5": {
                 "$className": "Frame",
-                "$properties": {
-                  "LayoutOrder": 5,
-                  "Size": { "UDim2": [[1, 0], [0, 54]] },
-                  "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
-                },
-                "UICorner": {
-                  "$className": "UICorner",
-                  "$properties": { "CornerRadius": { "UDim": [0, 12] } }
-                },
-                "UIStroke": {
-                  "$className": "UIStroke",
-                  "$properties": {
-                    "Thickness": 1,
-                    "Color": [0.2156863, 0.2431373, 0.3294118],
-                    "Transparency": 0.3
-                  }
-                },
-                "UIPadding": {
-                  "$className": "UIPadding",
-                  "$properties": {
-                    "PaddingLeft": { "UDim": [0, 12] },
-                    "PaddingRight": { "UDim": [0, 12] },
-                    "PaddingTop": { "UDim": [0, 6] },
-                    "PaddingBottom": { "UDim": [0, 6] }
-                  }
-                },
                 "StatusLbl": {
-                  "$className": "TextLabel",
-                  "$properties": {
-                    "Position": { "UDim2": [[0, 0], [0, 0]] },
-                    "Size": { "UDim2": [[1, 0], [0, 22]] },
-                    "BackgroundTransparency": 1,
-                    "Text": "",
-                    "Font": "GothamBold",
-                    "TextScaled": true,
-                    "TextColor3": [1, 1, 1],
-                    "TextXAlignment": "Left"
-                  }
+                  "$className": "TextLabel"
                 },
                 "TimeLbl": {
-                  "$className": "TextLabel",
-                  "$properties": {
-                    "Position": { "UDim2": [[0, 0], [0, 26]] },
-                    "Size": { "UDim2": [[1, 0], [0, 18]] },
-                    "BackgroundTransparency": 1,
-                    "Text": "",
-                    "Font": "GothamMedium",
-                    "TextScaled": true,
-                    "TextColor3": [0.6666667, 0.6901961, 0.7607843],
-                    "TextXAlignment": "Left"
-                  }
+                  "$className": "TextLabel"
+                },
+                "MainBG": {
+                  "$className": "ImageLabel"
                 }
               },
               "ObbyRow6": {
                 "$className": "Frame",
-                "$properties": {
-                  "LayoutOrder": 6,
-                  "Size": { "UDim2": [[1, 0], [0, 54]] },
-                  "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
-                },
-                "UICorner": {
-                  "$className": "UICorner",
-                  "$properties": { "CornerRadius": { "UDim": [0, 12] } }
-                },
-                "UIStroke": {
-                  "$className": "UIStroke",
-                  "$properties": {
-                    "Thickness": 1,
-                    "Color": [0.2156863, 0.2431373, 0.3294118],
-                    "Transparency": 0.3
-                  }
-                },
-                "UIPadding": {
-                  "$className": "UIPadding",
-                  "$properties": {
-                    "PaddingLeft": { "UDim": [0, 12] },
-                    "PaddingRight": { "UDim": [0, 12] },
-                    "PaddingTop": { "UDim": [0, 6] },
-                    "PaddingBottom": { "UDim": [0, 6] }
-                  }
-                },
                 "StatusLbl": {
-                  "$className": "TextLabel",
-                  "$properties": {
-                    "Position": { "UDim2": [[0, 0], [0, 0]] },
-                    "Size": { "UDim2": [[1, 0], [0, 22]] },
-                    "BackgroundTransparency": 1,
-                    "Text": "",
-                    "Font": "GothamBold",
-                    "TextScaled": true,
-                    "TextColor3": [1, 1, 1],
-                    "TextXAlignment": "Left"
-                  }
+                  "$className": "TextLabel"
                 },
                 "TimeLbl": {
-                  "$className": "TextLabel",
-                  "$properties": {
-                    "Position": { "UDim2": [[0, 0], [0, 26]] },
-                    "Size": { "UDim2": [[1, 0], [0, 18]] },
-                    "BackgroundTransparency": 1,
-                    "Text": "",
-                    "Font": "GothamMedium",
-                    "TextScaled": true,
-                    "TextColor3": [0.6666667, 0.6901961, 0.7607843],
-                    "TextXAlignment": "Left"
-                  }
+                  "$className": "TextLabel"
+                },
+                "MainBG": {
+                  "$className": "ImageLabel"
                 }
               }
-            }
           }
         }
       },
       "LockedNoticeUI": {
         "$className": "ScreenGui",
-        "$properties": {
-          "ResetOnSpawn": false,
-          "IgnoreGuiInset": true
-        },
         "NoticeFrame": {
           "$className": "Frame",
-          "$properties": {
-            "AnchorPoint": [0.5, 0],
-            "Position": { "UDim2": [[0.5, 0], [0, 92]] },
-            "Size": { "UDim2": [[0, 320], [0, 50]] },
-            "BackgroundColor3": [0.0784314, 0.1019608, 0.1647059],
-            "BackgroundTransparency": 1,
-            "Visible": false
-          },
-          "UICorner": {
-            "$className": "UICorner",
-            "$properties": { "CornerRadius": { "UDim": [0, 12] } }
-          },
-          "UIStroke": {
-            "$className": "UIStroke",
-            "$properties": {
-              "Thickness": 1,
-              "Color": [0.8627451, 0.2745098, 0.2745098],
-              "Transparency": 0.3
-            }
-          },
           "NoticeLbl": {
-            "$className": "TextLabel",
-            "$properties": {
-              "Size": { "UDim2": [[1, -20], [1, 0]] },
-              "Position": { "UDim2": [[0, 10], [0, 0]] },
-              "BackgroundTransparency": 1,
-              "Text": "",
-              "Font": "GothamBold",
-              "TextScaled": true,
-              "TextColor3": [1, 1, 1],
-              "TextTransparency": 1
-            }
+            "$className": "TextLabel"
           }
         }
       },
       "DailyRewardGiftButtonUI": {
         "$className": "ScreenGui",
-        "$properties": {
-          "ResetOnSpawn": false,
-          "IgnoreGuiInset": true
-        },
         "GiftButton": {
-          "$className": "TextButton",
-          "$properties": {
-            "AnchorPoint": [0, 1],
-            "Position": { "UDim2": [[0, 16], [1, -236]] },
-            "Size": { "UDim2": [[0, 46], [0, 46]] },
-            "BackgroundColor3": [0.1372549, 0.1764706, 0.2745098],
-            "Text": "🎁",
-            "Font": "GothamBold",
-            "TextScaled": true,
-            "TextColor3": [1, 1, 1]
-          },
-          "UICorner": {
-            "$className": "UICorner",
-            "$properties": { "CornerRadius": { "UDim": [1, 0] } }
-          },
-          "UIStroke": {
-            "$className": "UIStroke",
-            "$properties": {
-              "Thickness": 1,
-              "Color": [1.0, 0.8156863, 0.1568628],
-              "Transparency": 0.4
-            }
-          },
-          "UIScale": {
-            "$className": "UIScale",
-            "$properties": { "Scale": 1 }
-          },
+          "$className": "ImageButton",
           "NotifyDot": {
             "$className": "Frame",
-            "$properties": {
-              "AnchorPoint": [1, 0],
-              "Position": { "UDim2": [[1, 2], [0, -2]] },
-              "Size": { "UDim2": [[0, 14], [0, 14]] },
-              "BackgroundColor3": [0.8627451, 0.2745098, 0.2745098],
-              "Visible": false
-            },
             "UICorner": {
-              "$className": "UICorner",
-              "$properties": { "CornerRadius": { "UDim": [1, 0] } }
+              "$className": "UICorner"
             },
             "UIStroke": {
-              "$className": "UIStroke",
-              "$properties": {
-                "Thickness": 1.5,
-                "Color": [0.0784314, 0.1019608, 0.1647059]
-              }
+              "$className": "UIStroke"
             }
           }
         }
       },
       "DailyRewardUI": {
         "$className": "ScreenGui",
-        "$properties": {
-          "ResetOnSpawn": false,
-          "IgnoreGuiInset": true
-        },
         "Dim": {
-          "$className": "TextButton",
-          "$properties": {
-            "Size": { "UDim2": [[1, 0], [1, 0]] },
-            "BackgroundColor3": [0, 0, 0],
-            "BackgroundTransparency": 0.5,
-            "Text": "",
-            "AutoButtonColor": false,
-            "Visible": false
-          }
+          "$className": "TextButton"
         },
         "DailyRewardFrame": {
           "$className": "Frame",
-          "$properties": {
-            "AnchorPoint": [0.5, 0.5],
-            "Position": { "UDim2": [[0.5, 0], [0.5, 0]] },
-            "Size": { "UDim2": [[0.86, 0], [0.62, 0]] },
-            "BackgroundColor3": [0.0784314, 0.1019608, 0.1647059],
-            "BorderSizePixel": 0,
-            "ClipsDescendants": true,
-            "Visible": false
-          },
-          "UICorner": {
-            "$className": "UICorner",
-            "$properties": { "CornerRadius": { "UDim": [0, 20] } }
-          },
-          "UIStroke": {
-            "$className": "UIStroke",
-            "$properties": {
-              "Thickness": 1.5,
-              "Color": [0.2156863, 0.2431373, 0.3294118],
-              "Transparency": 0.1
-            }
-          },
-          "UIGradient": {
-            "$className": "UIGradient",
-            "$properties": { "Rotation": 90 }
-          },
-          "UIPadding": {
-            "$className": "UIPadding",
-            "$properties": {
-              "PaddingTop": { "UDim": [0, 22] },
-              "PaddingBottom": { "UDim": [0, 22] },
-              "PaddingLeft": { "UDim": [0, 22] },
-              "PaddingRight": { "UDim": [0, 22] }
-            }
-          },
-          "UISizeConstraint": {
-            "$className": "UISizeConstraint",
-            "$properties": {
-              "MinSize": [360, 340],
-              "MaxSize": [660, 460]
-            }
+          "MainBG": {
+            "$className": "ImageLabel"
           },
           "Header": {
             "$className": "Frame",
-            "$properties": {
-              "Position": { "UDim2": [[0, 0], [0, 0]] },
-              "Size": { "UDim2": [[1, 0], [0, 40]] },
-              "BackgroundTransparency": 1
-            },
             "Title": {
-              "$className": "TextLabel",
-              "$properties": {
-                "Position": { "UDim2": [[0, 0], [0, 0]] },
-                "Size": { "UDim2": [[0.7, 0], [1, 0]] },
-                "BackgroundTransparency": 1,
-                "Text": "Daily Rewards",
-                "Font": "GothamBlack",
-                "TextScaled": true,
-                "TextColor3": [1, 1, 1],
-                "TextXAlignment": "Left"
-              }
+              "$className": "TextLabel"
+            },
+            "IconLbl": {
+              "$className": "ImageLabel"
             },
             "CloseBtn": {
-              "$className": "TextButton",
-              "$properties": {
-                "AnchorPoint": [1, 0.5],
-                "Position": { "UDim2": [[1, 0], [0.5, 0]] },
-                "Size": { "UDim2": [[0, 28], [0, 28]] },
-                "BackgroundColor3": [0.8627451, 0.2745098, 0.2745098],
-                "Text": "X",
-                "Font": "GothamBold",
-                "TextScaled": true,
-                "TextColor3": [1, 1, 1]
-              },
-              "UICorner": {
-                "$className": "UICorner",
-                "$properties": { "CornerRadius": { "UDim": [0, 10] } }
-              },
-              "UIScale": {
-                "$className": "UIScale",
-                "$properties": { "Scale": 1 }
-              }
+              "$className": "ImageButton"
             }
           },
           "StreakLbl": {
-            "$className": "TextLabel",
-            "$properties": {
-              "Position": { "UDim2": [[0, 0], [0, 44]] },
-              "Size": { "UDim2": [[1, 0], [0, 22]] },
-              "BackgroundTransparency": 1,
-              "Text": "🔥 Streak: 0 Days",
-              "Font": "GothamMedium",
-              "TextScaled": true,
-              "TextColor3": [1.0, 0.8156863, 0.1568628],
-              "TextXAlignment": "Left"
-            }
+            "$className": "TextLabel"
           },
           "CardsRow": {
-            "$className": "ScrollingFrame",
-            "$properties": {
-              "Position": { "UDim2": [[0, 0], [0, 76]] },
-              "Size": { "UDim2": [[1, 0], [1, -118]] },
-              "BackgroundTransparency": 1,
-              "BorderSizePixel": 0,
-              "ScrollBarThickness": 6,
-              "ScrollingDirection": "X",
-              "CanvasSize": { "UDim2": [[0, 0], [0, 0]] },
-              "AutomaticCanvasSize": "X"
-            },
-            "UIListLayout": {
-              "$className": "UIListLayout",
-              "$properties": {
-                "FillDirection": "Horizontal",
-                "Padding": { "UDim": [0, 10] },
-                "VerticalAlignment": "Center",
-                "SortOrder": "LayoutOrder"
-              }
+            "$className": "Frame",
+            "UIGridLayout": {
+              "$className": "UIGridLayout"
             },
             "DayCard1": {
               "$className": "Frame",
-              "$properties": {
-                "LayoutOrder": 1,
-                "Size": { "UDim2": [[0, 92], [0, 140]] },
-                "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
-              },
-              "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 14] } } },
-              "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1, "Color": [0.2156863, 0.2431373, 0.3294118], "Transparency": 0.2 } },
-              "UIPadding": {
-                "$className": "UIPadding",
-                "$properties": {
-                  "PaddingTop": { "UDim": [0, 10] },
-                  "PaddingBottom": { "UDim": [0, 10] },
-                  "PaddingLeft": { "UDim": [0, 6] },
-                  "PaddingRight": { "UDim": [0, 6] }
-                }
-              },
               "DayLabel": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "Size": { "UDim2": [[1, 0], [0, 18]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "Day 1",
-                  "Font": "GothamBold",
-                  "TextScaled": true,
-                  "TextColor3": [0.7647059, 0.7882353, 0.8627451]
-                }
+                "$className": "TextLabel"
               },
-              "CoinGlyph": {
-                "$className": "Frame",
-                "$properties": {
-                  "AnchorPoint": [0.5, 0],
-                  "Position": { "UDim2": [[0.5, 0], [0, 26]] },
-                  "Size": { "UDim2": [[0, 34], [0, 34]] },
-                  "BackgroundColor3": [1.0, 0.8156863, 0.1568628]
-                },
-                "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [1, 0] } } },
-                "UIGradient": { "$className": "UIGradient", "$properties": { "Rotation": 45 } },
-                "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1.5, "Color": [0.6, 0.4156863, 0], "Transparency": 0.5 } }
+              "IconLbl": {
+                "$className": "ImageLabel"
               },
               "AmountLabel": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "AnchorPoint": [0, 1],
-                  "Position": { "UDim2": [[0, 0], [1, 0]] },
-                  "Size": { "UDim2": [[1, 0], [0, 18]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "0",
-                  "Font": "GothamBold",
-                  "TextScaled": true,
-                  "TextColor3": [1.0, 0.8156863, 0.1568628]
-                }
+                "$className": "TextLabel"
               },
               "CheckMark": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "AnchorPoint": [1, 0],
-                  "Position": { "UDim2": [[1, -2], [0, -2]] },
-                  "Size": { "UDim2": [[0, 20], [0, 20]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "✔",
-                  "Font": "GothamBlack",
-                  "TextScaled": true,
-                  "TextColor3": [0.3058824, 0.8392157, 0.5647059],
-                  "Visible": false
-                }
+                "$className": "TextLabel"
+              },
+              "MainBG": {
+                "$className": "ImageLabel"
               }
             },
             "DayCard2": {
               "$className": "Frame",
-              "$properties": {
-                "LayoutOrder": 2,
-                "Size": { "UDim2": [[0, 92], [0, 140]] },
-                "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
-              },
-              "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 14] } } },
-              "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1, "Color": [0.2156863, 0.2431373, 0.3294118], "Transparency": 0.2 } },
-              "UIPadding": {
-                "$className": "UIPadding",
-                "$properties": {
-                  "PaddingTop": { "UDim": [0, 10] },
-                  "PaddingBottom": { "UDim": [0, 10] },
-                  "PaddingLeft": { "UDim": [0, 6] },
-                  "PaddingRight": { "UDim": [0, 6] }
-                }
-              },
               "DayLabel": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "Size": { "UDim2": [[1, 0], [0, 18]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "Day 2",
-                  "Font": "GothamBold",
-                  "TextScaled": true,
-                  "TextColor3": [0.7647059, 0.7882353, 0.8627451]
-                }
+                "$className": "TextLabel"
               },
-              "CoinGlyph": {
-                "$className": "Frame",
-                "$properties": {
-                  "AnchorPoint": [0.5, 0],
-                  "Position": { "UDim2": [[0.5, 0], [0, 26]] },
-                  "Size": { "UDim2": [[0, 34], [0, 34]] },
-                  "BackgroundColor3": [1.0, 0.8156863, 0.1568628]
-                },
-                "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [1, 0] } } },
-                "UIGradient": { "$className": "UIGradient", "$properties": { "Rotation": 45 } },
-                "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1.5, "Color": [0.6, 0.4156863, 0], "Transparency": 0.5 } }
+              "IconLbl": {
+                "$className": "ImageLabel"
               },
               "AmountLabel": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "AnchorPoint": [0, 1],
-                  "Position": { "UDim2": [[0, 0], [1, 0]] },
-                  "Size": { "UDim2": [[1, 0], [0, 18]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "0",
-                  "Font": "GothamBold",
-                  "TextScaled": true,
-                  "TextColor3": [1.0, 0.8156863, 0.1568628]
-                }
+                "$className": "TextLabel"
               },
               "CheckMark": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "AnchorPoint": [1, 0],
-                  "Position": { "UDim2": [[1, -2], [0, -2]] },
-                  "Size": { "UDim2": [[0, 20], [0, 20]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "✔",
-                  "Font": "GothamBlack",
-                  "TextScaled": true,
-                  "TextColor3": [0.3058824, 0.8392157, 0.5647059],
-                  "Visible": false
-                }
+                "$className": "TextLabel"
+              },
+              "MainBG": {
+                "$className": "ImageLabel"
               }
             },
             "DayCard3": {
               "$className": "Frame",
-              "$properties": {
-                "LayoutOrder": 3,
-                "Size": { "UDim2": [[0, 92], [0, 140]] },
-                "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
-              },
-              "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 14] } } },
-              "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1, "Color": [0.2156863, 0.2431373, 0.3294118], "Transparency": 0.2 } },
-              "UIPadding": {
-                "$className": "UIPadding",
-                "$properties": {
-                  "PaddingTop": { "UDim": [0, 10] },
-                  "PaddingBottom": { "UDim": [0, 10] },
-                  "PaddingLeft": { "UDim": [0, 6] },
-                  "PaddingRight": { "UDim": [0, 6] }
-                }
-              },
               "DayLabel": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "Size": { "UDim2": [[1, 0], [0, 18]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "Day 3",
-                  "Font": "GothamBold",
-                  "TextScaled": true,
-                  "TextColor3": [0.7647059, 0.7882353, 0.8627451]
-                }
+                "$className": "TextLabel"
               },
-              "CoinGlyph": {
-                "$className": "Frame",
-                "$properties": {
-                  "AnchorPoint": [0.5, 0],
-                  "Position": { "UDim2": [[0.5, 0], [0, 26]] },
-                  "Size": { "UDim2": [[0, 34], [0, 34]] },
-                  "BackgroundColor3": [1.0, 0.8156863, 0.1568628]
-                },
-                "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [1, 0] } } },
-                "UIGradient": { "$className": "UIGradient", "$properties": { "Rotation": 45 } },
-                "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1.5, "Color": [0.6, 0.4156863, 0], "Transparency": 0.5 } }
+              "IconLbl": {
+                "$className": "ImageLabel"
               },
               "AmountLabel": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "AnchorPoint": [0, 1],
-                  "Position": { "UDim2": [[0, 0], [1, 0]] },
-                  "Size": { "UDim2": [[1, 0], [0, 18]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "0",
-                  "Font": "GothamBold",
-                  "TextScaled": true,
-                  "TextColor3": [1.0, 0.8156863, 0.1568628]
-                }
+                "$className": "TextLabel"
               },
               "CheckMark": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "AnchorPoint": [1, 0],
-                  "Position": { "UDim2": [[1, -2], [0, -2]] },
-                  "Size": { "UDim2": [[0, 20], [0, 20]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "✔",
-                  "Font": "GothamBlack",
-                  "TextScaled": true,
-                  "TextColor3": [0.3058824, 0.8392157, 0.5647059],
-                  "Visible": false
-                }
+                "$className": "TextLabel"
+              },
+              "MainBG": {
+                "$className": "ImageLabel"
               }
             },
             "DayCard4": {
               "$className": "Frame",
-              "$properties": {
-                "LayoutOrder": 4,
-                "Size": { "UDim2": [[0, 92], [0, 140]] },
-                "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
-              },
-              "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 14] } } },
-              "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1, "Color": [0.2156863, 0.2431373, 0.3294118], "Transparency": 0.2 } },
-              "UIPadding": {
-                "$className": "UIPadding",
-                "$properties": {
-                  "PaddingTop": { "UDim": [0, 10] },
-                  "PaddingBottom": { "UDim": [0, 10] },
-                  "PaddingLeft": { "UDim": [0, 6] },
-                  "PaddingRight": { "UDim": [0, 6] }
-                }
-              },
               "DayLabel": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "Size": { "UDim2": [[1, 0], [0, 18]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "Day 4",
-                  "Font": "GothamBold",
-                  "TextScaled": true,
-                  "TextColor3": [0.7647059, 0.7882353, 0.8627451]
-                }
+                "$className": "TextLabel"
               },
-              "CoinGlyph": {
-                "$className": "Frame",
-                "$properties": {
-                  "AnchorPoint": [0.5, 0],
-                  "Position": { "UDim2": [[0.5, 0], [0, 26]] },
-                  "Size": { "UDim2": [[0, 34], [0, 34]] },
-                  "BackgroundColor3": [1.0, 0.8156863, 0.1568628]
-                },
-                "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [1, 0] } } },
-                "UIGradient": { "$className": "UIGradient", "$properties": { "Rotation": 45 } },
-                "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1.5, "Color": [0.6, 0.4156863, 0], "Transparency": 0.5 } }
+              "IconLbl": {
+                "$className": "ImageLabel"
               },
               "AmountLabel": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "AnchorPoint": [0, 1],
-                  "Position": { "UDim2": [[0, 0], [1, 0]] },
-                  "Size": { "UDim2": [[1, 0], [0, 18]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "0",
-                  "Font": "GothamBold",
-                  "TextScaled": true,
-                  "TextColor3": [1.0, 0.8156863, 0.1568628]
-                }
+                "$className": "TextLabel"
               },
               "CheckMark": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "AnchorPoint": [1, 0],
-                  "Position": { "UDim2": [[1, -2], [0, -2]] },
-                  "Size": { "UDim2": [[0, 20], [0, 20]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "✔",
-                  "Font": "GothamBlack",
-                  "TextScaled": true,
-                  "TextColor3": [0.3058824, 0.8392157, 0.5647059],
-                  "Visible": false
-                }
+                "$className": "TextLabel"
+              },
+              "MainBG": {
+                "$className": "ImageLabel"
               }
             },
             "DayCard5": {
               "$className": "Frame",
-              "$properties": {
-                "LayoutOrder": 5,
-                "Size": { "UDim2": [[0, 92], [0, 140]] },
-                "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
-              },
-              "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 14] } } },
-              "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1, "Color": [0.2156863, 0.2431373, 0.3294118], "Transparency": 0.2 } },
-              "UIPadding": {
-                "$className": "UIPadding",
-                "$properties": {
-                  "PaddingTop": { "UDim": [0, 10] },
-                  "PaddingBottom": { "UDim": [0, 10] },
-                  "PaddingLeft": { "UDim": [0, 6] },
-                  "PaddingRight": { "UDim": [0, 6] }
-                }
-              },
               "DayLabel": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "Size": { "UDim2": [[1, 0], [0, 18]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "Day 5",
-                  "Font": "GothamBold",
-                  "TextScaled": true,
-                  "TextColor3": [0.7647059, 0.7882353, 0.8627451]
-                }
+                "$className": "TextLabel"
               },
-              "CoinGlyph": {
-                "$className": "Frame",
-                "$properties": {
-                  "AnchorPoint": [0.5, 0],
-                  "Position": { "UDim2": [[0.5, 0], [0, 26]] },
-                  "Size": { "UDim2": [[0, 34], [0, 34]] },
-                  "BackgroundColor3": [1.0, 0.8156863, 0.1568628]
-                },
-                "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [1, 0] } } },
-                "UIGradient": { "$className": "UIGradient", "$properties": { "Rotation": 45 } },
-                "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1.5, "Color": [0.6, 0.4156863, 0], "Transparency": 0.5 } }
+              "IconLbl": {
+                "$className": "ImageLabel"
               },
               "AmountLabel": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "AnchorPoint": [0, 1],
-                  "Position": { "UDim2": [[0, 0], [1, 0]] },
-                  "Size": { "UDim2": [[1, 0], [0, 18]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "0",
-                  "Font": "GothamBold",
-                  "TextScaled": true,
-                  "TextColor3": [1.0, 0.8156863, 0.1568628]
-                }
+                "$className": "TextLabel"
               },
               "CheckMark": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "AnchorPoint": [1, 0],
-                  "Position": { "UDim2": [[1, -2], [0, -2]] },
-                  "Size": { "UDim2": [[0, 20], [0, 20]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "✔",
-                  "Font": "GothamBlack",
-                  "TextScaled": true,
-                  "TextColor3": [0.3058824, 0.8392157, 0.5647059],
-                  "Visible": false
-                }
+                "$className": "TextLabel"
+              },
+              "MainBG": {
+                "$className": "ImageLabel"
               }
             },
             "DayCard6": {
               "$className": "Frame",
-              "$properties": {
-                "LayoutOrder": 6,
-                "Size": { "UDim2": [[0, 92], [0, 140]] },
-                "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
-              },
-              "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 14] } } },
-              "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1, "Color": [0.2156863, 0.2431373, 0.3294118], "Transparency": 0.2 } },
-              "UIPadding": {
-                "$className": "UIPadding",
-                "$properties": {
-                  "PaddingTop": { "UDim": [0, 10] },
-                  "PaddingBottom": { "UDim": [0, 10] },
-                  "PaddingLeft": { "UDim": [0, 6] },
-                  "PaddingRight": { "UDim": [0, 6] }
-                }
-              },
               "DayLabel": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "Size": { "UDim2": [[1, 0], [0, 18]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "Day 6",
-                  "Font": "GothamBold",
-                  "TextScaled": true,
-                  "TextColor3": [0.7647059, 0.7882353, 0.8627451]
-                }
+                "$className": "TextLabel"
               },
-              "CoinGlyph": {
-                "$className": "Frame",
-                "$properties": {
-                  "AnchorPoint": [0.5, 0],
-                  "Position": { "UDim2": [[0.5, 0], [0, 26]] },
-                  "Size": { "UDim2": [[0, 34], [0, 34]] },
-                  "BackgroundColor3": [1.0, 0.8156863, 0.1568628]
-                },
-                "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [1, 0] } } },
-                "UIGradient": { "$className": "UIGradient", "$properties": { "Rotation": 45 } },
-                "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1.5, "Color": [0.6, 0.4156863, 0], "Transparency": 0.5 } }
+              "IconLbl": {
+                "$className": "ImageLabel"
               },
               "AmountLabel": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "AnchorPoint": [0, 1],
-                  "Position": { "UDim2": [[0, 0], [1, 0]] },
-                  "Size": { "UDim2": [[1, 0], [0, 18]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "0",
-                  "Font": "GothamBold",
-                  "TextScaled": true,
-                  "TextColor3": [1.0, 0.8156863, 0.1568628]
-                }
+                "$className": "TextLabel"
               },
               "CheckMark": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "AnchorPoint": [1, 0],
-                  "Position": { "UDim2": [[1, -2], [0, -2]] },
-                  "Size": { "UDim2": [[0, 20], [0, 20]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "✔",
-                  "Font": "GothamBlack",
-                  "TextScaled": true,
-                  "TextColor3": [0.3058824, 0.8392157, 0.5647059],
-                  "Visible": false
-                }
+                "$className": "TextLabel"
+              },
+              "MainBG": {
+                "$className": "ImageLabel"
               }
             },
             "DayCard7": {
               "$className": "Frame",
-              "$properties": {
-                "LayoutOrder": 7,
-                "Size": { "UDim2": [[0, 92], [0, 140]] },
-                "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
-              },
-              "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 14] } } },
-              "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1, "Color": [0.2156863, 0.2431373, 0.3294118], "Transparency": 0.2 } },
-              "UIPadding": {
-                "$className": "UIPadding",
-                "$properties": {
-                  "PaddingTop": { "UDim": [0, 10] },
-                  "PaddingBottom": { "UDim": [0, 10] },
-                  "PaddingLeft": { "UDim": [0, 6] },
-                  "PaddingRight": { "UDim": [0, 6] }
-                }
-              },
               "DayLabel": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "Size": { "UDim2": [[1, 0], [0, 18]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "Day 7",
-                  "Font": "GothamBold",
-                  "TextScaled": true,
-                  "TextColor3": [0.7647059, 0.7882353, 0.8627451]
-                }
+                "$className": "TextLabel"
               },
-              "CoinGlyph": {
-                "$className": "Frame",
-                "$properties": {
-                  "AnchorPoint": [0.5, 0],
-                  "Position": { "UDim2": [[0.5, 0], [0, 26]] },
-                  "Size": { "UDim2": [[0, 34], [0, 34]] },
-                  "BackgroundColor3": [1.0, 0.8156863, 0.1568628]
-                },
-                "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [1, 0] } } },
-                "UIGradient": { "$className": "UIGradient", "$properties": { "Rotation": 45 } },
-                "UIStroke": { "$className": "UIStroke", "$properties": { "Thickness": 1.5, "Color": [0.6, 0.4156863, 0], "Transparency": 0.5 } }
+              "IconLbl": {
+                "$className": "ImageLabel"
               },
               "AmountLabel": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "AnchorPoint": [0, 1],
-                  "Position": { "UDim2": [[0, 0], [1, 0]] },
-                  "Size": { "UDim2": [[1, 0], [0, 18]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "0",
-                  "Font": "GothamBold",
-                  "TextScaled": true,
-                  "TextColor3": [1.0, 0.8156863, 0.1568628]
-                }
+                "$className": "TextLabel"
               },
               "CheckMark": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "AnchorPoint": [1, 0],
-                  "Position": { "UDim2": [[1, -2], [0, -2]] },
-                  "Size": { "UDim2": [[0, 20], [0, 20]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "✔",
-                  "Font": "GothamBlack",
-                  "TextScaled": true,
-                  "TextColor3": [0.3058824, 0.8392157, 0.5647059],
-                  "Visible": false
-                }
+                "$className": "TextLabel"
+              },
+              "MainBG": {
+                "$className": "ImageLabel"
+              }
+            },
+            "DayCard8": {
+              "$className": "Frame",
+              "DayLabel": {
+                "$className": "TextLabel"
+              },
+              "IconLbl": {
+                "$className": "ImageLabel"
+              },
+              "AmountLabel": {
+                "$className": "TextLabel"
+              },
+              "CheckMark": {
+                "$className": "TextLabel"
+              },
+              "MainBG": {
+                "$className": "ImageLabel"
               }
             }
           },
+        
           "CountdownLbl": {
-            "$className": "TextLabel",
-            "$properties": {
-              "AnchorPoint": [0, 1],
-              "Position": { "UDim2": [[0, 0], [1, -64]] },
-              "Size": { "UDim2": [[1, 0], [0, 18]] },
-              "BackgroundTransparency": 1,
-              "Text": "",
-              "Font": "GothamMedium",
-              "TextScaled": true,
-              "TextColor3": [0.6666667, 0.6901961, 0.7607843],
-              "Visible": false
-            }
+            "$className": "TextLabel"
           },
           "ClaimButton": {
-            "$className": "TextButton",
-            "$properties": {
-              "AnchorPoint": [0, 1],
-              "Position": { "UDim2": [[0, 0], [1, 0]] },
-              "Size": { "UDim2": [[1, 0], [0, 46]] },
-              "BackgroundColor3": [0.3568627, 0.4862745, 0.9803922],
-              "Text": "Claim",
-              "Font": "GothamBold",
-              "TextScaled": true,
-              "TextColor3": [1, 1, 1]
+            "$className": "ImageButton",
+            "Text": {
+              "$className": "TextLabel"
             },
-            "UICorner": {
-              "$className": "UICorner",
-              "$properties": { "CornerRadius": { "UDim": [0, 12] } }
-            },
-            "UIGradient": {
-              "$className": "UIGradient",
-              "$properties": { "Rotation": 90 }
-            },
-            "UIScale": {
-              "$className": "UIScale",
-              "$properties": { "Scale": 1 }
+            "Disabled": {
+              "$className": "Frame"
             }
           }
         }
