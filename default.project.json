@@ -109,55 +109,17 @@
           },
           "LeaderboardRow": {
             "$className": "Frame",
-            "$properties": {
-              "Size": { "UDim2": [[1, 0], [0, 30]] },
-              "BackgroundColor3": [0.1490196, 0.1725490, 0.2352941],
-              "BackgroundTransparency": 0.2,
-              "Visible": true
-            },
-            "UICorner": {
-              "$className": "UICorner",
-              "$properties": { "CornerRadius": { "UDim": [0, 6] } }
-            },
             "RankLbl": {
-              "$className": "TextLabel",
-              "$properties": {
-                "BackgroundTransparency": 1,
-                "Size": { "UDim2": [[0, 40], [1, 0]] },
-                "Position": { "UDim2": [[0, 6], [0, 0]] },
-                "TextXAlignment": "Left",
-                "Font": "GothamBold",
-                "TextScaled": true,
-                "TextColor3": [1, 1, 1],
-                "Text": ""
-              }
+              "$className": "TextLabel"
             },
             "NameLbl": {
-              "$className": "TextLabel",
-              "$properties": {
-                "BackgroundTransparency": 1,
-                "Size": { "UDim2": [[1, -140], [1, 0]] },
-                "Position": { "UDim2": [[0, 48], [0, 0]] },
-                "TextXAlignment": "Left",
-                "TextTruncate": "AtEnd",
-                "Font": "GothamMedium",
-                "TextScaled": true,
-                "TextColor3": [1, 1, 1],
-                "Text": ""
-              }
+              "$className": "TextLabel"
             },
             "TimeLbl": {
-              "$className": "TextLabel",
-              "$properties": {
-                "BackgroundTransparency": 1,
-                "Size": { "UDim2": [[0, 90], [1, 0]] },
-                "Position": { "UDim2": [[1, -96], [0, 0]] },
-                "TextXAlignment": "Right",
-                "Font": "GothamBold",
-                "TextScaled": true,
-                "TextColor3": [0.6666667, 0.8666667, 1.0],
-                "Text": ""
-              }
+              "$className": "TextLabel"
+            },
+            "MainBG": {
+              "$className": "ImageLabel"
             }
           },
           "GlobalLeaderboardRow": {
@@ -2419,135 +2381,38 @@
         },
         "Panel": {
           "$className": "Frame",
-          "$properties": {
-            "AnchorPoint": [0.5, 0.5],
-            "Position": { "UDim2": [[0.5, 0], [0.5, 0]] },
-            "Size": { "UDim2": [[0, 380], [0, 460]] },
-            "BackgroundColor3": [0.0784314, 0.1019608, 0.1647059],
-            "Visible": false
+          "MainBG": {
+            "$className": "ImageLabel"
           },
-          "UICorner": {
-            "$className": "UICorner",
-            "$properties": { "CornerRadius": { "UDim": [0, 18] } }
+          "BestTimeBG": {
+            "$className": "ImageLabel"
           },
-          "UIStroke": {
-            "$className": "UIStroke",
-            "$properties": {
-              "Color": [0.2156863, 0.2431373, 0.3294118],
-              "Thickness": 1
-            }
+          "LeaderboardBG": {
+            "$className": "ImageLabel"
           },
           "CloseBtn": {
-            "$className": "TextButton",
-            "$properties": {
-              "Size": { "UDim2": [[0, 34], [0, 34]] },
-              "Position": { "UDim2": [[1, -46], [0, 12]] },
-              "BackgroundColor3": [0.8627451, 0.2745098, 0.2745098],
-              "Text": "X",
-              "Font": "GothamBold",
-              "TextScaled": true,
-              "TextColor3": [1, 1, 1]
-            },
-            "UICorner": {
-              "$className": "UICorner",
-              "$properties": { "CornerRadius": { "UDim": [0, 8] } }
-            }
+            "$className": "ImageButton"
           },
           "BestBanner": {
-            "$className": "TextLabel",
-            "$properties": {
-              "BackgroundTransparency": 1,
-              "Size": { "UDim2": [[1, -24], [0, 26]] },
-              "Position": { "UDim2": [[0, 12], [0, 10]] },
-              "Font": "GothamBold",
-              "TextScaled": true,
-              "TextColor3": [1.0, 0.8156863, 0.1568628],
-              "Text": "NEW BEST TIME!",
-              "Visible": false
-            }
+            "$className": "TextLabel"
           },
           "Title": {
-            "$className": "TextLabel",
-            "$properties": {
-              "BackgroundTransparency": 1,
-              "Size": { "UDim2": [[1, -24], [0, 32]] },
-              "Position": { "UDim2": [[0, 12], [0, 38]] },
-              "Font": "GothamBold",
-              "TextScaled": true,
-              "TextColor3": [1, 1, 1],
-              "Text": ""
-            }
+            "$className": "TextLabel"
           },
           "TimeLbl": {
-            "$className": "TextLabel",
-            "$properties": {
-              "BackgroundTransparency": 1,
-              "Size": { "UDim2": [[1, -24], [0, 24]] },
-              "Position": { "UDim2": [[0, 12], [0, 74]] },
-              "TextXAlignment": "Left",
-              "Font": "GothamMedium",
-              "TextScaled": true,
-              "TextColor3": [0.9019608, 0.9019608, 0.9019608],
-              "Text": ""
-            }
+            "$className": "TextLabel"
           },
           "BestLbl": {
-            "$className": "TextLabel",
-            "$properties": {
-              "BackgroundTransparency": 1,
-              "Size": { "UDim2": [[1, -24], [0, 24]] },
-              "Position": { "UDim2": [[0, 12], [0, 98]] },
-              "TextXAlignment": "Left",
-              "Font": "GothamMedium",
-              "TextScaled": true,
-              "TextColor3": [0.6666667, 0.8666667, 1.0],
-              "Text": ""
-            }
+            "$className": "TextLabel"
           },
           "RewardLbl": {
-            "$className": "TextLabel",
-            "$properties": {
-              "BackgroundTransparency": 1,
-              "Size": { "UDim2": [[1, -24], [0, 24]] },
-              "Position": { "UDim2": [[0, 12], [0, 122]] },
-              "TextXAlignment": "Left",
-              "Font": "GothamMedium",
-              "TextScaled": true,
-              "TextColor3": [0.6, 0.9019608, 0.6431373],
-              "Text": ""
-            }
+            "$className": "TextLabel"
           },
           "LeaderboardTitle": {
-            "$className": "TextLabel",
-            "$properties": {
-              "BackgroundTransparency": 1,
-              "Size": { "UDim2": [[1, -24], [0, 24]] },
-              "Position": { "UDim2": [[0, 12], [0, 154]] },
-              "TextXAlignment": "Left",
-              "Font": "GothamBold",
-              "TextScaled": true,
-              "TextColor3": [1, 1, 1],
-              "Text": "Leaderboard"
-            }
+            "$className": "TextLabel"
           },
           "List": {
-            "$className": "ScrollingFrame",
-            "$properties": {
-              "Size": { "UDim2": [[1, -24], [1, -190]] },
-              "Position": { "UDim2": [[0, 12], [0, 182]] },
-              "BackgroundTransparency": 1,
-              "BorderSizePixel": 0,
-              "ScrollBarThickness": 6,
-              "CanvasSize": { "UDim2": [[0, 0], [0, 0]] },
-              "AutomaticCanvasSize": "Y"
-            },
-            "UIListLayout": {
-              "$className": "UIListLayout",
-              "$properties": {
-                "Padding": { "UDim": [0, 4] },
-                "SortOrder": "LayoutOrder"
-              }
-            }
+            "$className": "ScrollingFrame"
           }
         }
       },
@@ -2894,7 +2759,7 @@
           },
           "ClaimButton": {
             "$className": "ImageButton",
-            "Text": {
+            "text": {
               "$className": "TextLabel"
             },
             "Disabled": {

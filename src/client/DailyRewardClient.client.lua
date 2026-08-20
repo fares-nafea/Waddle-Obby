@@ -176,7 +176,7 @@ local function refreshClaimButton()
 
 	claimButton.Active = claimableNow
 	claimButton.AutoButtonColor = claimableNow
-	claimButton.Text.Text = claimableNow and "Claim" or "Claimed"
+	claimButton.text.Text = claimableNow and "Claim" or "Claimed"
 	claimButton.Disabled.BackgroundTransparency = claimableNow and CLAIM_ACTIVE_COLOR or CLAIM_DISABLED_COLOR
 
 	countdownLbl.Visible = not claimableNow
