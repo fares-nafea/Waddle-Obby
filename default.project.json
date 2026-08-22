@@ -1158,392 +1158,68 @@
     "StarterGui": {
       "ShopUI": {
         "$className": "ScreenGui",
-        "$properties": {
-          "ResetOnSpawn": false,
-          "IgnoreGuiInset": true
-        },
         "OpenButton": {
-          "$className": "TextButton",
-          "$properties": {
-            "AnchorPoint": [0, 1],
-            "Position": { "UDim2": [[0, 16], [1, -128]] },
-            "Size": { "UDim2": [[0, 140], [0, 46]] },
-            "BackgroundColor3": [0.1372549, 0.1764706, 0.2745098],
-            "Text": "Shop",
-            "Font": "GothamBold",
-            "TextScaled": true,
-            "TextColor3": [1, 1, 1]
-          },
-          "UICorner": {
-            "$className": "UICorner",
-            "$properties": { "CornerRadius": { "UDim": [0, 12] } }
-          },
-          "UIStroke": {
-            "$className": "UIStroke",
-            "$properties": {
-              "Thickness": 1,
-              "Color": [1.0, 0.8156863, 0.1568628],
-              "Transparency": 0.5
-            }
-          }
+          "$className": "ImageButton"
         },
         "Dim": {
-          "$className": "TextButton",
-          "$properties": {
-            "Size": { "UDim2": [[1, 0], [1, 0]] },
-            "BackgroundColor3": [0, 0, 0],
-            "BackgroundTransparency": 0.5,
-            "Text": "",
-            "AutoButtonColor": false,
-            "Visible": false
-          }
+          "$className": "TextButton"
         },
         "ShopFrame": {
           "$className": "Frame",
-          "$properties": {
-            "AnchorPoint": [0.5, 0.5],
-            "Position": { "UDim2": [[0.5, 0], [0.5, 0]] },
-            "Size": { "UDim2": [[0.86, 0], [0.82, 0]] },
-            "BackgroundColor3": [0.0784314, 0.1019608, 0.1647059],
-            "BorderSizePixel": 0,
-            "ClipsDescendants": true,
-            "Visible": false
-          },
-          "UICorner": {
-            "$className": "UICorner",
-            "$properties": { "CornerRadius": { "UDim": [0, 20] } }
-          },
-          "UIStroke": {
-            "$className": "UIStroke",
-            "$properties": {
-              "Thickness": 1.5,
-              "Color": [0.2156863, 0.2431373, 0.3294118],
-              "Transparency": 0.1
-            }
-          },
-          "UIGradient": {
-            "$className": "UIGradient",
-            "$properties": { "Rotation": 90 }
-          },
-          "UIPadding": {
-            "$className": "UIPadding",
-            "$properties": {
-              "PaddingTop": { "UDim": [0, 22] },
-              "PaddingBottom": { "UDim": [0, 22] },
-              "PaddingLeft": { "UDim": [0, 22] },
-              "PaddingRight": { "UDim": [0, 22] }
-            }
-          },
-          "UISizeConstraint": {
-            "$className": "UISizeConstraint",
-            "$properties": {
-              "MinSize": [340, 420],
-              "MaxSize": [640, 560]
-            }
+          "MainBG": {
+            "$className": "ImageLabel"
           },
           "Header": {
             "$className": "Frame",
-            "$properties": {
-              "Position": { "UDim2": [[0, 0], [0, 0]] },
-              "Size": { "UDim2": [[1, 0], [0, 44]] },
-              "BackgroundTransparency": 1
-            },
             "Title": {
-              "$className": "TextLabel",
-              "$properties": {
-                "Position": { "UDim2": [[0, 0], [0, 0]] },
-                "Size": { "UDim2": [[0.5, 0], [1, 0]] },
-                "BackgroundTransparency": 1,
-                "Text": "Shop",
-                "Font": "GothamBlack",
-                "TextScaled": true,
-                "TextColor3": [1, 1, 1],
-                "TextXAlignment": "Left"
-              }
+              "$className": "TextLabel"
+            },
+            "MainBG": {
+              "$className": "ImageLabel"
             },
             "HeaderRight": {
               "$className": "Frame",
-              "$properties": {
-                "AnchorPoint": [1, 0.5],
-                "Position": { "UDim2": [[1, 0], [0.5, 0]] },
-                "Size": { "UDim2": [[0, 146], [0, 28]] },
-                "BackgroundTransparency": 1
-              },
-              "UIListLayout": {
-                "$className": "UIListLayout",
-                "$properties": {
-                  "FillDirection": "Horizontal",
-                  "Padding": { "UDim": [0, 8] },
-                  "VerticalAlignment": "Center",
-                  "HorizontalAlignment": "Right",
-                  "SortOrder": "LayoutOrder"
-                }
-              },
               "CoinPill": {
                 "$className": "Frame",
-                "$properties": {
-                  "LayoutOrder": 1,
-                  "Size": { "UDim2": [[0, 90], [0, 28]] },
-                  "BackgroundColor3": [1.0, 0.8156863, 0.1568628],
-                  "BackgroundTransparency": 0.9
-                },
-                "UICorner": {
-                  "$className": "UICorner",
-                  "$properties": { "CornerRadius": { "UDim": [1, 0] } }
-                },
-                "UIStroke": {
-                  "$className": "UIStroke",
-                  "$properties": {
-                    "Thickness": 1,
-                    "Color": [1.0, 0.8156863, 0.1568628],
-                    "Transparency": 0.55
-                  }
-                },
-                "UIPadding": {
-                  "$className": "UIPadding",
-                  "$properties": {
-                    "PaddingLeft": { "UDim": [0, 8] },
-                    "PaddingRight": { "UDim": [0, 12] }
-                  }
-                },
-                "UIListLayout": {
-                  "$className": "UIListLayout",
-                  "$properties": {
-                    "FillDirection": "Horizontal",
-                    "Padding": { "UDim": [0, 6] },
-                    "VerticalAlignment": "Center",
-                    "SortOrder": "LayoutOrder"
-                  }
+                "MainBG": {
+                  "$className": "ImageLabel"
                 },
                 "CoinGlyph": {
-                  "$className": "Frame",
-                  "$properties": {
-                    "LayoutOrder": 1,
-                    "Size": { "UDim2": [[0, 16], [0, 16]] },
-                    "BackgroundColor3": [1.0, 0.8156863, 0.1568628]
-                  },
-                  "UICorner": {
-                    "$className": "UICorner",
-                    "$properties": { "CornerRadius": { "UDim": [1, 0] } }
-                  },
-                  "UIGradient": {
-                    "$className": "UIGradient",
-                    "$properties": { "Rotation": 45 }
-                  },
-                  "UIStroke": {
-                    "$className": "UIStroke",
-                    "$properties": {
-                      "Thickness": 1.5,
-                      "Color": [0.6, 0.4156863, 0],
-                      "Transparency": 0.5
-                    }
-                  }
+                  "$className": "Frame"
                 },
                 "CoinAmount": {
-                  "$className": "TextLabel",
-                  "$properties": {
-                    "LayoutOrder": 2,
-                    "Size": { "UDim2": [[0, 50], [1, 0]] },
-                    "BackgroundTransparency": 1,
-                    "Text": "0",
-                    "Font": "GothamBold",
-                    "TextScaled": true,
-                    "TextColor3": [1.0, 0.8156863, 0.1568628],
-                    "TextXAlignment": "Left"
-                  }
+                  "$className": "TextLabel"
                 }
               },
               "CloseBtn": {
-                "$className": "TextButton",
-                "$properties": {
-                  "LayoutOrder": 2,
-                  "Size": { "UDim2": [[0, 28], [0, 28]] },
-                  "BackgroundColor3": [0.8627451, 0.2745098, 0.2745098],
-                  "Text": "X",
-                  "Font": "GothamBold",
-                  "TextScaled": true,
-                  "TextColor3": [1, 1, 1]
-                },
-                "UICorner": {
-                  "$className": "UICorner",
-                  "$properties": { "CornerRadius": { "UDim": [0, 10] } }
-                },
-                "UIScale": {
-                  "$className": "UIScale",
-                  "$properties": { "Scale": 1 }
-                }
+                "$className": "ImageButton"
               }
             }
           },
           "Grid": {
             "$className": "ScrollingFrame",
-            "$properties": {
-              "Position": { "UDim2": [[0, 0], [0, 58]] },
-              "Size": { "UDim2": [[1, 0], [1, -58]] },
-              "BackgroundTransparency": 1,
-              "BorderSizePixel": 0,
-              "ScrollBarThickness": 6,
-              "CanvasSize": { "UDim2": [[0, 0], [0, 0]] },
-              "AutomaticCanvasSize": "Y"
-            },
-            "UIGridLayout": {
-              "$className": "UIGridLayout",
-              "$properties": {
-                "CellSize": { "UDim2": [[0, 152], [0, 180]] },
-                "CellPadding": { "UDim2": [[0, 14], [0, 14]] },
-                "SortOrder": "LayoutOrder"
-              }
-            },
             "BlueTrailCard": {
               "$className": "Frame",
-              "$properties": {
-                "LayoutOrder": 1,
-                "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
-              },
-              "UICorner": {
-                "$className": "UICorner",
-                "$properties": { "CornerRadius": { "UDim": [0, 14] } }
-              },
-              "UIStroke": {
-                "$className": "UIStroke",
-                "$properties": {
-                  "Thickness": 1,
-                  "Color": [0.2156863, 0.2431373, 0.3294118],
-                  "Transparency": 0.2
-                }
-              },
-              "UIPadding": {
-                "$className": "UIPadding",
-                "$properties": {
-                  "PaddingTop": { "UDim": [0, 12] },
-                  "PaddingBottom": { "UDim": [0, 12] },
-                  "PaddingLeft": { "UDim": [0, 12] },
-                  "PaddingRight": { "UDim": [0, 12] }
-                }
-              },
-              "UIScale": {
-                "$className": "UIScale",
-                "$properties": { "Scale": 1 }
+              "MainBG": {
+                "$className": "ImageLabel"
               },
               "Preview": {
-                "$className": "Frame",
-                "$properties": {
-                  "Position": { "UDim2": [[0, 0], [0, 0]] },
-                  "Size": { "UDim2": [[1, 0], [0, 66]] },
-                  "BackgroundColor3": [0.3137255, 0.627451, 1.0]
-                },
-                "UICorner": {
-                  "$className": "UICorner",
-                  "$properties": { "CornerRadius": { "UDim": [0, 10] } }
-                },
-                "UIGradient": {
-                  "$className": "UIGradient",
-                  "$properties": { "Rotation": 135 }
-                }
+                "$className": "Frame"
               },
               "StatusLabel": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "AnchorPoint": [1, 0],
-                  "Position": { "UDim2": [[1, 0], [0, -6]] },
-                  "Size": { "UDim2": [[0, 64], [0, 18]] },
-                  "BackgroundColor3": [0.1098039, 0.1294118, 0.1960784],
-                  "Text": "Not Owned",
-                  "Font": "GothamBold",
-                  "TextScaled": true,
-                  "TextColor3": [0.4901961, 0.5215686, 0.6117647]
-                },
-                "UICorner": {
-                  "$className": "UICorner",
-                  "$properties": { "CornerRadius": { "UDim": [1, 0] } }
-                },
-                "UIStroke": {
-                  "$className": "UIStroke",
-                  "$properties": {
-                    "Thickness": 1,
-                    "Color": [0.2156863, 0.2431373, 0.3294118],
-                    "Transparency": 0.4
-                  }
-                }
+                "$className": "TextLabel"
               },
               "NameLabel": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "Position": { "UDim2": [[0, 0], [0, 74]] },
-                  "Size": { "UDim2": [[1, 0], [0, 20]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "Blue Trail",
-                  "Font": "GothamBold",
-                  "TextScaled": true,
-                  "TextColor3": [1, 1, 1],
-                  "TextXAlignment": "Left"
-                }
+                "$className": "TextLabel"
               },
               "PriceLabel": {
-                "$className": "TextLabel",
-                "$properties": {
-                  "Position": { "UDim2": [[0, 0], [0, 100]] },
-                  "Size": { "UDim2": [[0, 90], [0, 18]] },
-                  "BackgroundTransparency": 1,
-                  "Text": "300 Coins",
-                  "Font": "GothamBold",
-                  "TextScaled": true,
-                  "TextColor3": [1.0, 0.8156863, 0.1568628],
-                  "TextXAlignment": "Left"
-                }
+                "$className": "TextLabel"
               },
               "BuyButton": {
-                "$className": "TextButton",
-                "$properties": {
-                  "Position": { "UDim2": [[0, 0], [0, 126]] },
-                  "Size": { "UDim2": [[1, 0], [0, 30]] },
-                  "BackgroundColor3": [0.3568627, 0.4862745, 0.9803922],
-                  "Text": "Buy",
-                  "Font": "GothamBold",
-                  "TextScaled": true,
-                  "TextColor3": [1, 1, 1]
-                },
-                "UICorner": {
-                  "$className": "UICorner",
-                  "$properties": { "CornerRadius": { "UDim": [0, 10] } }
-                },
-                "UIGradient": {
-                  "$className": "UIGradient",
-                  "$properties": { "Rotation": 90 }
-                },
-                "UIScale": {
-                  "$className": "UIScale",
-                  "$properties": { "Scale": 1 }
-                }
+                "$className": "TextButton"
               },
               "EquipButton": {
-                "$className": "TextButton",
-                "$properties": {
-                  "Position": { "UDim2": [[0, 0], [0, 126]] },
-                  "Size": { "UDim2": [[1, 0], [0, 30]] },
-                  "Visible": false,
-                  "BackgroundColor3": [0.1372549, 0.1764706, 0.2745098],
-                  "Text": "Equip",
-                  "Font": "GothamBold",
-                  "TextScaled": true,
-                  "TextColor3": [0.7647059, 0.7882353, 0.8627451]
-                },
-                "UICorner": {
-                  "$className": "UICorner",
-                  "$properties": { "CornerRadius": { "UDim": [0, 10] } }
-                },
-                "UIStroke": {
-                  "$className": "UIStroke",
-                  "$properties": {
-                    "Thickness": 1,
-                    "Color": [0.2156863, 0.2431373, 0.3294118],
-                    "Transparency": 0.1
-                  }
-                },
-                "UIScale": {
-                  "$className": "UIScale",
-                  "$properties": { "Scale": 1 }
-                }
+                "$className": "TextButton"
               }
             },
             "FireTrailCard": {
@@ -2311,10 +1987,6 @@
       },
       "TimerGui": {
         "$className": "ScreenGui",
-        "$properties": {
-          "ResetOnSpawn": false,
-          "IgnoreGuiInset": true
-        },
         "TimerFrame": {
           "$className": "Frame",
           "$properties": {
