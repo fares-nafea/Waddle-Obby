@@ -18,12 +18,7 @@
 local TrailConfig = {}
 
 TrailConfig.Items = {
-	{ Name = "Blue Trail",      Price = 300,  CardName = "BlueTrailCard",      Color = Color3.fromRGB(80, 160, 255) },
-	{ Name = "Fire Trail",      Price = 450,  CardName = "FireTrailCard",      Color = Color3.fromRGB(255, 120, 60) },
-	{ Name = "Rainbow Trail",   Price = 1200, CardName = "RainbowTrailCard",   Color = Color3.fromRGB(255, 120, 200) },
-	{ Name = "Lightning Trail", Price = 700,  CardName = "LightningTrailCard", Color = Color3.fromRGB(255, 240, 120) },
-	{ Name = "Galaxy Trail",    Price = 900,  CardName = "GalaxyTrailCard",    Color = Color3.fromRGB(140, 90, 255) },
-	{ Name = "Neon Trail",      Price = 600,  CardName = "NeonTrailCard",      Color = Color3.fromRGB(80, 255, 190) },
+	{ Name = "Blue Trail",      Price = 300,  CardName = "BlueTrailCard"},
 }
 
 -- look up one shop trail by its ReplicatedStorage.Trails / ownership-marker name

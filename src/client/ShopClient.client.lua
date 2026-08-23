@@ -1,8 +1,8 @@
 --// Shop Client
 --// Place in: StarterPlayer > StarterPlayerScripts
 --// Opens/closes StarterGui.ShopUI.ShopFrame, wires the Buy button on each
---// trail card (found under ShopFrame.Grid), the Close button, the live coin
---// counter, and hover/press feedback. Every object referenced below already
+--// trail card (found under ShopFrame.Grid), the Close button, and the live
+--// coin counter. Every object referenced below already
 --// exists (built in Studio) - this script only finds them (WaitForChild) and
 --// reads/writes their properties; it never creates an Instance.
 --//
@@ -14,7 +14,6 @@
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local TweenService = game:GetService("TweenService")
 
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
@@ -25,6 +24,8 @@ local TrailConfig = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChil
 
 local inventory = player:WaitForChild("Inventory")
 local equippedTrail = player:WaitForChild("EquippedTrail", 10)
+local EQUIP_IMAGE = "rbxassetid://92424482846330"
+local UNEQUIP_IMAGE = "rbxassetid://110451088897225"
 
 --============================ GUI ============================--
 local shopGui = playerGui:WaitForChild("ShopUI")
@@ -55,13 +56,6 @@ for _, item in ipairs(TrailConfig.Items) do
 	end
 end
 
---============================ CARD STATE ============================--
-local STATUS_STYLE = {
-	NotOwned = { Text = "Not Owned", Color = Color3.fromRGB(125, 133, 156), Bg = Color3.fromRGB(28, 33, 50) },
-	Owned    = { Text = "Owned",     Color = Color3.fromRGB(78, 214, 144),  Bg = Color3.fromRGB(20, 43, 34) },
-	Equipped = { Text = "Equipped",  Color = Color3.fromRGB(255, 208, 40), Bg = Color3.fromRGB(46, 38, 12) },
-}
-
 local function isOwned(trailName)
 	return inventory:FindFirstChild(trailName) ~= nil
 end
@@ -70,54 +64,36 @@ local function isEquipped(trailName)
 	return equippedTrail ~= nil and equippedTrail.Value == trailName
 end
 
--- recolors + retexts the StatusLabel pill in one place, so every call site
--- (refreshCard, the NotEnoughCoins flash) stays in sync
-local function applyStatusStyle(statusLabel, key)
-	local style = STATUS_STYLE[key]
-	statusLabel.Text = style.Text
-	statusLabel.TextColor3 = style.Color
-	statusLabel.BackgroundColor3 = style.Bg
-
-	local stroke = statusLabel:FindFirstChildOfClass("UIStroke")
-	if stroke then
-		stroke.Color = style.Color
-	end
-end
-
 local function refreshCard(trailName, card)
+
 	local item = TrailConfig.get(trailName)
-	if not item then return end
+	if not item then
+		return
+	end
 
 	local buyButton = card:WaitForChild("BuyButton")
 	local equipButton = card:WaitForChild("EquipButton")
 	local priceLabel = card:WaitForChild("PriceLabel")
-	local statusLabel = card:WaitForChild("StatusLabel")
-	local cardStroke = card:FindFirstChildOfClass("UIStroke")
 
 	priceLabel.Text = item.Price .. " Coins"
 
 	local owned = isOwned(trailName)
+	local equipped = isEquipped(trailName)
+
+	-- Buy
 	buyButton.Visible = not owned
+
+	-- Equip / Unequip
 	equipButton.Visible = owned
 
-	if owned then
-		local equipped = isEquipped(trailName)
-		equipButton.Text = equipped and "Unequip" or "Equip"
-		applyStatusStyle(statusLabel, equipped and "Equipped" or "Owned")
-
-		if cardStroke then
-			cardStroke.Color = equipped and Color3.fromRGB(255, 208, 40) or Color3.fromRGB(78, 214, 144)
-			cardStroke.Thickness = equipped and 1.5 or 1
-		end
+	if equipped then
+		equipButton.Image = UNEQUIP_IMAGE
 	else
-		applyStatusStyle(statusLabel, "NotOwned")
-
-		if cardStroke then
-			cardStroke.Color = Color3.fromRGB(55, 62, 84)
-			cardStroke.Thickness = 1
-		end
+		equipButton.Image = EQUIP_IMAGE
 	end
+
 end
+
 
 local function refreshAll()
 	for trailName, card in pairs(cards) do
@@ -144,106 +120,45 @@ task.spawn(function()
 end)
 
 --============================ OPEN / CLOSE ============================--
-local OPEN_TWEEN = TweenInfo.new(0.22, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
-local CLOSE_TWEEN = TweenInfo.new(0.16, Enum.EasingStyle.Quad, Enum.EasingDirection.In)
-
-local panelSize = shopFrame.Size -- the size authored in Studio; never overwritten with a guessed value
-local closing = false
 
 local function openShop()
-	if shopFrame.Visible then return end
+
+	if shopFrame.Visible then
+		return
+	end
+
 	refreshAll()
 	refreshCoins()
 
-	closing = false
 	dim.Visible = true
-	dim.BackgroundTransparency = 1
 	shopFrame.Visible = true
-	shopFrame.Size = panelSize - UDim2.fromOffset(40, 40)
 
-	TweenService:Create(shopFrame, OPEN_TWEEN, { Size = panelSize }):Play()
-	TweenService:Create(dim, OPEN_TWEEN, { BackgroundTransparency = 0.5 }):Play()
 end
 
 local function closeShop()
-	if not shopFrame.Visible or closing then return end
-	closing = true
 
-	local shrink = TweenService:Create(shopFrame, CLOSE_TWEEN, { Size = panelSize - UDim2.fromOffset(40, 40) })
-	TweenService:Create(dim, CLOSE_TWEEN, { BackgroundTransparency = 1 }):Play()
-	shrink:Play()
+	if not shopFrame.Visible then
+		return
+	end
 
-	shrink.Completed:Connect(function()
-		shopFrame.Visible = false
-		dim.Visible = false
-		shopFrame.Size = panelSize -- reset ahead of the next open
-		closing = false
-	end)
+	shopFrame.Visible = false
+	dim.Visible = false
+
 end
 
 openButton.MouseButton1Click:Connect(function()
+
 	if shopFrame.Visible then
 		closeShop()
 	else
 		openShop()
 	end
+
 end)
 
 closeBtn.MouseButton1Click:Connect(closeShop)
+
 dim.MouseButton1Click:Connect(closeShop)
-
---============================ HOVER / PRESS FEEL ============================--
-local HOVER_TWEEN = TweenInfo.new(0.12, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-local PRESS_DOWN_TWEEN = TweenInfo.new(0.08, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-local PRESS_UP_TWEEN = TweenInfo.new(0.16, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
-
--- whole-card hover pop, driven by the card's own UIScale so it never fights
--- Grid's UIGridLayout (which owns .Size, but has no opinion on UIScale.Scale)
-local function wireCardHover(card)
-	local scale = card:FindFirstChildOfClass("UIScale")
-	local stroke = card:FindFirstChildOfClass("UIStroke")
-	if not scale then return end
-
-	local baseTransparency = stroke and stroke.Transparency or 0
-
-	card.MouseEnter:Connect(function()
-		TweenService:Create(scale, HOVER_TWEEN, { Scale = 1.025 }):Play()
-		if stroke then
-			TweenService:Create(stroke, HOVER_TWEEN, { Transparency = 0 }):Play()
-		end
-	end)
-
-	card.MouseLeave:Connect(function()
-		TweenService:Create(scale, HOVER_TWEEN, { Scale = 1 }):Play()
-		if stroke then
-			TweenService:Create(stroke, HOVER_TWEEN, { Transparency = baseTransparency }):Play()
-		end
-	end)
-end
-
--- press-down/release "click" feel for any button, via its own UIScale
-local function wireButtonPress(button)
-	local scale = button:FindFirstChildOfClass("UIScale")
-	if not scale then return end
-
-	button.MouseButton1Down:Connect(function()
-		TweenService:Create(scale, PRESS_DOWN_TWEEN, { Scale = 0.94 }):Play()
-	end)
-
-	local function release()
-		TweenService:Create(scale, PRESS_UP_TWEEN, { Scale = 1 }):Play()
-	end
-
-	button.MouseButton1Up:Connect(release)
-	button.MouseLeave:Connect(release)
-end
-
-for _, card in pairs(cards) do
-	wireCardHover(card)
-	wireButtonPress(card:WaitForChild("BuyButton"))
-	wireButtonPress(card:WaitForChild("EquipButton"))
-end
-wireButtonPress(closeBtn)
 
 --============================ BUTTON WIRING ============================--
 for trailName, card in pairs(cards) do
@@ -269,17 +184,5 @@ end
 ShopRemote.OnClientEvent:Connect(function(action, trailName, ...)
 	if action == "Bought" then
 		refreshAll()
-
-	elseif action == "NotEnoughCoins" then
-		local cost, have = ...
-		local card = cards[trailName]
-		if not card then return end
-
-		local statusLabel = card:WaitForChild("StatusLabel")
-		applyStatusStyle(statusLabel, "NotOwned")
-		statusLabel.Text = "Need " .. cost .. " (have " .. have .. ")"
-
-		task.wait(2)
-		refreshCard(trailName, card) -- restore the normal status text/color
 	end
 end)
