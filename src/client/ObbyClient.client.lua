@@ -9,6 +9,7 @@
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
+local SoundService = game:GetService("SoundService")
 
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
@@ -16,6 +17,7 @@ local playerGui = player:WaitForChild("PlayerGui")
 local Events = ReplicatedStorage:WaitForChild("Events")
 local TimerEvent = Events:WaitForChild("TimerEvent")
 local LeaderboardEvent = Events:WaitForChild("LeaderboardEvent")
+local ButtonClick = SoundService:WaitForChild("ButtonClick")
 
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local ObbyConfig = require(Shared:WaitForChild("ObbyConfig"))
@@ -121,8 +123,8 @@ local function hideResult()
 	panel.Visible = false
 end
 
-closeBtn.MouseButton1Click:Connect(hideResult)
-dim.MouseButton1Click:Connect(hideResult)
+closeBtn.MouseButton1Click:Connect(hideResult, 	ButtonClick:Play())
+dim.MouseButton1Click:Connect(hideResult, ButtonClick:Play())
 
 --============================ SERVER EVENTS ============================--
 TimerEvent.OnClientEvent:Connect(function(action, obbyId, ...)

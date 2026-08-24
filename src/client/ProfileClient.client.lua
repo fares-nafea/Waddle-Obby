@@ -16,6 +16,8 @@
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TweenService = game:GetService("TweenService")
+local SoundService = game:GetService("SoundService")
+local ButtonClick = SoundService:WaitForChild("ButtonClick")
 
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
@@ -168,6 +170,7 @@ local function openProfile()
 	refreshAll()
 
 	closing = false
+	ButtonClick:Play()
 	dim.Visible = true
 	dim.BackgroundTransparency = 1
 	profileFrame.Visible = true
@@ -186,6 +189,7 @@ local function closeProfile()
 	shrink:Play()
 
 	shrink.Completed:Connect(function()
+		ButtonClick:Play()
 		profileFrame.Visible = false
 		dim.Visible = false
 		profileFrame.Size = panelSize -- reset ahead of the next open
@@ -201,8 +205,8 @@ openButton.MouseButton1Click:Connect(function()
 	end
 end)
 
-closeBtn.MouseButton1Click:Connect(closeProfile)
-dim.MouseButton1Click:Connect(closeProfile)
+closeBtn.MouseButton1Click:Connect(closeProfile, ButtonClick:Play())
+dim.MouseButton1Click:Connect(closeProfile, ButtonClick:Play())
 
 --============================ HOVER / PRESS FEEL ============================--
 local PRESS_DOWN_TWEEN = TweenInfo.new(0.08, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)

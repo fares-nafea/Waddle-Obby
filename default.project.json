@@ -1127,32 +1127,22 @@
     },
     "SoundService": {
       "DailyRewardClaimSound": {
-        "$className": "Sound",
-        "$properties": {
-          "SoundId": "",
-          "Volume": 0.6
-        }
+        "$className": "Sound"
       },
       "DonationSound": {
-        "$className": "Sound",
-        "$properties": {
-          "SoundId": "",
-          "Volume": 0.7
-        }
+        "$className": "Sound"
       },
       "DonationLegendarySound": {
-        "$className": "Sound",
-        "$properties": {
-          "SoundId": "",
-          "Volume": 0.9
-        }
+        "$className": "Sound"
       },
       "BoostActivateSound": {
-        "$className": "Sound",
-        "$properties": {
-          "SoundId": "",
-          "Volume": 0.6
-        }
+        "$className": "Sound"
+      },
+      "MainBG": {
+        "$className": "Sound"
+      },
+      "ButtonClick": {
+        "$className": "Sound"
       }
     },
     "StarterGui": {
@@ -1226,48 +1216,14 @@
         "$className": "ScreenGui",
         "TimerFrame": {
           "$className": "Frame",
-          "$properties": {
-            "AnchorPoint": [0.5, 0],
-            "Position": { "UDim2": [[0.5, 0], [0, 20]] },
-            "Size": { "UDim2": [[0, 220], [0, 64]] },
-            "BackgroundColor3": [0.0784314, 0.1019608, 0.1647059],
-            "BackgroundTransparency": 0.15,
-            "Visible": false
-          },
-          "UICorner": {
-            "$className": "UICorner",
-            "$properties": { "CornerRadius": { "UDim": [0, 14] } }
-          },
-          "UIStroke": {
-            "$className": "UIStroke",
-            "$properties": {
-              "Color": [0.2156863, 0.2431373, 0.3294118],
-              "Thickness": 1
-            }
-          },
           "ObbyLbl": {
-            "$className": "TextLabel",
-            "$properties": {
-              "BackgroundTransparency": 1,
-              "Size": { "UDim2": [[1, -16], [0, 18]] },
-              "Position": { "UDim2": [[0, 8], [0, 4]] },
-              "Font": "GothamMedium",
-              "TextScaled": true,
-              "TextColor3": [0.6666667, 0.7058824, 0.7843137],
-              "Text": ""
-            }
+            "$className": "TextLabel"
           },
           "TimeLbl": {
-            "$className": "TextLabel",
-            "$properties": {
-              "BackgroundTransparency": 1,
-              "Size": { "UDim2": [[1, -16], [0, 38]] },
-              "Position": { "UDim2": [[0, 8], [0, 22]] },
-              "Font": "GothamBold",
-              "TextScaled": true,
-              "TextColor3": [1, 1, 1],
-              "Text": "00:00.00"
-            }
+            "$className": "TextLabel"
+          },
+          "MainBG": {
+            "$className": "ImageLabel"
           }
         }
       },
@@ -1775,7 +1731,6 @@
         }
       }
     },
-
     "Workspace": {
     }
   }

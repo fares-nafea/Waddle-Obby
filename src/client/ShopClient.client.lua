@@ -14,6 +14,7 @@
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local SoundService =  game:GetService("SoundService")
 
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
@@ -21,6 +22,8 @@ local playerGui = player:WaitForChild("PlayerGui")
 local ShopRemote = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ShopRemote")
 local EquipEvent = ReplicatedStorage:WaitForChild("Events"):WaitForChild("EquipEvent")
 local TrailConfig = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("TrailConfig"))
+
+local ButtonClick = SoundService:WaitForChild("ButtonClick")
 
 local inventory = player:WaitForChild("Inventory")
 local equippedTrail = player:WaitForChild("EquippedTrail", 10)
@@ -130,6 +133,7 @@ local function openShop()
 	refreshAll()
 	refreshCoins()
 
+	ButtonClick:Play()
 	dim.Visible = true
 	shopFrame.Visible = true
 
@@ -141,6 +145,7 @@ local function closeShop()
 		return
 	end
 
+	ButtonClick:Play()
 	shopFrame.Visible = false
 	dim.Visible = false
 

@@ -27,6 +27,7 @@ local BoostRemote = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("Boos
 local BoostConfig = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("BoostConfig"))
 
 local activateSound = SoundService:FindFirstChild("BoostActivateSound")
+local ButtonClick = SoundService:WaitForChild("ButtonClick")
 
 local boostRemainingSeconds = player:WaitForChild("BoostRemainingSeconds", 10)
 local boostPermanent = player:WaitForChild("BoostPermanent", 10)
@@ -143,8 +144,10 @@ local function openPanel()
 	if panel.Visible then return end
 
 	closing = false
+
 	dim.Visible = true
 	dim.BackgroundTransparency = 1
+	ButtonClick:Play()
 	panel.Visible = true
 	panel.Size = panelSize - UDim2.fromOffset(40, 40)
 
@@ -161,9 +164,10 @@ local function closePanel()
 	shrink:Play()
 
 	shrink.Completed:Connect(function()
+		ButtonClick:Play()
 		panel.Visible = false
 		dim.Visible = false
-		panel.Size = panelSize -- reset ahead of the next open
+		panel.Size = panelSize
 		closing = false
 	end)
 end

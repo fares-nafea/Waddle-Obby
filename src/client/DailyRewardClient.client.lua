@@ -23,6 +23,7 @@ local SoundService = game:GetService("SoundService")
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
+
 local DailyRewardRemote = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("DailyRewardRemote")
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local DailyRewardConfig = require(Shared:WaitForChild("DailyRewardConfig"))
@@ -65,6 +66,7 @@ local giftButton = giftGui:WaitForChild("GiftButton")
 local giftNotifyDot = giftButton:WaitForChild("NotifyDot")
 
 local claimSound = SoundService:FindFirstChild("DailyRewardClaimSound")
+local ButtonClick = SoundService:WaitForChild("ButtonClick")
 
 dim.Visible = false
 panel.Visible = false
@@ -221,6 +223,7 @@ local function openPanel()
 	refreshAll()
 
 	closing = false
+	ButtonClick:Play()
 	dim.Visible = true
 	dim.BackgroundTransparency = 1
 	panel.Visible = true
@@ -239,6 +242,7 @@ local function closePanel()
 	shrink:Play()
 
 	shrink.Completed:Connect(function()
+		ButtonClick:Play()
 		panel.Visible = false
 		dim.Visible = false
 		panel.Size = panelSize -- reset ahead of the next open
@@ -246,8 +250,8 @@ local function closePanel()
 	end)
 end
 
-closeBtn.MouseButton1Click:Connect(closePanel)
-dim.MouseButton1Click:Connect(closePanel)
+closeBtn.MouseButton1Click:Connect(closePanel, 	ButtonClick:Play())
+dim.MouseButton1Click:Connect(closePanel, 	ButtonClick:Play())
 giftButton.MouseButton1Click:Connect(function()
 	if panel.Visible then
 		closePanel()
