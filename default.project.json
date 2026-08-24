@@ -1144,6 +1144,9 @@
       "BoostActivateSound": {
         "$className": "Sound"
       },
+      "BoostExpirationSound": {
+        "$className": "Sound"
+      },
       "MainBG": {
         "$className": "Sound"
       },

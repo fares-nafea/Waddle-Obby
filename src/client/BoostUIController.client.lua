@@ -28,6 +28,7 @@ local BoostConfig = require(Shared:WaitForChild("BoostConfig"))
 local UIAnimation = require(Shared:WaitForChild("UIAnimation"))
 
 local activateSound = SoundService:FindFirstChild("BoostActivateSound")
+local expirationSound = SoundService:FindFirstChild("BoostExpirationSound")
 local ButtonClick = SoundService:WaitForChild("ButtonClick")
 
 local boostRemainingSeconds = player:WaitForChild("BoostRemainingSeconds", 10)
@@ -111,6 +112,7 @@ boostRemainingSeconds.Changed:Connect(function(newValue)
 		playActivationCue()
 	elseif newValue == 0 and lastRemaining > 0 and not boostPermanent.Value then
 		showExpiredNotification()
+		expirationSound:Play()
 	end
 	lastRemaining = newValue
 	refresh()
@@ -174,6 +176,7 @@ for _, item in ipairs(BoostConfig.Items) do
 			UIAnimation.ButtonPress(buyButton)
 
 			buyButton.MouseButton1Click:Connect(function()
+				ButtonClick:Play()
 				local now = os.clock()
 				if now - lastClick < BUY_DEBOUNCE then return end
 				lastClick = now
