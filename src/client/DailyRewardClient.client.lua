@@ -17,7 +17,6 @@
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local TweenService = game:GetService("TweenService")
 local SoundService = game:GetService("SoundService")
 
 local player = Players.LocalPlayer
@@ -27,6 +26,7 @@ local playerGui = player:WaitForChild("PlayerGui")
 local DailyRewardRemote = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("DailyRewardRemote")
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local DailyRewardConfig = require(Shared:WaitForChild("DailyRewardConfig"))
+local UIAnimation = require(Shared:WaitForChild("UIAnimation"))
 local coinToastTemplate = Shared:WaitForChild("Templates"):WaitForChild("CoinToast")
 
 local DAY_COUNT = DailyRewardConfig.MaxDay
@@ -212,46 +212,21 @@ lastClaimTime.Changed:Connect(refreshAll)
 dailyStreak.Changed:Connect(refreshAll)
 
 --============================ OPEN / CLOSE ============================--
-local OPEN_TWEEN = TweenInfo.new(0.22, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
-local CLOSE_TWEEN = TweenInfo.new(0.16, Enum.EasingStyle.Quad, Enum.EasingDirection.In)
-
-local panelSize = panel.Size -- the size authored in Studio; never overwritten with a guessed value
-local closing = false
-
 local function openPanel()
-	if panel.Visible then return end
 	refreshAll()
-
-	closing = false
-	ButtonClick:Play()
-	dim.Visible = true
-	dim.BackgroundTransparency = 1
-	panel.Visible = true
-	panel.Size = panelSize - UDim2.fromOffset(40, 40)
-
-	TweenService:Create(panel, OPEN_TWEEN, { Size = panelSize }):Play()
-	TweenService:Create(dim, OPEN_TWEEN, { BackgroundTransparency = 0.5 }):Play()
+	if UIAnimation.Open(panel, dim) then
+		ButtonClick:Play()
+	end
 end
 
 local function closePanel()
-	if not panel.Visible or closing then return end
-	closing = true
-
-	local shrink = TweenService:Create(panel, CLOSE_TWEEN, { Size = panelSize - UDim2.fromOffset(40, 40) })
-	TweenService:Create(dim, CLOSE_TWEEN, { BackgroundTransparency = 1 }):Play()
-	shrink:Play()
-
-	shrink.Completed:Connect(function()
+	if UIAnimation.Close(panel, dim) then
 		ButtonClick:Play()
-		panel.Visible = false
-		dim.Visible = false
-		panel.Size = panelSize -- reset ahead of the next open
-		closing = false
-	end)
+	end
 end
 
-closeBtn.MouseButton1Click:Connect(closePanel, 	ButtonClick:Play())
-dim.MouseButton1Click:Connect(closePanel, 	ButtonClick:Play())
+closeBtn.MouseButton1Click:Connect(closePanel)
+dim.MouseButton1Click:Connect(closePanel)
 giftButton.MouseButton1Click:Connect(function()
 	if panel.Visible then
 		closePanel()
@@ -260,30 +235,9 @@ giftButton.MouseButton1Click:Connect(function()
 	end
 end)
 
---============================ HOVER / PRESS FEEL ============================--
-local PRESS_DOWN_TWEEN = TweenInfo.new(0.08, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-local PRESS_UP_TWEEN = TweenInfo.new(0.16, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
-
--- press-down/release "click" feel for any button, via its own UIScale - same helper ShopClient/ProfileClient use
-local function wireButtonPress(button)
-	local scale = button:FindFirstChildOfClass("UIScale")
-	if not scale then return end
-
-	button.MouseButton1Down:Connect(function()
-		TweenService:Create(scale, PRESS_DOWN_TWEEN, { Scale = 0.94 }):Play()
-	end)
-
-	local function release()
-		TweenService:Create(scale, PRESS_UP_TWEEN, { Scale = 1 }):Play()
-	end
-
-	button.MouseButton1Up:Connect(release)
-	button.MouseLeave:Connect(release)
-end
-
-wireButtonPress(closeBtn)
-wireButtonPress(claimButton)
-wireButtonPress(giftButton)
+UIAnimation.ButtonPress(closeBtn)
+UIAnimation.ButtonPress(claimButton)
+UIAnimation.ButtonPress(giftButton)
 
 --============================ CLAIM ANIMATION ============================--
 local function showCoinToast(card, text)
@@ -293,25 +247,11 @@ local function showCoinToast(card, text)
 	toast.Position = UDim2.fromScale(0.5, 0.4)
 	toast.Parent = card.frame
 
-	local rise = TweenService:Create(toast, TweenInfo.new(0.9, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-		Position = UDim2.fromScale(0.5, -0.5),
-		TextTransparency = 1,
+	UIAnimation.Notification(toast, {
+		rise = true,
+		destroy = true,
+		hold = 0,
 	})
-	rise:Play()
-	rise.Completed:Connect(function()
-		toast:Destroy()
-	end)
-end
-
-local function pulseCard(card)
-	if not card.stroke then return end
-	local baseThickness = card.stroke.Thickness
-
-	local grow = TweenService:Create(card.stroke, TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { Thickness = baseThickness + 3 })
-	grow:Play()
-	grow.Completed:Connect(function()
-		TweenService:Create(card.stroke, TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.In), { Thickness = baseThickness }):Play()
-	end)
 end
 
 local function playClaimAnimation(day, rewardData)
@@ -322,18 +262,10 @@ local function playClaimAnimation(day, rewardData)
 	local card = dayCards[day]
 	if card then
 		showCoinToast(card, describeReward(rewardData))
-		pulseCard(card)
+		UIAnimation.Popup(card.frame)
 	end
 
-	local scale = claimButton:FindFirstChildOfClass("UIScale")
-	if scale then
-		local punch = TweenService:Create(scale, TweenInfo.new(0.12, Enum.EasingStyle.Back, Enum.EasingDirection.Out), { Scale = 1.12 })
-		punch:Play()
-		punch.Completed:Connect(function()
-			TweenService:Create(scale, TweenInfo.new(0.14, Enum.EasingStyle.Quad, Enum.EasingDirection.In), { Scale = 1 }):Play()
-		end)
-	end
-
+	UIAnimation.Popup(claimButton)
 	refreshAll()
 end
 

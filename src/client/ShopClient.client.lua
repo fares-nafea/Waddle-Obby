@@ -21,7 +21,9 @@ local playerGui = player:WaitForChild("PlayerGui")
 
 local ShopRemote = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ShopRemote")
 local EquipEvent = ReplicatedStorage:WaitForChild("Events"):WaitForChild("EquipEvent")
-local TrailConfig = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("TrailConfig"))
+local Shared = ReplicatedStorage:WaitForChild("Shared")
+local TrailConfig = require(Shared:WaitForChild("TrailConfig"))
+local UIAnimation = require(Shared:WaitForChild("UIAnimation"))
 
 local ButtonClick = SoundService:WaitForChild("ButtonClick")
 
@@ -125,30 +127,17 @@ end)
 --============================ OPEN / CLOSE ============================--
 
 local function openShop()
-
-	if shopFrame.Visible then
-		return
-	end
-
 	refreshAll()
 	refreshCoins()
-
-	ButtonClick:Play()
-	dim.Visible = true
-	shopFrame.Visible = true
-
+	if UIAnimation.Open(shopFrame, dim) then
+		ButtonClick:Play()
+	end
 end
 
 local function closeShop()
-
-	if not shopFrame.Visible then
-		return
+	if UIAnimation.Close(shopFrame, dim) then
+		ButtonClick:Play()
 	end
-
-	ButtonClick:Play()
-	shopFrame.Visible = false
-	dim.Visible = false
-
 end
 
 openButton.MouseButton1Click:Connect(function()
@@ -165,15 +154,24 @@ closeBtn.MouseButton1Click:Connect(closeShop)
 
 dim.MouseButton1Click:Connect(closeShop)
 
+UIAnimation.ButtonPress(openButton)
+UIAnimation.ButtonPress(closeBtn)
+
 --============================ BUTTON WIRING ============================--
 for trailName, card in pairs(cards) do
-	card:WaitForChild("BuyButton").MouseButton1Click:Connect(function()
+	local buyButton = card:WaitForChild("BuyButton")
+	local equipButton = card:WaitForChild("EquipButton")
+
+	UIAnimation.ButtonPress(buyButton)
+	UIAnimation.ButtonPress(equipButton)
+
+	buyButton.MouseButton1Click:Connect(function()
 		ShopRemote:FireServer("Buy", trailName)
 	end)
 
 	-- EquipService toggles it off if you click the one you're already wearing,
 	-- and guarantees only one trail is ever equipped at a time
-	card:WaitForChild("EquipButton").MouseButton1Click:Connect(function()
+	equipButton.MouseButton1Click:Connect(function()
 		EquipEvent:FireServer(trailName)
 	end)
 end

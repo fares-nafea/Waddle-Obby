@@ -15,11 +15,12 @@
 --// a result back, it just asks.
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local TweenService = game:GetService("TweenService")
 local TextChatService = game:GetService("TextChatService")
 
+local Shared = ReplicatedStorage:WaitForChild("Shared")
 local DonationRemote = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("DonationRemote")
-local DonationConfig = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("DonationConfig"))
+local DonationConfig = require(Shared:WaitForChild("DonationConfig"))
+local UIAnimation = require(Shared:WaitForChild("UIAnimation"))
 
 --=============== GLOBAL ANNOUNCEMENT ===============--
 -- registered before the board lookup below (which can `return` early if the
@@ -64,27 +65,6 @@ if not grid then
 	return
 end
 
---=============== HOVER / PRESS FEEL ============--
-local PRESS_DOWN_TWEEN = TweenInfo.new(0.08, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-local PRESS_UP_TWEEN = TweenInfo.new(0.16, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
-
--- press-down/release "click" feel for any button, via its own UIScale - same helper ShopClient/ProfileClient/DailyRewardClient use
-local function wireButtonPress(button)
-	local scale = button:FindFirstChildOfClass("UIScale")
-	if not scale then return end
-
-	button.MouseButton1Down:Connect(function()
-		TweenService:Create(scale, PRESS_DOWN_TWEEN, { Scale = 0.94 }):Play()
-	end)
-
-	local function release()
-		TweenService:Create(scale, PRESS_UP_TWEEN, { Scale = 1 }):Play()
-	end
-
-	button.MouseButton1Up:Connect(release)
-	button.MouseLeave:Connect(release)
-end
-
 --=============== BUTTON WIRING ============--
 local DONATE_DEBOUNCE = 1 -- seconds; stops one double-click firing two purchase prompts
 local lastClick = 0
@@ -96,7 +76,7 @@ for _, item in ipairs(DonationConfig.Items) do
 		local buyButton = card:FindFirstChild("BuyButton")
 
 		if buyButton then
-			wireButtonPress(buyButton)
+			UIAnimation.ButtonPress(buyButton)
 
 			buyButton.MouseButton1Click:Connect(function()
 				local now = os.clock()

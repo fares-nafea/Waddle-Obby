@@ -17,14 +17,15 @@
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local TweenService = game:GetService("TweenService")
 local SoundService = game:GetService("SoundService")
 
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
+local Shared = ReplicatedStorage:WaitForChild("Shared")
 local BoostRemote = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("BoostRemote")
-local BoostConfig = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("BoostConfig"))
+local BoostConfig = require(Shared:WaitForChild("BoostConfig"))
+local UIAnimation = require(Shared:WaitForChild("UIAnimation"))
 
 local activateSound = SoundService:FindFirstChild("BoostActivateSound")
 local ButtonClick = SoundService:WaitForChild("ButtonClick")
@@ -58,20 +59,11 @@ local function formatTime(seconds)
 end
 
 --============================ BADGE ============================--
-local POP_TWEEN = TweenInfo.new(0.25, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
-
 local function playActivationCue()
-	badge.Visible = true
-
 	if activateSound then
 		activateSound:Play()
 	end
-
-	local scale = badge:FindFirstChildOfClass("UIScale")
-	if scale then
-		scale.Scale = 0.8
-		TweenService:Create(scale, POP_TWEEN, { Scale = 1 }):Play()
-	end
+	UIAnimation.Popup(badge)
 end
 
 local function showExpiredNotification()
@@ -134,42 +126,16 @@ end)
 refresh()
 
 --============================ PANEL OPEN / CLOSE ============================--
-local OPEN_TWEEN = TweenInfo.new(0.22, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
-local CLOSE_TWEEN = TweenInfo.new(0.16, Enum.EasingStyle.Quad, Enum.EasingDirection.In)
-
-local panelSize = panel.Size -- the size authored in Studio; never overwritten with a guessed value
-local closing = false
-
 local function openPanel()
-	if panel.Visible then return end
-
-	closing = false
-
-	dim.Visible = true
-	dim.BackgroundTransparency = 1
-	ButtonClick:Play()
-	panel.Visible = true
-	panel.Size = panelSize - UDim2.fromOffset(40, 40)
-
-	TweenService:Create(panel, OPEN_TWEEN, { Size = panelSize }):Play()
-	TweenService:Create(dim, OPEN_TWEEN, { BackgroundTransparency = 0.5 }):Play()
+	if UIAnimation.Open(panel, dim) then
+		ButtonClick:Play()
+	end
 end
 
 local function closePanel()
-	if not panel.Visible or closing then return end
-	closing = true
-
-	local shrink = TweenService:Create(panel, CLOSE_TWEEN, { Size = panelSize - UDim2.fromOffset(40, 40) })
-	TweenService:Create(dim, CLOSE_TWEEN, { BackgroundTransparency = 1 }):Play()
-	shrink:Play()
-
-	shrink.Completed:Connect(function()
+	if UIAnimation.Close(panel, dim) then
 		ButtonClick:Play()
-		panel.Visible = false
-		dim.Visible = false
-		panel.Size = panelSize
-		closing = false
-	end)
+	end
 end
 
 openButton.MouseButton1Click:Connect(function()
@@ -183,28 +149,8 @@ end)
 closeBtn.MouseButton1Click:Connect(closePanel)
 dim.MouseButton1Click:Connect(closePanel)
 
---============================ HOVER / PRESS FEEL ============================--
-local PRESS_DOWN_TWEEN = TweenInfo.new(0.08, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-local PRESS_UP_TWEEN = TweenInfo.new(0.16, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
-
--- press-down/release "click" feel for any button, via its own UIScale - same helper ShopClient/ProfileClient/DailyRewardClient use
-local function wireButtonPress(button)
-	local scale = button:FindFirstChildOfClass("UIScale")
-	if not scale then return end
-
-	button.MouseButton1Down:Connect(function()
-		TweenService:Create(scale, PRESS_DOWN_TWEEN, { Scale = 0.94 }):Play()
-	end)
-
-	local function release()
-		TweenService:Create(scale, PRESS_UP_TWEEN, { Scale = 1 }):Play()
-	end
-
-	button.MouseButton1Up:Connect(release)
-	button.MouseLeave:Connect(release)
-end
-
-wireButtonPress(closeBtn)
+UIAnimation.ButtonPress(openButton)
+UIAnimation.ButtonPress(closeBtn)
 
 --============================ BUY BUTTON WIRING ============================--
 local ROW_NAMES = {
@@ -225,7 +171,7 @@ for _, item in ipairs(BoostConfig.Items) do
 		local buyButton = row:FindFirstChild("BuyButton")
 
 		if buyButton then
-			wireButtonPress(buyButton)
+			UIAnimation.ButtonPress(buyButton)
 
 			buyButton.MouseButton1Click:Connect(function()
 				local now = os.clock()

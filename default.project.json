@@ -90,6 +90,9 @@
         "BoostConfig": {
           "$path": "src/shared/BoostConfig.lua"
         },
+        "UIAnimation": {
+          "$path": "src/shared/UIAnimation.lua"
+        },
         "Templates": {
           "$className": "Folder",
           "CoinToast": {

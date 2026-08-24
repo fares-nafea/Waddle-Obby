@@ -15,14 +15,15 @@
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local TweenService = game:GetService("TweenService")
 local SoundService = game:GetService("SoundService")
 local ButtonClick = SoundService:WaitForChild("ButtonClick")
 
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
-local ObbyConfig = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("ObbyConfig"))
+local Shared = ReplicatedStorage:WaitForChild("Shared")
+local ObbyConfig = require(Shared:WaitForChild("ObbyConfig"))
+local UIAnimation = require(Shared:WaitForChild("UIAnimation"))
 
 local OBBY_COUNT = 6
 
@@ -159,42 +160,17 @@ local function refreshAll()
 end
 
 --============================ OPEN / CLOSE ============================--
-local OPEN_TWEEN = TweenInfo.new(0.22, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
-local CLOSE_TWEEN = TweenInfo.new(0.16, Enum.EasingStyle.Quad, Enum.EasingDirection.In)
-
-local panelSize = profileFrame.Size -- the size authored in Studio; never overwritten with a guessed value
-local closing = false
-
 local function openProfile()
-	if profileFrame.Visible then return end
 	refreshAll()
-
-	closing = false
-	ButtonClick:Play()
-	dim.Visible = true
-	dim.BackgroundTransparency = 1
-	profileFrame.Visible = true
-	profileFrame.Size = panelSize - UDim2.fromOffset(40, 40)
-
-	TweenService:Create(profileFrame, OPEN_TWEEN, { Size = panelSize }):Play()
-	TweenService:Create(dim, OPEN_TWEEN, { BackgroundTransparency = 0.5 }):Play()
+	if UIAnimation.Open(profileFrame, dim) then
+		ButtonClick:Play()
+	end
 end
 
 local function closeProfile()
-	if not profileFrame.Visible or closing then return end
-	closing = true
-
-	local shrink = TweenService:Create(profileFrame, CLOSE_TWEEN, { Size = panelSize - UDim2.fromOffset(40, 40) })
-	TweenService:Create(dim, CLOSE_TWEEN, { BackgroundTransparency = 1 }):Play()
-	shrink:Play()
-
-	shrink.Completed:Connect(function()
+	if UIAnimation.Close(profileFrame, dim) then
 		ButtonClick:Play()
-		profileFrame.Visible = false
-		dim.Visible = false
-		profileFrame.Size = panelSize -- reset ahead of the next open
-		closing = false
-	end)
+	end
 end
 
 openButton.MouseButton1Click:Connect(function()
@@ -205,31 +181,11 @@ openButton.MouseButton1Click:Connect(function()
 	end
 end)
 
-closeBtn.MouseButton1Click:Connect(closeProfile, ButtonClick:Play())
-dim.MouseButton1Click:Connect(closeProfile, ButtonClick:Play())
+closeBtn.MouseButton1Click:Connect(closeProfile)
+dim.MouseButton1Click:Connect(closeProfile)
 
---============================ HOVER / PRESS FEEL ============================--
-local PRESS_DOWN_TWEEN = TweenInfo.new(0.08, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-local PRESS_UP_TWEEN = TweenInfo.new(0.16, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
-
--- press-down/release "click" feel for any button, via its own UIScale
-local function wireButtonPress(button)
-	local scale = button:FindFirstChildOfClass("UIScale")
-	if not scale then return end
-
-	button.MouseButton1Down:Connect(function()
-		TweenService:Create(scale, PRESS_DOWN_TWEEN, { Scale = 0.94 }):Play()
-	end)
-
-	local function release()
-		TweenService:Create(scale, PRESS_UP_TWEEN, { Scale = 1 }):Play()
-	end
-
-	button.MouseButton1Up:Connect(release)
-	button.MouseLeave:Connect(release)
-end
-
-wireButtonPress(closeBtn)
+UIAnimation.ButtonPress(openButton)
+UIAnimation.ButtonPress(closeBtn)
 
 --============================ LIVE REFRESH ============================--
 inventory.ChildAdded:Connect(refreshTrail)

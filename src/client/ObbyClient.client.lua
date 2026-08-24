@@ -21,6 +21,7 @@ local ButtonClick = SoundService:WaitForChild("ButtonClick")
 
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local ObbyConfig = require(Shared:WaitForChild("ObbyConfig"))
+local UIAnimation = require(Shared:WaitForChild("UIAnimation"))
 local rowTemplate = Shared:WaitForChild("Templates"):WaitForChild("LeaderboardRow")
 
 --============================ GUI ============================--
@@ -39,6 +40,9 @@ local timeLbl = panel:WaitForChild("TimeLbl")
 local bestLbl = panel:WaitForChild("BestLbl")
 local rewardLbl = panel:WaitForChild("RewardLbl")
 local list = panel:WaitForChild("List")
+
+dim.Visible = false
+panel.Visible = false
 
 --============================ TIME FORMATTING ============================--
 -- ms -> "00:24.35"
@@ -112,19 +116,21 @@ local function showResult(obbyId, timeMs, reward, isNewBest, bestMs)
 	bestBanner.Visible = isNewBest
 
 	renderLeaderboard({}) -- clear stale rows while the fresh list loads
-	dim.Visible = true
-	panel.Visible = true
+	UIAnimation.Open(panel, dim)
 
 	LeaderboardEvent:FireServer(obbyId)
 end
 
 local function hideResult()
-	dim.Visible = false
-	panel.Visible = false
+	if UIAnimation.Close(panel, dim) then
+		ButtonClick:Play()
+	end
 end
 
-closeBtn.MouseButton1Click:Connect(hideResult, 	ButtonClick:Play())
-dim.MouseButton1Click:Connect(hideResult, ButtonClick:Play())
+closeBtn.MouseButton1Click:Connect(hideResult)
+dim.MouseButton1Click:Connect(hideResult)
+
+UIAnimation.ButtonPress(closeBtn)
 
 --============================ SERVER EVENTS ============================--
 TimerEvent.OnClientEvent:Connect(function(action, obbyId, ...)
