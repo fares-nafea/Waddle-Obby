@@ -62,43 +62,76 @@ Config.RewardDefaults = {
 --// # finish, so watch the server log during playtests.                        #
 --// ############################################################################
 Config.Overrides = {
-	["1"] = {
-		RecordTime = .1,  -- placeholder: was RewardConfig FastTime = 60
-		FastTime = .1, SlowTime = 120,
-		Fast   = { Min = 200, Max = 700 },
-		Normal = { Min = 100, Max = 400 },
-		Slow   = { Min = 50,  Max = 200 },
+
+    ["1"] = {
+		RecordTime = 5,
+		FastTime = 1,
+		SlowTime = 60,
+	
+		Fast   = { Min = 300, Max = 500 },
+		Normal = { Min = 100, Max = 300 },
+		Slow   = { Min = 50,  Max = 100 },
+	
 		UnlocksNext = "2",
 	},
+	
 	["2"] = {
-		RecordTime = 40,  -- placeholder: uncalibrated
-		FastTime = .1, SlowTime = 120,
-		Fast   = { Min = 200, Max = 700 },
-		Normal = { Min = 100, Max = 400 },
-		Slow   = { Min = 50,  Max = 200 },
+		RecordTime = 5,
+		FastTime = 1,
+		SlowTime = 60,
+	
+		Fast   = { Min = 500, Max = 800 },
+		Normal = { Min = 200, Max = 500 },
+		Slow   = { Min = 100, Max = 200 },
+	
 		UnlocksNext = "3",
 	},
+	
 	["3"] = {
-		RecordTime = 40, -- placeholder: was RewardConfig FastTime = 180
-		FastTime = .1, SlowTime = 120,
-		Fast   = { Min = 500, Max = 1500 },
-		Normal = { Min = 300, Max = 900 },
-		Slow   = { Min = 100, Max = 500 },
+		RecordTime = 5,
+		FastTime = 1,
+		SlowTime = 60,
+	
+		Fast   = { Min = 800, Max = 1200 },
+		Normal = { Min = 400, Max = 800 },
+		Slow   = { Min = 150, Max = 400 },
+	
 		UnlocksNext = "4",
 	},
+	
 	["4"] = {
-		RecordTime = 40,  -- placeholder: uncalibrated
-		FastTime = .1, SlowTime = 120,
-		Fast   = { Min = 500, Max = 1500 },
-		Normal = { Min = 300, Max = 900 },
-		Slow   = { Min = 100, Max = 500 },
+		RecordTime = 5,
+		FastTime = 1,
+		SlowTime = 60,
+	
+		Fast   = { Min = 1200, Max = 1800 },
+		Normal = { Min = 600, Max = 1200 },
+		Slow   = { Min = 200, Max = 600 },
+	
 		UnlocksNext = "5",
 	},
+	
 	["5"] = {
-		RecordTime = 40,  -- placeholder: uncalibrated; no reward tier -> Config.RewardDefaults
+		RecordTime = 5,
+		FastTime = 1,
+		SlowTime = 60,
+	
+		Fast   = { Min = 1800, Max = 2500 },
+		Normal = { Min = 900, Max = 1800 },
+		Slow   = { Min = 300, Max = 900 },
+	
 		UnlocksNext = "6",
 	},
-	["6"] = { RecordTime = 40 },  -- placeholder: uncalibrated; no reward tier -> Config.RewardDefaults; last Obby, nothing to unlock
+	
+	["6"] = {
+		RecordTime = 20,
+		FastTime = 1,
+		SlowTime = 60,
+	
+		Fast   = { Min = 2500, Max = 3500 },
+		Normal = { Min = 1200, Max = 2500 },
+		Slow   = { Min = 400, Max = 1200 },
+	},
 }
 
 -- the canonical ObbyId for a stage folder: the first run of digits in its
