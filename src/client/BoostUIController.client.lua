@@ -26,7 +26,6 @@ local Shared = ReplicatedStorage:WaitForChild("Shared")
 local BoostRemote = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("BoostRemote")
 local BoostConfig = require(Shared:WaitForChild("BoostConfig"))
 local UIAnimation = require(Shared:WaitForChild("UIAnimation"))
-local UIPanelController = require(Shared:WaitForChild("UIPanelController"))
 
 local activateSound = SoundService:FindFirstChild("BoostActivateSound")
 local ButtonClick = SoundService:WaitForChild("ButtonClick")
@@ -51,7 +50,6 @@ local list = panel:WaitForChild("List")
 badge.Visible = false
 dim.Visible = false
 panel.Visible = false
-UIPanelController.Register("Boost2X", panel, dim)
 
 --============================ FORMAT ============================--
 local function formatTime(seconds)
@@ -129,13 +127,13 @@ refresh()
 
 --============================ PANEL OPEN / CLOSE ============================--
 local function openPanel()
-	if UIPanelController.Open("Boost2X") then
+	if UIAnimation.Open(panel, dim) then
 		ButtonClick:Play()
 	end
 end
 
 local function closePanel()
-	if UIPanelController.Close("Boost2X") then
+	if UIAnimation.Close(panel, dim) then
 		ButtonClick:Play()
 	end
 end

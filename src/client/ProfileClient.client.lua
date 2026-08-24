@@ -24,7 +24,6 @@ local playerGui = player:WaitForChild("PlayerGui")
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local ObbyConfig = require(Shared:WaitForChild("ObbyConfig"))
 local UIAnimation = require(Shared:WaitForChild("UIAnimation"))
-local UIPanelController = require(Shared:WaitForChild("UIPanelController"))
 
 local OBBY_COUNT = 6
 
@@ -58,7 +57,6 @@ local ownedCountLbl = trailCard:WaitForChild("OwnedCountLbl")
 
 dim.Visible = false
 profileFrame.Visible = false
-UIPanelController.Register("Profile", profileFrame, dim)
 
 -- one row per Obby, found under content by "ObbyRow" .. ObbyId (built in Studio,
 -- same lookup-by-name approach ShopClient uses for TrailConfig cards)
@@ -164,13 +162,13 @@ end
 --============================ OPEN / CLOSE ============================--
 local function openProfile()
 	refreshAll()
-	if UIPanelController.Open("Profile") then
+	if UIAnimation.Open(profileFrame, dim) then
 		ButtonClick:Play()
 	end
 end
 
 local function closeProfile()
-	if UIPanelController.Close("Profile") then
+	if UIAnimation.Close(profileFrame, dim) then
 		ButtonClick:Play()
 	end
 end

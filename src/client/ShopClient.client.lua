@@ -24,7 +24,6 @@ local EquipEvent = ReplicatedStorage:WaitForChild("Events"):WaitForChild("EquipE
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local TrailConfig = require(Shared:WaitForChild("TrailConfig"))
 local UIAnimation = require(Shared:WaitForChild("UIAnimation"))
-local UIPanelController = require(Shared:WaitForChild("UIPanelController"))
 
 local ButtonClick = SoundService:WaitForChild("ButtonClick")
 
@@ -49,7 +48,6 @@ local grid = shopFrame:WaitForChild("Grid")
 
 dim.Visible = false
 shopFrame.Visible = false
-UIPanelController.Register("Shop", shopFrame, dim)
 
 -- one card per TrailConfig entry, found under Grid by its configured CardName -
 -- add a new trail to TrailConfig plus its card in Studio and it shows up here automatically
@@ -131,13 +129,13 @@ end)
 local function openShop()
 	refreshAll()
 	refreshCoins()
-	if UIPanelController.Open("Shop") then
+	if UIAnimation.Open(shopFrame, dim) then
 		ButtonClick:Play()
 	end
 end
 
 local function closeShop()
-	if UIPanelController.Close("Shop") then
+	if UIAnimation.Close(shopFrame, dim) then
 		ButtonClick:Play()
 	end
 end
