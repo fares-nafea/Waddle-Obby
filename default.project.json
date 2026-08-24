@@ -1129,6 +1129,9 @@
       }
     },
     "SoundService": {
+      "Victory": {
+        "$className": "Sound"
+      },
       "DailyRewardClaimSound": {
         "$className": "Sound"
       },

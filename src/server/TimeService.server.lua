@@ -8,7 +8,9 @@
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local ServerScriptService = game:GetService("ServerScriptService")
+local SoundService = game:GetService("SoundService")
 
+local Victory = SoundService:WaitForChild("Victory")
 local TimerEvent = ReplicatedStorage:WaitForChild("Events"):WaitForChild("TimerEvent")
 local Config = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("ObbyConfig"))
 local Leaderboard = require(ServerScriptService:WaitForChild("LeaderboardService"))
@@ -163,6 +165,7 @@ local function setupStage(stage)
 		end
 
 		local timeMs = math.floor(elapsed * 1000)
+		Victory:Play()
 		print(player.Name .. " finished " .. obbyId .. " in " .. formatSeconds(elapsed))
 
 		-- reward scales with how fast this run was relative to the Obby's TargetTime -
