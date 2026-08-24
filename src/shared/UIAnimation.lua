@@ -183,6 +183,35 @@ function UIAnimation.Open(frame, dim)
 	return true
 end
 
+-- Instant hide: cancel in-flight open/close tweens and set Visible = false.
+-- Used by UIPanelController when switching main panels so the outgoing
+-- panel does not keep animating over the incoming one.
+function UIAnimation.Hide(frame, dim)
+	if not isAlive(frame) then
+		return false
+	end
+
+	local rec = getRecord(frame)
+	rec.gen += 1
+	rec.closing = false
+	cancel(frame)
+	dim = dim or rec.dim
+	if dim then
+		rec.dim = dim
+	end
+
+	frame.Visible = false
+	local scale = frame:FindFirstChild("UIAnimationScale") or frame:FindFirstChildOfClass("UIScale")
+	if scale then
+		scale.Scale = 1
+	end
+	if dim and isAlive(dim) then
+		dim.Visible = false
+	end
+
+	return true
+end
+
 function UIAnimation.Close(frame, dim)
 	if not isAlive(frame) then
 		return false

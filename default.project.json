@@ -93,6 +93,9 @@
         "UIAnimation": {
           "$path": "src/shared/UIAnimation.lua"
         },
+        "UIPanelController": {
+          "$path": "src/shared/UIPanelController.lua"
+        },
         "Templates": {
           "$className": "Folder",
           "CoinToast": {

@@ -27,6 +27,7 @@ local DailyRewardRemote = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local DailyRewardConfig = require(Shared:WaitForChild("DailyRewardConfig"))
 local UIAnimation = require(Shared:WaitForChild("UIAnimation"))
+local UIPanelController = require(Shared:WaitForChild("UIPanelController"))
 local coinToastTemplate = Shared:WaitForChild("Templates"):WaitForChild("CoinToast")
 
 local DAY_COUNT = DailyRewardConfig.MaxDay
@@ -70,6 +71,7 @@ local ButtonClick = SoundService:WaitForChild("ButtonClick")
 
 dim.Visible = false
 panel.Visible = false
+UIPanelController.Register("DailyReward", panel, dim)
 
 -- one card per configured day, found under CardsRow by "DayCard" .. day
 local dayCards = {}
@@ -214,13 +216,13 @@ dailyStreak.Changed:Connect(refreshAll)
 --============================ OPEN / CLOSE ============================--
 local function openPanel()
 	refreshAll()
-	if UIAnimation.Open(panel, dim) then
+	if UIPanelController.Open("DailyReward") then
 		ButtonClick:Play()
 	end
 end
 
 local function closePanel()
-	if UIAnimation.Close(panel, dim) then
+	if UIPanelController.Close("DailyReward") then
 		ButtonClick:Play()
 	end
 end
