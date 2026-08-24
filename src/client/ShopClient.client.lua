@@ -26,6 +26,7 @@ local TrailConfig = require(Shared:WaitForChild("TrailConfig"))
 local UIAnimation = require(Shared:WaitForChild("UIAnimation"))
 
 local ButtonClick = SoundService:WaitForChild("ButtonClick")
+local Buy = SoundService:WaitForChild("Buy")
 
 local inventory = player:WaitForChild("Inventory")
 local equippedTrail = player:WaitForChild("EquippedTrail", 10)
@@ -172,6 +173,7 @@ for trailName, card in pairs(cards) do
 	-- EquipService toggles it off if you click the one you're already wearing,
 	-- and guarantees only one trail is ever equipped at a time
 	equipButton.MouseButton1Click:Connect(function()
+		ButtonClick:Play()
 		EquipEvent:FireServer(trailName)
 	end)
 end
@@ -186,6 +188,7 @@ end
 --============================ SERVER FEEDBACK ============================--
 ShopRemote.OnClientEvent:Connect(function(action, trailName, ...)
 	if action == "Bought" then
+		Buy:Play()
 		refreshAll()
 	end
 end)
