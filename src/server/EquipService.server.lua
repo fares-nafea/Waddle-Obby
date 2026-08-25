@@ -23,6 +23,13 @@ local function isValidTrail(trailName)
 	return TrailConfig.get(trailName) ~= nil
 end
 
+-- TrailConfig.Name is the shop/inventory id (e.g. "Aurora"); the Studio
+-- template under ReplicatedStorage.Trails is named "Aurora Trail".
+local function getTrailTemplate(trailName)
+	return Trails:FindFirstChild(trailName)
+		or Trails:FindFirstChild(trailName .. " Trail")
+end
+
 local function getRoot(character)
 	return character:FindFirstChild("HumanoidRootPart")
 		or character:WaitForChild("HumanoidRootPart", 5)
@@ -52,8 +59,11 @@ local function applyTrail(character, trailName)
 
 	if not isValidTrail(trailName) then return end
 
-	local template = Trails:FindFirstChild(trailName)
-	if not template then return end
+	local template = getTrailTemplate(trailName)
+	if not template then
+		warn("[EquipService] no template in ReplicatedStorage.Trails for " .. trailName)
+		return
+	end
 
 	local clone = template:Clone()
 	local a0 = clone:WaitForChild("Attachment0")

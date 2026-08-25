@@ -908,85 +908,61 @@
       },
       "Trails": {
         "$className": "Folder",
-        "Frost Trail": {
+        "Celestial Trail": {
           "$className": "Folder",
           "Attachment0": {
-            "$className": "Attachment",
-            "$properties": { "Position": [0, 1, 0] }
+            "$className": "Attachment"
           },
           "Attachment1": {
-            "$className": "Attachment",
-            "$properties": { "Position": [0, -1.5, 0] }
+            "$className": "Attachment"
           },
           "Trail": {
             "$className": "Trail"
           }
         },
-        "Snow Trail": {
+        "Sunset Trail": {
           "$className": "Folder",
           "Attachment0": {
-            "$className": "Attachment",
-            "$properties": { "Position": [0, 1, 0] }
+            "$className": "Attachment"
           },
           "Attachment1": {
-            "$className": "Attachment",
-            "$properties": { "Position": [0, -1.5, 0] }
+            "$className": "Attachment"
           },
           "Trail": {
             "$className": "Trail"
           }
         },
-        "Aqua Trail": {
+        "Ocean Trail": {
           "$className": "Folder",
           "Attachment0": {
-            "$className": "Attachment",
-            "$properties": { "Position": [0, 1, 0] }
+            "$className": "Attachment"
           },
           "Attachment1": {
-            "$className": "Attachment",
-            "$properties": { "Position": [0, -1.5, 0] }
+            "$className": "Attachment"
           },
           "Trail": {
             "$className": "Trail"
           }
         },
-        "Rainbow Trail": {
+        "Forest Trail": {
           "$className": "Folder",
           "Attachment0": {
-            "$className": "Attachment",
-            "$properties": { "Position": [0, 1, 0] }
+            "$className": "Attachment"
           },
           "Attachment1": {
-            "$className": "Attachment",
-            "$properties": { "Position": [0, -1.5, 0] }
+            "$className": "Attachment"
           },
           "Trail": {
             "$className": "Trail"
           }
         },
-        "Aurora Trail": {
+        "Royal Trail": {
           "$className": "Folder",
           "Attachment0": {
-            "$className": "Attachment",
-            "$properties": { "Position": [0, 1, 0] }
+            "$className": "Attachment"
           },
           "Attachment1": {
-            "$className": "Attachment",
-            "$properties": { "Position": [0, -1.5, 0] }
-          },
-          "Trail": {
-            "$className": "Trail"
-          }
-        },
-        "Blue Trail": {
-          "$className": "Folder",
-          "Attachment0": {
-            "$className": "Attachment",
-            "$properties": { "Position": [0, 1, 0] }
-          },
-          "Attachment1": {
-            "$className": "Attachment",
-            "$properties": { "Position": [0, -1.5, 0] }
+            "$className": "Attachment"
           },
           "Trail": {
             "$className": "Trail"
@@ -995,26 +971,70 @@
         "Fire Trail": {
           "$className": "Folder",
           "Attachment0": {
-            "$className": "Attachment",
-            "$properties": { "Position": [0, 1, 0] }
+            "$className": "Attachment"
           },
           "Attachment1": {
-            "$className": "Attachment",
-            "$properties": { "Position": [0, -1.5, 0] }
+            "$className": "Attachment"
           },
           "Trail": {
             "$className": "Trail"
           }
         },
-        "Lightning Trail": {
+        "Toxic Trail": {
           "$className": "Folder",
           "Attachment0": {
-            "$className": "Attachment",
-            "$properties": { "Position": [0, 1, 0] }
+            "$className": "Attachment"
           },
           "Attachment1": {
-            "$className": "Attachment",
-            "$properties": { "Position": [0, -1.5, 0] }
+            "$className": "Attachment"
+          },
+          "Trail": {
+            "$className": "Trail"
+          }
+        },
+        "Aurora Trail": {
+          "$className": "Folder",
+          "Attachment0": {
+            "$className": "Attachment"
+          },
+          "Attachment1": {
+            "$className": "Attachment"
+          },
+          "Trail": {
+            "$className": "Trail"
+          }
+        },
+        "Candy Trail": {
+          "$className": "Folder",
+          "Attachment0": {
+            "$className": "Attachment"
+          },
+          "Attachment1": {
+            "$className": "Attachment"
+          },
+          "Trail": {
+            "$className": "Trail"
+          }
+        },
+        "Cyber Trail": {
+          "$className": "Folder",
+          "Attachment0": {
+            "$className": "Attachment"
+          },
+          "Attachment1": {
+            "$className": "Attachment"
+          },
+          "Trail": {
+            "$className": "Trail"
+          }
+        },
+        "Lava Trail": {
+          "$className": "Folder",
+          "Attachment0": {
+            "$className": "Attachment"
+          },
+          "Attachment1": {
+            "$className": "Attachment"
           },
           "Trail": {
             "$className": "Trail"
@@ -1023,26 +1043,118 @@
         "Galaxy Trail": {
           "$className": "Folder",
           "Attachment0": {
-            "$className": "Attachment",
-            "$properties": { "Position": [0, 1, 0] }
+            "$className": "Attachment"
           },
           "Attachment1": {
-            "$className": "Attachment",
-            "$properties": { "Position": [0, -1.5, 0] }
+            "$className": "Attachment"
           },
           "Trail": {
             "$className": "Trail"
           }
         },
-        "Neon Trail": {
+        "Ice Trail": {
           "$className": "Folder",
           "Attachment0": {
-            "$className": "Attachment",
-            "$properties": { "Position": [0, 1, 0] }
+            "$className": "Attachment"
           },
           "Attachment1": {
-            "$className": "Attachment",
-            "$properties": { "Position": [0, -1.5, 0] }
+            "$className": "Attachment"
+          },
+          "Trail": {
+            "$className": "Trail"
+          }
+        },
+        "Purple Flame Trail": {
+          "$className": "Folder",
+          "Attachment0": {
+            "$className": "Attachment"
+          },
+          "Attachment1": {
+            "$className": "Attachment"
+          },
+          "Trail": {
+            "$className": "Trail"
+          }
+        },
+        "Electric Trail": {
+          "$className": "Folder",
+          "Attachment0": {
+            "$className": "Attachment"
+          },
+          "Attachment1": {
+            "$className": "Attachment"
+          },
+          "Trail": {
+            "$className": "Trail"
+          }
+        },
+        "Dragon Trail": {
+          "$className": "Folder",
+          "Attachment0": {
+            "$className": "Attachment"
+          },
+          "Attachment1": {
+            "$className": "Attachment"
+          },
+          "Trail": {
+            "$className": "Trail"
+          }
+        },
+        "Rainbow Trail": {
+          "$className": "Folder",
+          "Attachment0": {
+            "$className": "Attachment"
+          },
+          "Attachment1": {
+            "$className": "Attachment"
+          },
+          "Trail": {
+            "$className": "Trail"
+          }
+        },
+        "Cosmic Trail": {
+          "$className": "Folder",
+          "Attachment0": {
+            "$className": "Attachment"
+          },
+          "Attachment1": {
+            "$className": "Attachment"
+          },
+          "Trail": {
+            "$className": "Trail"
+          }
+        },
+        "Golden Trail": {
+          "$className": "Folder",
+          "Attachment0": {
+            "$className": "Attachment"
+          },
+          "Attachment1": {
+            "$className": "Attachment"
+          },
+          "Trail": {
+            "$className": "Trail"
+          }
+        },
+        "Diamond Trail": {
+          "$className": "Folder",
+          "Attachment0": {
+            "$className": "Attachment"
+          },
+          "Attachment1": {
+            "$className": "Attachment"
+          },
+          "Trail": {
+            "$className": "Trail"
+          }
+        },
+        "Waddle Legend Trail": {
+          "$className": "Folder",
+          "Attachment0": {
+            "$className": "Attachment"
+          },
+          "Attachment1": {
+            "$className": "Attachment"
           },
           "Trail": {
             "$className": "Trail"
@@ -1169,13 +1281,497 @@
           },
           "Grid": {
             "$className": "ScrollingFrame",
-            "BlueTrailCard": {
+            "SunsetTrailCard": {
               "$className": "Frame",
               "MainBG": {
                 "$className": "ImageLabel"
               },
               "Preview": {
                 "$className": "Frame"
+              },
+              "NameLabel": {
+                "$className": "TextLabel"
+              },
+              "UnequipButton": {
+                "$className": "ImageButton"
+              },
+              "PriceLabel": {
+                "$className": "TextLabel"
+              },
+              "EquipButton": {
+                "$className": "ImageButton"
+              }, 
+              "BuyButton": {
+                "$className": "ImageButton"
+              }
+            },
+            "OceanTrailCard": {
+              "$className": "Frame",
+              "MainBG": {
+                "$className": "ImageLabel"
+              },
+              "UnequipButton": {
+                "$className": "ImageButton"
+              },
+              "Preview": {
+                "$className": "Frame"
+              },
+              "NameLabel": {
+                "$className": "TextLabel"
+              },
+              "PriceLabel": {
+                "$className": "TextLabel"
+              },
+              "EquipButton": {
+                "$className": "ImageButton"
+              }, 
+              "BuyButton": {
+                "$className": "ImageButton"
+              }
+            },
+            "RoyalTrailCard": {
+              "$className": "Frame",
+              "MainBG": {
+                "$className": "ImageLabel"
+              },
+              "UnequipButton": {
+                "$className": "ImageButton"
+              },
+              "Preview": {
+                "$className": "Frame"
+              },
+              "NameLabel": {
+                "$className": "TextLabel"
+              },
+              "PriceLabel": {
+                "$className": "TextLabel"
+              },
+              "EquipButton": {
+                "$className": "ImageButton"
+              }, 
+              "BuyButton": {
+                "$className": "ImageButton"
+              }
+            },
+            "FireTrailCard": {
+              "$className": "Frame",
+              "MainBG": {
+                "$className": "ImageLabel"
+              },
+              "UnequipButton": {
+                "$className": "ImageButton"
+              },
+              "Preview": {
+                "$className": "Frame"
+              },
+              "NameLabel": {
+                "$className": "TextLabel"
+              },
+              "PriceLabel": {
+                "$className": "TextLabel"
+              },
+              "EquipButton": {
+                "$className": "ImageButton"
+              }, 
+              "BuyButton": {
+                "$className": "ImageButton"
+              }
+            },
+            
+            "ToxicTrailCard": {
+              "$className": "Frame",
+              "MainBG": {
+                "$className": "ImageLabel"
+              },
+              "Preview": {
+                "$className": "Frame"
+              },
+              "UnequipButton": {
+                "$className": "ImageButton"
+              },
+              "NameLabel": {
+                "$className": "TextLabel"
+              },
+              "PriceLabel": {
+                "$className": "TextLabel"
+              },
+              "EquipButton": {
+                "$className": "ImageButton"
+              }, 
+              "BuyButton": {
+                "$className": "ImageButton"
+              }
+            },
+            "AuroraTrailCard": {
+              "$className": "Frame",
+              "MainBG": {
+                "$className": "ImageLabel"
+              },
+              "Preview": {
+                "$className": "Frame"
+              },
+              "UnequipButton": {
+                "$className": "ImageButton"
+              },
+              "NameLabel": {
+                "$className": "TextLabel"
+              },
+              "PriceLabel": {
+                "$className": "TextLabel"
+              },
+              "EquipButton": {
+                "$className": "ImageButton"
+              }, 
+              "BuyButton": {
+                "$className": "ImageButton"
+              }
+            },
+            "CandyTrailCard": {
+              "$className": "Frame",
+              "MainBG": {
+                "$className": "ImageLabel"
+              },
+              "Preview": {
+                "$className": "Frame"
+              },
+              "UnequipButton": {
+                "$className": "ImageButton"
+              },
+              "NameLabel": {
+                "$className": "TextLabel"
+              },
+              "PriceLabel": {
+                "$className": "TextLabel"
+              },
+              "EquipButton": {
+                "$className": "ImageButton"
+              }, 
+              "BuyButton": {
+                "$className": "ImageButton"
+              }
+            },
+            "CyberTrailCard": {
+              "$className": "Frame",
+              "MainBG": {
+                "$className": "ImageLabel"
+              },
+              "Preview": {
+                "$className": "Frame"
+              },
+              "NameLabel": {
+                "$className": "TextLabel"
+              },
+              "UnequipButton": {
+                "$className": "ImageButton"
+              },
+              "PriceLabel": {
+                "$className": "TextLabel"
+              },
+              "EquipButton": {
+                "$className": "ImageButton"
+              }, 
+              "BuyButton": {
+                "$className": "ImageButton"
+              }
+            },
+            "LavaTrailCard": {
+              "$className": "Frame",
+              "MainBG": {
+                "$className": "ImageLabel"
+              },
+              "Preview": {
+                "$className": "Frame"
+              },
+              "NameLabel": {
+                "$className": "TextLabel"
+              },
+              "PriceLabel": {
+                "$className": "TextLabel"
+              },
+              "UnequipButton": {
+                "$className": "ImageButton"
+              },
+              "EquipButton": {
+                "$className": "ImageButton"
+              }, 
+              "BuyButton": {
+                "$className": "ImageButton"
+              }
+            },
+            "GalaxyTrailCard": {
+              "$className": "Frame",
+              "MainBG": {
+                "$className": "ImageLabel"
+              },
+              "Preview": {
+                "$className": "Frame"
+              },
+              "NameLabel": {
+                "$className": "TextLabel"
+              },
+              "PriceLabel": {
+                "$className": "TextLabel"
+              },
+              "UnequipButton": {
+                "$className": "ImageButton"
+              },
+              "EquipButton": {
+                "$className": "ImageButton"
+              }, 
+              "BuyButton": {
+                "$className": "ImageButton"
+              }
+            },
+            "IceTrailCard": {
+              "$className": "Frame",
+              "MainBG": {
+                "$className": "ImageLabel"
+              },
+              "Preview": {
+                "$className": "Frame"
+              },
+              "UnequipButton": {
+                "$className": "ImageButton"
+              },
+              "NameLabel": {
+                "$className": "TextLabel"
+              },
+              "PriceLabel": {
+                "$className": "TextLabel"
+              },
+              "EquipButton": {
+                "$className": "ImageButton"
+              }, 
+              "BuyButton": {
+                "$className": "ImageButton"
+              }
+            },
+            "PurpleFlameTrailCard": {
+              "$className": "Frame",
+              "MainBG": {
+                "$className": "ImageLabel"
+              },
+              "Preview": {
+                "$className": "Frame"
+              },
+              "UnequipButton": {
+                "$className": "ImageButton"
+              },
+              "NameLabel": {
+                "$className": "TextLabel"
+              },
+              "PriceLabel": {
+                "$className": "TextLabel"
+              },
+              "EquipButton": {
+                "$className": "ImageButton"
+              }, 
+              "BuyButton": {
+                "$className": "ImageButton"
+              }
+            },
+            "ElectricTrailCard": {
+              "$className": "Frame",
+              "MainBG": {
+                "$className": "ImageLabel"
+              },
+              "Preview": {
+                "$className": "Frame"
+              },
+              "NameLabel": {
+                "$className": "TextLabel"
+              },
+              "PriceLabel": {
+                "$className": "TextLabel"
+              },
+              "UnequipButton": {
+                "$className": "ImageButton"
+              },
+              "EquipButton": {
+                "$className": "ImageButton"
+              }, 
+              "BuyButton": {
+                "$className": "ImageButton"
+              }
+            },
+            "DragonTrailCard": {
+              "$className": "Frame",
+              "MainBG": {
+                "$className": "ImageLabel"
+              },
+              "Preview": {
+                "$className": "Frame"
+              },
+              "NameLabel": {
+                "$className": "TextLabel"
+              },
+              "PriceLabel": {
+                "$className": "TextLabel"
+              },
+              "UnequipButton": {
+                "$className": "ImageButton"
+              },
+              "EquipButton": {
+                "$className": "ImageButton"
+              }, 
+              "BuyButton": {
+                "$className": "ImageButton"
+              }
+            },
+            "RainbowTrailCard": {
+              "$className": "Frame",
+              "MainBG": {
+                "$className": "ImageLabel"
+              },
+              "Preview": {
+                "$className": "Frame"
+              },
+              "NameLabel": {
+                "$className": "TextLabel"
+              },
+              "PriceLabel": {
+                "$className": "TextLabel"
+              },
+              "UnequipButton": {
+                "$className": "ImageButton"
+              },
+              "EquipButton": {
+                "$className": "ImageButton"
+              }, 
+              "BuyButton": {
+                "$className": "ImageButton"
+              }
+            },
+            "CosmicTrailCard": {
+              "$className": "Frame",
+              "MainBG": {
+                "$className": "ImageLabel"
+              },
+              "Preview": {
+                "$className": "Frame"
+              },
+              "NameLabel": {
+                "$className": "TextLabel"
+              },
+              "PriceLabel": {
+                "$className": "TextLabel"
+              },
+              "EquipButton": {
+                "$className": "ImageButton"
+              }, 
+              "UnequipButton": {
+                "$className": "ImageButton"
+              },
+              "BuyButton": {
+                "$className": "ImageButton"
+              }
+            },
+            "GoldenTrailCard": {
+              "$className": "Frame",
+              "MainBG": {
+                "$className": "ImageLabel"
+              },
+              "Preview": {
+                "$className": "Frame"
+              },
+              "UnequipButton": {
+                "$className": "ImageButton"
+              },
+              "NameLabel": {
+                "$className": "TextLabel"
+              },
+              "PriceLabel": {
+                "$className": "TextLabel"
+              },
+              "EquipButton": {
+                "$className": "ImageButton"
+              }, 
+              "BuyButton": {
+                "$className": "ImageButton"
+              }
+            },
+            "DiamondTrailCard": {
+              "$className": "Frame",
+              "MainBG": {
+                "$className": "ImageLabel"
+              },
+              "Preview": {
+                "$className": "Frame"
+              },
+              "UnequipButton": {
+                "$className": "ImageButton"
+              },
+              "NameLabel": {
+                "$className": "TextLabel"
+              },
+              "PriceLabel": {
+                "$className": "TextLabel"
+              },
+              "EquipButton": {
+                "$className": "ImageButton"
+              }, 
+              "BuyButton": {
+                "$className": "ImageButton"
+              }
+            },
+            "WaddleLegendTrailCard": {
+              "$className": "Frame",
+              "MainBG": {
+                "$className": "ImageLabel"
+              },
+              "Preview": {
+                "$className": "Frame"
+              },
+              "UnequipButton": {
+                "$className": "ImageButton"
+              },
+              "NameLabel": {
+                "$className": "TextLabel"
+              },
+              "PriceLabel": {
+                "$className": "TextLabel"
+              },
+              "EquipButton": {
+                "$className": "ImageButton"
+              }, 
+              "BuyButton": {
+                "$className": "ImageButton"
+              }
+            },
+            "CelestialTrailCard": {
+              "$className": "Frame",
+              "MainBG": {
+                "$className": "ImageLabel"
+              },
+              "Preview": {
+                "$className": "Frame"
+              },
+              "UnequipButton": {
+                "$className": "ImageButton"
+              },
+              "NameLabel": {
+                "$className": "TextLabel"
+              },
+              "PriceLabel": {
+                "$className": "TextLabel"
+              },
+              "EquipButton": {
+                "$className": "ImageButton"
+              }, 
+              "BuyButton": {
+                "$className": "ImageButton"
+              }
+            },
+            "ForestTrailCard": {
+              "$className": "Frame",
+              "MainBG": {
+                "$className": "ImageLabel"
+              },
+              "Preview": {
+                "$className": "Frame"
+              },
+              "UnequipButton": {
+                "$className": "ImageButton"
               },
               "NameLabel": {
                 "$className": "TextLabel"

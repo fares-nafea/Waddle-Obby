@@ -53,13 +53,16 @@ shopFrame.Visible = false
 -- one card per TrailConfig entry, found under Grid by its configured CardName -
 -- add a new trail to TrailConfig plus its card in Studio and it shows up here automatically
 local cards = {}
-for _, item in ipairs(TrailConfig.Items) do
-	local card = grid:WaitForChild(item.CardName, 5)
-	if card then
-		cards[item.Name] = card
-	else
-		warn("[ShopClient] Grid." .. item.CardName .. " not found - can't sell " .. item.Name)
-	end
+
+for index, item in ipairs(TrailConfig.Items) do
+    local card = grid:WaitForChild(item.CardName, 5)
+
+    if card then
+        cards[item.Name] = card
+        card.LayoutOrder = index
+    else
+        warn("[ShopClient] Grid." .. item.CardName .. " not found - can't sell " .. item.Name)
+    end
 end
 
 local function isOwned(trailName)
