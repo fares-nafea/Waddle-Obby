@@ -4,40 +4,6 @@
     "$className": "DataModel",
 
     "Lighting": {
-      "$properties": {
-        "Ambient": [
-          0.7843137383460999,
-          0.6274510025978088,
-          0.8823529481887817
-        ],
-        "Brightness": 2.0,
-        "ColorShift_Top": [
-          0.843137264251709,
-          0.7450980544090271,
-          0.529411792755127
-        ],
-        "EnvironmentDiffuseScale": 0.30000001192092896,
-        "EnvironmentSpecularScale": 0.25,
-        "FogColor": [
-          0.7843137383460999,
-          0.6666666865348816,
-          0.9803921580314636
-        ],
-        "FogEnd": 2500.0,
-        "GeographicLatitude": 40.0,
-        "GlobalShadows": true,
-        "LightingStyle": "Realistic",
-        "OutdoorAmbient": [
-          0.4901960790157318,
-          0.3921568691730499,
-          0.5882353186607361
-        ],
-        "Outlines": false,
-        "PrioritizeLightingQuality": true,
-        "ShadowSoftness": 0.20000000298023224,
-        "Technology": "ShadowMap",
-        "TimeOfDay": "14:30:00"
-      }
     },
     "ReplicatedStorage": {
       "Events": {
@@ -1085,6 +1051,9 @@
       }
     },
     "ServerScriptService": {
+      "DamageWater": {
+        "$path": "src/server/DamageWater.server.lua"
+      },
       "Main": {
         "$path": "src/server/Main.server.lua"
       },
