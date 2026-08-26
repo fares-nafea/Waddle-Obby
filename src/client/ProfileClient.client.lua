@@ -189,7 +189,6 @@ local function closeProfile()
 end
 
 openButton.MouseButton1Click:Connect(function()
-	task.wait(0.1)
 	if profileFrame.Visible then
 		closeProfile()
 	else
@@ -198,11 +197,9 @@ openButton.MouseButton1Click:Connect(function()
 end)
 
 closeBtn.MouseButton1Click:Connect(function()
-    task.wait(0.1)
     closeProfile()
 end)
 dim.MouseButton1Click:Connect(function()
-    task.wait(0.1)
     closeProfile()
 end)
 

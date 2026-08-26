@@ -141,11 +141,9 @@ local function hideResult()
 end
 
 closeBtn.MouseButton1Click:Connect(function()
-    task.wait(0.1)
     hideResult()
 end)
 dim.MouseButton1Click:Connect(function()
-    task.wait(0.1)
     hideResult()
 end)
 

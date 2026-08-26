@@ -161,7 +161,6 @@ local function closeShop()
 end
 
 openButton.MouseButton1Click:Connect(function()
-	task.wait(0.1)
 
 	if shopFrame.Visible then
 		closeShop()
@@ -172,11 +171,9 @@ openButton.MouseButton1Click:Connect(function()
 end)
 
 closeBtn.MouseButton1Click:Connect(function()
-    task.wait(0.1)
     closeShop()
 end)
 dim.MouseButton1Click:Connect(function()
-    task.wait(0.1)
     closeShop()
 end)
 

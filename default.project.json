@@ -65,19 +65,7 @@
         "Templates": {
           "$className": "Folder",
           "CoinToast": {
-            "$className": "TextLabel",
-            "$properties": {
-              "AnchorPoint": [0.5, 0.5],
-              "Size": { "UDim2": [[1, -16], [0, 30]] },
-              "BackgroundTransparency": 1,
-              "Text": "+0",
-              "Font": "GothamBlack",
-              "TextScaled": true,
-              "TextColor3": [1.0, 0.8156863, 0.1568628],
-              "TextStrokeTransparency": 0.5,
-              "TextStrokeColor3": [0, 0, 0],
-              "ZIndex": 5
-            }
+            "$className": "TextLabel"
           },
           "LeaderboardRow": {
             "$className": "Frame",
@@ -96,684 +84,183 @@
           },
           "GlobalLeaderboardRow": {
             "$className": "Frame",
-            "$properties": {
-              "Size": { "UDim2": [[1, 0], [0.084, 0]] },
-              "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902],
-              "BackgroundTransparency": 0.15,
-              "BorderSizePixel": 0,
-              "Visible": true
-            },
-            "UICorner": {
-              "$className": "UICorner",
-              "$properties": { "CornerRadius": { "UDim": [0, 10] } }
-            },
-            "UIStroke": {
-              "$className": "UIStroke",
-              "$properties": {
-                "Thickness": 1,
-                "Color": [0.2156863, 0.2431373, 0.3294118],
-                "Transparency": 0.2
-              }
-            },
-            "UIPadding": {
-              "$className": "UIPadding",
-              "$properties": {
-                "PaddingLeft": { "UDim": [0, 14] },
-                "PaddingRight": { "UDim": [0, 14] }
-              }
-            },
-            "UIScale": {
-              "$className": "UIScale",
-              "$properties": { "Scale": 1 }
-            },
             "RankLbl": {
-              "$className": "TextLabel",
-              "$properties": {
-                "BackgroundTransparency": 1,
-                "Size": { "UDim2": [[0, 70], [1, 0]] },
-                "Position": { "UDim2": [[0, 0], [0, 0]] },
-                "TextXAlignment": "Left",
-                "Font": "GothamBlack",
-                "TextScaled": true,
-                "TextColor3": [1, 1, 1],
-                "Text": ""
-              }
+              "$className": "TextLabel"
             },
             "NameLbl": {
-              "$className": "TextLabel",
-              "$properties": {
-                "BackgroundTransparency": 1,
-                "Size": { "UDim2": [[1, -260], [1, 0]] },
-                "Position": { "UDim2": [[0, 78], [0, 0]] },
-                "TextXAlignment": "Left",
-                "TextTruncate": "AtEnd",
-                "Font": "GothamMedium",
-                "TextScaled": true,
-                "TextColor3": [1, 1, 1],
-                "Text": ""
-              }
+              "$className": "TextLabel"
             },
             "CoinsLbl": {
-              "$className": "TextLabel",
-              "$properties": {
-                "BackgroundTransparency": 1,
-                "Size": { "UDim2": [[0, 170], [1, 0]] },
-                "Position": { "UDim2": [[1, -170], [0, 0]] },
-                "TextXAlignment": "Right",
-                "Font": "GothamBold",
-                "TextScaled": true,
-                "TextColor3": [1.0, 0.8156863, 0.1568628],
-                "Text": ""
-              }
+              "$className": "TextLabel"
+            },
+            "MainBG": {
+              "$className": "ImageLabel"
             }
           },
-          "GlobalLeaderboardBoard": {
+          "GlobalLeaderboard": {
             "$className": "Model",
             "BoardPart": {
               "$className": "Part",
-              "$properties": {
-                "Size": [14, 10, 0.6],
-                "Anchored": true,
-                "CanCollide": false,
-                "CanQuery": false,
-                "CastShadow": false,
-                "Material": "SmoothPlastic",
-                "Color": [0.0980392, 0.1058824, 0.1372549]
-              },
               "WorldLeaderboardGui": {
                 "$className": "SurfaceGui",
-                "$properties": {
-                  "Face": "Front",
-                  "SizingMode": "PixelsPerStud",
-                  "PixelsPerStud": 50,
-                  "LightInfluence": 0,
-                  "AlwaysOnTop": false,
-                  "ClipsDescendants": true
-                },
                 "Board": {
                   "$className": "Frame",
-                  "$properties": {
-                    "Size": { "UDim2": [[1, 0], [1, 0]] },
-                    "BackgroundColor3": [0.0784314, 0.1019608, 0.1647059],
-                    "BackgroundTransparency": 0.05,
-                    "BorderSizePixel": 0
-                  },
-                  "UIStroke": {
-                    "$className": "UIStroke",
-                    "$properties": {
-                      "Color": [1.0, 0.8156863, 0.1568628],
-                      "Thickness": 3,
-                      "Transparency": 0.35
-                    }
-                  },
-                  "UIGradient": {
-                    "$className": "UIGradient",
-                    "$properties": { "Rotation": 90 }
-                  },
                   "Title": {
-                    "$className": "TextLabel",
-                    "$properties": {
-                      "BackgroundTransparency": 1,
-                      "Size": { "UDim2": [[0.92, 0], [0.1, 0]] },
-                      "Position": { "UDim2": [[0.04, 0], [0.03, 0]] },
-                      "Font": "GothamBlack",
-                      "TextScaled": true,
-                      "TextColor3": [1.0, 0.8156863, 0.1568628],
-                      "TextStrokeTransparency": 0.6,
-                      "Text": "GLOBAL COIN LEADERBOARD"
-                    }
+                    "$className": "TextLabel"
                   },
                   "Subtitle": {
-                    "$className": "TextLabel",
-                    "$properties": {
-                      "BackgroundTransparency": 1,
-                      "Size": { "UDim2": [[0.92, 0], [0.06, 0]] },
-                      "Position": { "UDim2": [[0.04, 0], [0.135, 0]] },
-                      "Font": "GothamMedium",
-                      "TextScaled": true,
-                      "TextColor3": [0.6666667, 0.6901961, 0.7607843],
-                      "Text": "🏆 Ranked by Total Coins Earned"
-                    }
+                    "$className": "TextLabel"
                   },
                   "Divider": {
-                    "$className": "Frame",
-                    "$properties": {
-                      "BackgroundColor3": [1.0, 0.8156863, 0.1568628],
-                      "BackgroundTransparency": 0.5,
-                      "BorderSizePixel": 0,
-                      "Size": { "UDim2": [[0.92, 0], [0.006, 0]] },
-                      "Position": { "UDim2": [[0.04, 0], [0.205, 0]] }
-                    }
+                    "$className": "Frame"
                   },
                   "List": {
                     "$className": "Frame",
-                    "$properties": {
-                      "BackgroundTransparency": 1,
-                      "Size": { "UDim2": [[0.92, 0], [0.75, 0]] },
-                      "Position": { "UDim2": [[0.04, 0], [0.235, 0]] },
-                      "ClipsDescendants": true
-                    },
-                    "UIListLayout": {
-                      "$className": "UIListLayout",
-                      "$properties": {
-                        "Padding": { "UDim": [0.006, 0] },
-                        "SortOrder": "LayoutOrder"
-                      }
-                    },
                     "EmptyLbl": {
-                      "$className": "TextLabel",
-                      "$properties": {
-                        "BackgroundTransparency": 1,
-                        "Size": { "UDim2": [[1, 0], [0.1, 0]] },
-                        "LayoutOrder": 0,
-                        "Font": "GothamMedium",
-                        "TextScaled": true,
-                        "TextColor3": [0.4705882, 0.5019608, 0.5803922],
-                        "Text": "No rankings yet - be the first!",
-                        "Visible": false
-                      }
+                      "$className": "TextLabel"
                     }
                   }
                 }
               },
               "GlowAttachment": {
                 "$className": "Attachment",
-                "$properties": {
-                  "Position": [0, 0, -0.35]
-                },
                 "Sparkles": {
-                  "$className": "ParticleEmitter",
-                  "$properties": {
-                    "Texture": "rbxasset://textures/particles/sparkles_main.dds",
-                    "Rate": 6,
-                    "Enabled": true
-                  }
+                  "$className": "ParticleEmitter"
                 }
               },
               "AccentLight": {
-                "$className": "SpotLight",
-                "$properties": {
-                  "Color": [1.0, 0.8862745, 0.6],
-                  "Brightness": 3,
-                  "Range": 20,
-                  "Angle": 90,
-                  "Face": "Front",
-                  "Enabled": true
-                }
+                "$className": "SpotLight"
               }
             },
             "CoinDecoration": {
-              "$className": "Part",
-              "$properties": {
-                "Shape": "Cylinder",
-                "Size": [0.5, 3, 3],
-                "Orientation": [0, 90, 0],
-                "Position": [0, 6.5, 0],
-                "Anchored": true,
-                "CanCollide": false,
-                "CanQuery": false,
-                "CastShadow": false,
-                "Material": "Neon",
-                "Color": [1.0, 0.8156863, 0.1568628]
-              }
+              "$className": "Part"
             }
           },
           "DonationBoard": {
             "$className": "Model",
             "BoardPart": {
               "$className": "Part",
-              "$properties": {
-                "Size": [16, 12, 0.6],
-                "Anchored": true,
-                "CanCollide": true,
-                "CanQuery": true,
-                "CastShadow": false,
-                "Material": "SmoothPlastic",
-                "Color": [0.0980392, 0.1058824, 0.1372549]
-              },
               "DonationBoardGui": {
                 "$className": "SurfaceGui",
-                "$properties": {
-                  "Face": "Front",
-                  "SizingMode": "PixelsPerStud",
-                  "PixelsPerStud": 50,
-                  "LightInfluence": 0,
-                  "AlwaysOnTop": false,
-                  "ClipsDescendants": true
-                },
                 "Board": {
                   "$className": "Frame",
-                  "$properties": {
-                    "Size": { "UDim2": [[1, 0], [1, 0]] },
-                    "BackgroundColor3": [0.0784314, 0.1019608, 0.1647059],
-                    "BackgroundTransparency": 0.05,
-                    "BorderSizePixel": 0
-                  },
-                  "UIStroke": {
-                    "$className": "UIStroke",
-                    "$properties": {
-                      "Color": [1.0, 0.8156863, 0.1568628],
-                      "Thickness": 3,
-                      "Transparency": 0.35
-                    }
-                  },
-                  "UIGradient": {
-                    "$className": "UIGradient",
-                    "$properties": { "Rotation": 90 }
-                  },
                   "Title": {
-                    "$className": "TextLabel",
-                    "$properties": {
-                      "BackgroundTransparency": 1,
-                      "Size": { "UDim2": [[0.92, 0], [0.09, 0]] },
-                      "Position": { "UDim2": [[0.04, 0], [0.025, 0]] },
-                      "Font": "GothamBlack",
-                      "TextScaled": true,
-                      "TextColor3": [1.0, 0.8156863, 0.1568628],
-                      "TextStrokeTransparency": 0.6,
-                      "Text": "💸 SUPPORT WADDLE OBBY 💸"
-                    }
+                    "$className": "TextLabel"
                   },
                   "Subtitle": {
-                    "$className": "TextLabel",
-                    "$properties": {
-                      "BackgroundTransparency": 1,
-                      "Size": { "UDim2": [[0.92, 0], [0.05, 0]] },
-                      "Position": { "UDim2": [[0.04, 0], [0.12, 0]] },
-                      "Font": "GothamMedium",
-                      "TextScaled": true,
-                      "TextColor3": [0.6666667, 0.6901961, 0.7607843],
-                      "Text": "Every donation helps us build more Obbies! 🐧"
-                    }
+                    "$className": "TextLabel"
                   },
                   "Divider": {
-                    "$className": "Frame",
-                    "$properties": {
-                      "BackgroundColor3": [1.0, 0.8156863, 0.1568628],
-                      "BackgroundTransparency": 0.5,
-                      "BorderSizePixel": 0,
-                      "Size": { "UDim2": [[0.92, 0], [0.006, 0]] },
-                      "Position": { "UDim2": [[0.04, 0], [0.185, 0]] }
-                    }
+                    "$className": "Frame"
                   },
                   "Grid": {
                     "$className": "Frame",
-                    "$properties": {
-                      "BackgroundTransparency": 1,
-                      "Size": { "UDim2": [[0.92, 0], [0.77, 0]] },
-                      "Position": { "UDim2": [[0.04, 0], [0.21, 0]] },
-                      "ClipsDescendants": true
-                    },
-                    "UIGridLayout": {
-                      "$className": "UIGridLayout",
-                      "$properties": {
-                        "CellSize": { "UDim2": [[0, 236], [0, 215]] },
-                        "CellPadding": { "UDim2": [[0, 12], [0, 12]] },
-                        "SortOrder": "LayoutOrder"
-                      }
-                    },
                     "SmallSupportCard": {
                       "$className": "Frame",
-                      "$properties": {
-                        "LayoutOrder": 1,
-                        "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
-                      },
-                      "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 14] } } },
-                      "UIStroke": {
-                        "$className": "UIStroke",
-                        "$properties": { "Thickness": 1, "Color": [0.2156863, 0.2431373, 0.3294118], "Transparency": 0.2 }
-                      },
-                      "UIPadding": {
-                        "$className": "UIPadding",
-                        "$properties": {
-                          "PaddingTop": { "UDim": [0, 12] }, "PaddingBottom": { "UDim": [0, 12] },
-                          "PaddingLeft": { "UDim": [0, 12] }, "PaddingRight": { "UDim": [0, 12] }
-                        }
-                      },
-                      "UIScale": { "$className": "UIScale", "$properties": { "Scale": 1 } },
                       "IconLbl": {
-                        "$className": "TextLabel",
-                        "$properties": {
-                          "BackgroundTransparency": 1, "Size": { "UDim2": [[1, 0], [0, 44]] }, "Position": { "UDim2": [[0, 0], [0, 0]] },
-                          "Font": "GothamBold", "TextScaled": true, "TextColor3": [1, 1, 1], "Text": "🐧"
-                        }
+                        "$className": "TextLabel"
                       },
                       "NameLbl": {
-                        "$className": "TextLabel",
-                        "$properties": {
-                          "BackgroundTransparency": 1, "Size": { "UDim2": [[1, 0], [0, 24]] }, "Position": { "UDim2": [[0, 0], [0, 46]] },
-                          "Font": "GothamBlack", "TextScaled": true, "TextColor3": [1, 1, 1], "Text": "Small Support"
-                        }
+                        "$className": "TextLabel"
                       },
                       "PriceLbl": {
-                        "$className": "TextLabel",
-                        "$properties": {
-                          "BackgroundTransparency": 1, "Size": { "UDim2": [[1, 0], [0, 22]] }, "Position": { "UDim2": [[0, 0], [0, 72]] },
-                          "Font": "GothamBold", "TextScaled": true, "TextColor3": [1.0, 0.8156863, 0.1568628], "Text": "10 Robux"
-                        }
+                        "$className": "TextLabel"
                       },
                       "DescLbl": {
-                        "$className": "TextLabel",
-                        "$properties": {
-                          "BackgroundTransparency": 1, "Size": { "UDim2": [[1, 0], [0, 50]] }, "Position": { "UDim2": [[0, 0], [0, 96]] },
-                          "Font": "GothamMedium", "TextScaled": true, "TextWrapped": true, "TextYAlignment": "Top",
-                          "TextColor3": [0.6666667, 0.6901961, 0.7607843], "Text": "Every bit helps keep Waddle Obby running!"
-                        }
+                        "$className": "TextLabel"
                       },
                       "BuyButton": {
-                        "$className": "TextButton",
-                        "$properties": {
-                          "Size": { "UDim2": [[1, 0], [0, 34]] }, "Position": { "UDim2": [[0, 0], [1, -34]] },
-                          "BackgroundColor3": [0.3568627, 0.4862745, 0.9803922],
-                          "Text": "Donate", "Font": "GothamBold", "TextScaled": true, "TextColor3": [1, 1, 1]
-                        },
-                        "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 10] } } },
-                        "UIGradient": { "$className": "UIGradient", "$properties": { "Rotation": 90 } },
-                        "UIScale": { "$className": "UIScale", "$properties": { "Scale": 1 } }
+                        "$className": "TextButton"
                       }
                     },
                     "SupporterCard": {
                       "$className": "Frame",
-                      "$properties": {
-                        "LayoutOrder": 2,
-                        "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
-                      },
-                      "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 14] } } },
-                      "UIStroke": {
-                        "$className": "UIStroke",
-                        "$properties": { "Thickness": 1, "Color": [0.2156863, 0.2431373, 0.3294118], "Transparency": 0.2 }
-                      },
-                      "UIPadding": {
-                        "$className": "UIPadding",
-                        "$properties": {
-                          "PaddingTop": { "UDim": [0, 12] }, "PaddingBottom": { "UDim": [0, 12] },
-                          "PaddingLeft": { "UDim": [0, 12] }, "PaddingRight": { "UDim": [0, 12] }
-                        }
-                      },
-                      "UIScale": { "$className": "UIScale", "$properties": { "Scale": 1 } },
                       "IconLbl": {
-                        "$className": "TextLabel",
-                        "$properties": {
-                          "BackgroundTransparency": 1, "Size": { "UDim2": [[1, 0], [0, 44]] }, "Position": { "UDim2": [[0, 0], [0, 0]] },
-                          "Font": "GothamBold", "TextScaled": true, "TextColor3": [1, 1, 1], "Text": "🐧"
-                        }
+                        "$className": "TextLabel"
                       },
                       "NameLbl": {
-                        "$className": "TextLabel",
-                        "$properties": {
-                          "BackgroundTransparency": 1, "Size": { "UDim2": [[1, 0], [0, 24]] }, "Position": { "UDim2": [[0, 0], [0, 46]] },
-                          "Font": "GothamBlack", "TextScaled": true, "TextColor3": [1, 1, 1], "Text": "Supporter"
-                        }
+                        "$className": "TextLabel"
                       },
                       "PriceLbl": {
-                        "$className": "TextLabel",
-                        "$properties": {
-                          "BackgroundTransparency": 1, "Size": { "UDim2": [[1, 0], [0, 22]] }, "Position": { "UDim2": [[0, 0], [0, 72]] },
-                          "Font": "GothamBold", "TextScaled": true, "TextColor3": [1.0, 0.8156863, 0.1568628], "Text": "20 Robux"
-                        }
+                        "$className": "TextLabel"
                       },
                       "DescLbl": {
-                        "$className": "TextLabel",
-                        "$properties": {
-                          "BackgroundTransparency": 1, "Size": { "UDim2": [[1, 0], [0, 50]] }, "Position": { "UDim2": [[0, 0], [0, 96]] },
-                          "Font": "GothamMedium", "TextScaled": true, "TextWrapped": true, "TextYAlignment": "Top",
-                          "TextColor3": [0.6666667, 0.6901961, 0.7607843], "Text": "Thanks for backing the Waddle crew!"
-                        }
+                        "$className": "TextLabel"
                       },
                       "BuyButton": {
-                        "$className": "TextButton",
-                        "$properties": {
-                          "Size": { "UDim2": [[1, 0], [0, 34]] }, "Position": { "UDim2": [[0, 0], [1, -34]] },
-                          "BackgroundColor3": [0.3568627, 0.4862745, 0.9803922],
-                          "Text": "Donate", "Font": "GothamBold", "TextScaled": true, "TextColor3": [1, 1, 1]
-                        },
-                        "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 10] } } },
-                        "UIGradient": { "$className": "UIGradient", "$properties": { "Rotation": 90 } },
-                        "UIScale": { "$className": "UIScale", "$properties": { "Scale": 1 } }
+                        "$className": "TextButton"
                       }
                     },
                     "BigSupportCard": {
                       "$className": "Frame",
-                      "$properties": {
-                        "LayoutOrder": 3,
-                        "BackgroundColor3": [0.0627451, 0.0784314, 0.1254902]
-                      },
-                      "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 14] } } },
-                      "UIStroke": {
-                        "$className": "UIStroke",
-                        "$properties": { "Thickness": 1, "Color": [0.2156863, 0.2431373, 0.3294118], "Transparency": 0.2 }
-                      },
-                      "UIPadding": {
-                        "$className": "UIPadding",
-                        "$properties": {
-                          "PaddingTop": { "UDim": [0, 12] }, "PaddingBottom": { "UDim": [0, 12] },
-                          "PaddingLeft": { "UDim": [0, 12] }, "PaddingRight": { "UDim": [0, 12] }
-                        }
-                      },
-                      "UIScale": { "$className": "UIScale", "$properties": { "Scale": 1 } },
                       "IconLbl": {
-                        "$className": "TextLabel",
-                        "$properties": {
-                          "BackgroundTransparency": 1, "Size": { "UDim2": [[1, 0], [0, 44]] }, "Position": { "UDim2": [[0, 0], [0, 0]] },
-                          "Font": "GothamBold", "TextScaled": true, "TextColor3": [1, 1, 1], "Text": "💎"
-                        }
+                        "$className": "TextLabel"
                       },
                       "NameLbl": {
-                        "$className": "TextLabel",
-                        "$properties": {
-                          "BackgroundTransparency": 1, "Size": { "UDim2": [[1, 0], [0, 24]] }, "Position": { "UDim2": [[0, 0], [0, 46]] },
-                          "Font": "GothamBlack", "TextScaled": true, "TextColor3": [1, 1, 1], "Text": "Big Support"
-                        }
+                        "$className": "TextLabel"
                       },
                       "PriceLbl": {
-                        "$className": "TextLabel",
-                        "$properties": {
-                          "BackgroundTransparency": 1, "Size": { "UDim2": [[1, 0], [0, 22]] }, "Position": { "UDim2": [[0, 0], [0, 72]] },
-                          "Font": "GothamBold", "TextScaled": true, "TextColor3": [1.0, 0.8156863, 0.1568628], "Text": "50 Robux"
-                        }
+                        "$className": "TextLabel"
                       },
                       "DescLbl": {
-                        "$className": "TextLabel",
-                        "$properties": {
-                          "BackgroundTransparency": 1, "Size": { "UDim2": [[1, 0], [0, 50]] }, "Position": { "UDim2": [[0, 0], [0, 96]] },
-                          "Font": "GothamMedium", "TextScaled": true, "TextWrapped": true, "TextYAlignment": "Top",
-                          "TextColor3": [0.6666667, 0.6901961, 0.7607843], "Text": "A big boost toward future updates!"
-                        }
+                        "$className": "TextLabel"
                       },
                       "BuyButton": {
-                        "$className": "TextButton",
-                        "$properties": {
-                          "Size": { "UDim2": [[1, 0], [0, 34]] }, "Position": { "UDim2": [[0, 0], [1, -34]] },
-                          "BackgroundColor3": [0.3568627, 0.4862745, 0.9803922],
-                          "Text": "Donate", "Font": "GothamBold", "TextScaled": true, "TextColor3": [1, 1, 1]
-                        },
-                        "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 10] } } },
-                        "UIGradient": { "$className": "UIGradient", "$properties": { "Rotation": 90 } },
-                        "UIScale": { "$className": "UIScale", "$properties": { "Scale": 1 } }
+                        "$className": "TextButton"
                       }
                     },
                     "SuperSupporterCard": {
                       "$className": "Frame",
-                      "$properties": {
-                        "LayoutOrder": 4,
-                        "BackgroundColor3": [0.1176471, 0.0941176, 0.0392157]
-                      },
-                      "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 14] } } },
-                      "UIStroke": {
-                        "$className": "UIStroke",
-                        "$properties": { "Thickness": 2, "Color": [1.0, 0.8156863, 0.1568628], "Transparency": 0.15 }
-                      },
-                      "UIPadding": {
-                        "$className": "UIPadding",
-                        "$properties": {
-                          "PaddingTop": { "UDim": [0, 12] }, "PaddingBottom": { "UDim": [0, 12] },
-                          "PaddingLeft": { "UDim": [0, 12] }, "PaddingRight": { "UDim": [0, 12] }
-                        }
-                      },
-                      "UIScale": { "$className": "UIScale", "$properties": { "Scale": 1 } },
                       "IconLbl": {
-                        "$className": "TextLabel",
-                        "$properties": {
-                          "BackgroundTransparency": 1, "Size": { "UDim2": [[1, 0], [0, 44]] }, "Position": { "UDim2": [[0, 0], [0, 0]] },
-                          "Font": "GothamBold", "TextScaled": true, "TextColor3": [1, 1, 1], "Text": "👑"
-                        }
+                        "$className": "TextLabel"
                       },
                       "NameLbl": {
-                        "$className": "TextLabel",
-                        "$properties": {
-                          "BackgroundTransparency": 1, "Size": { "UDim2": [[1, 0], [0, 24]] }, "Position": { "UDim2": [[0, 0], [0, 46]] },
-                          "Font": "GothamBlack", "TextScaled": true, "TextColor3": [1.0, 0.8156863, 0.1568628], "Text": "Super Supporter"
-                        }
+                        "$className": "TextLabel"
                       },
                       "PriceLbl": {
-                        "$className": "TextLabel",
-                        "$properties": {
-                          "BackgroundTransparency": 1, "Size": { "UDim2": [[1, 0], [0, 22]] }, "Position": { "UDim2": [[0, 0], [0, 72]] },
-                          "Font": "GothamBold", "TextScaled": true, "TextColor3": [1.0, 0.8156863, 0.1568628], "Text": "100 Robux"
-                        }
+                        "$className": "TextLabel"
                       },
                       "DescLbl": {
-                        "$className": "TextLabel",
-                        "$properties": {
-                          "BackgroundTransparency": 1, "Size": { "UDim2": [[1, 0], [0, 50]] }, "Position": { "UDim2": [[0, 0], [0, 96]] },
-                          "Font": "GothamMedium", "TextScaled": true, "TextWrapped": true, "TextYAlignment": "Top",
-                          "TextColor3": [0.8039216, 0.7215686, 0.5490196], "Text": "You're officially a Super Supporter!"
-                        }
+                        "$className": "TextLabel"
                       },
                       "BuyButton": {
-                        "$className": "TextButton",
-                        "$properties": {
-                          "Size": { "UDim2": [[1, 0], [0, 34]] }, "Position": { "UDim2": [[0, 0], [1, -34]] },
-                          "BackgroundColor3": [1.0, 0.8156863, 0.1568628],
-                          "Text": "Donate", "Font": "GothamBold", "TextScaled": true, "TextColor3": [0.1176471, 0.0862745, 0.0156863]
-                        },
-                        "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 10] } } },
-                        "UIGradient": { "$className": "UIGradient", "$properties": { "Rotation": 90 } },
-                        "UIScale": { "$className": "UIScale", "$properties": { "Scale": 1 } }
+                        "$className": "TextButton"
                       }
                     },
                     "VIPSupporterCard": {
                       "$className": "Frame",
-                      "$properties": {
-                        "LayoutOrder": 5,
-                        "BackgroundColor3": [0.1176471, 0.0941176, 0.0392157]
-                      },
-                      "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 14] } } },
-                      "UIStroke": {
-                        "$className": "UIStroke",
-                        "$properties": { "Thickness": 2, "Color": [1.0, 0.8156863, 0.1568628], "Transparency": 0.1 }
-                      },
-                      "UIPadding": {
-                        "$className": "UIPadding",
-                        "$properties": {
-                          "PaddingTop": { "UDim": [0, 12] }, "PaddingBottom": { "UDim": [0, 12] },
-                          "PaddingLeft": { "UDim": [0, 12] }, "PaddingRight": { "UDim": [0, 12] }
-                        }
-                      },
-                      "UIScale": { "$className": "UIScale", "$properties": { "Scale": 1 } },
                       "IconLbl": {
-                        "$className": "TextLabel",
-                        "$properties": {
-                          "BackgroundTransparency": 1, "Size": { "UDim2": [[1, 0], [0, 44]] }, "Position": { "UDim2": [[0, 0], [0, 0]] },
-                          "Font": "GothamBold", "TextScaled": true, "TextColor3": [1, 1, 1], "Text": "🌟"
-                        }
+                        "$className": "TextLabel"
                       },
                       "NameLbl": {
-                        "$className": "TextLabel",
-                        "$properties": {
-                          "BackgroundTransparency": 1, "Size": { "UDim2": [[1, 0], [0, 24]] }, "Position": { "UDim2": [[0, 0], [0, 46]] },
-                          "Font": "GothamBlack", "TextScaled": true, "TextColor3": [1.0, 0.8156863, 0.1568628], "Text": "VIP Supporter"
-                        }
+                        "$className": "TextLabel"
                       },
                       "PriceLbl": {
-                        "$className": "TextLabel",
-                        "$properties": {
-                          "BackgroundTransparency": 1, "Size": { "UDim2": [[1, 0], [0, 22]] }, "Position": { "UDim2": [[0, 0], [0, 72]] },
-                          "Font": "GothamBold", "TextScaled": true, "TextColor3": [1.0, 0.8156863, 0.1568628], "Text": "1,000 Robux"
-                        }
+                        "$className": "TextLabel"
                       },
                       "DescLbl": {
-                        "$className": "TextLabel",
-                        "$properties": {
-                          "BackgroundTransparency": 1, "Size": { "UDim2": [[1, 0], [0, 50]] }, "Position": { "UDim2": [[0, 0], [0, 96]] },
-                          "Font": "GothamMedium", "TextScaled": true, "TextWrapped": true, "TextYAlignment": "Top",
-                          "TextColor3": [0.8039216, 0.7215686, 0.5490196], "Text": "VIP status - our biggest thanks!"
-                        }
+                        "$className": "TextLabel"
                       },
                       "BuyButton": {
-                        "$className": "TextButton",
-                        "$properties": {
-                          "Size": { "UDim2": [[1, 0], [0, 34]] }, "Position": { "UDim2": [[0, 0], [1, -34]] },
-                          "BackgroundColor3": [1.0, 0.8156863, 0.1568628],
-                          "Text": "Donate", "Font": "GothamBold", "TextScaled": true, "TextColor3": [0.1176471, 0.0862745, 0.0156863]
-                        },
-                        "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 10] } } },
-                        "UIGradient": { "$className": "UIGradient", "$properties": { "Rotation": 90 } },
-                        "UIScale": { "$className": "UIScale", "$properties": { "Scale": 1 } }
+                        "$className": "TextButton"
                       }
                     },
                     "WaddleLegendCard": {
                       "$className": "Frame",
-                      "$properties": {
-                        "LayoutOrder": 6,
-                        "BackgroundColor3": [0.1372549, 0.0941176, 0.0235294]
-                      },
-                      "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 14] } } },
-                      "UIStroke": {
-                        "$className": "UIStroke",
-                        "$properties": { "Thickness": 3, "Color": [1.0, 0.8156863, 0.1568628], "Transparency": 0.05 }
-                      },
-                      "UIGradient": {
-                        "$className": "UIGradient",
-                        "$properties": { "Rotation": 90 }
-                      },
-                      "UIPadding": {
-                        "$className": "UIPadding",
-                        "$properties": {
-                          "PaddingTop": { "UDim": [0, 12] }, "PaddingBottom": { "UDim": [0, 12] },
-                          "PaddingLeft": { "UDim": [0, 12] }, "PaddingRight": { "UDim": [0, 12] }
-                        }
-                      },
-                      "UIScale": { "$className": "UIScale", "$properties": { "Scale": 1 } },
                       "IconLbl": {
-                        "$className": "TextLabel",
-                        "$properties": {
-                          "BackgroundTransparency": 1, "Size": { "UDim2": [[1, 0], [0, 44]] }, "Position": { "UDim2": [[0, 0], [0, 0]] },
-                          "Font": "GothamBold", "TextScaled": true, "TextColor3": [1, 1, 1], "Text": "🏆"
-                        }
+                        "$className": "TextLabel"
                       },
                       "NameLbl": {
-                        "$className": "TextLabel",
-                        "$properties": {
-                          "BackgroundTransparency": 1, "Size": { "UDim2": [[1, 0], [0, 24]] }, "Position": { "UDim2": [[0, 0], [0, 46]] },
-                          "Font": "GothamBlack", "TextScaled": true, "TextColor3": [1.0, 0.8156863, 0.1568628], "Text": "Waddle Legend"
-                        }
+                        "$className": "TextLabel"
                       },
                       "PriceLbl": {
-                        "$className": "TextLabel",
-                        "$properties": {
-                          "BackgroundTransparency": 1, "Size": { "UDim2": [[1, 0], [0, 22]] }, "Position": { "UDim2": [[0, 0], [0, 72]] },
-                          "Font": "GothamBold", "TextScaled": true, "TextColor3": [1.0, 0.8156863, 0.1568628], "Text": "5,000 Robux"
-                        }
+                        "$className": "TextLabel"
                       },
                       "DescLbl": {
-                        "$className": "TextLabel",
-                        "$properties": {
-                          "BackgroundTransparency": 1, "Size": { "UDim2": [[1, 0], [0, 50]] }, "Position": { "UDim2": [[0, 0], [0, 96]] },
-                          "Font": "GothamMedium", "TextScaled": true, "TextWrapped": true, "TextYAlignment": "Top",
-                          "TextColor3": [0.8823529, 0.7803922, 0.4823529], "Text": "Legendary support - you're in the Hall of Fame!"
-                        }
+                        "$className": "TextLabel"
                       },
                       "BuyButton": {
-                        "$className": "TextButton",
-                        "$properties": {
-                          "Size": { "UDim2": [[1, 0], [0, 34]] }, "Position": { "UDim2": [[0, 0], [1, -34]] },
-                          "BackgroundColor3": [1.0, 0.8156863, 0.1568628],
-                          "Text": "Donate", "Font": "GothamBold", "TextScaled": true, "TextColor3": [0.1176471, 0.0862745, 0.0156863]
-                        },
-                        "UICorner": { "$className": "UICorner", "$properties": { "CornerRadius": { "UDim": [0, 10] } } },
-                        "UIGradient": { "$className": "UIGradient", "$properties": { "Rotation": 90 } },
-                        "UIScale": { "$className": "UIScale", "$properties": { "Scale": 1 } }
+                        "$className": "TextButton"
                       }
                     }
                   }
@@ -781,127 +268,34 @@
               },
               "GlowAttachment": {
                 "$className": "Attachment",
-                "$properties": {
-                  "Position": [0, 0, -0.35]
-                },
                 "Sparkles": {
-                  "$className": "ParticleEmitter",
-                  "$properties": {
-                    "Texture": "rbxasset://textures/particles/sparkles_main.dds",
-                    "Rate": 6,
-                    "Enabled": true
-                  }
+                  "$className": "ParticleEmitter"
                 }
               },
               "AccentLight": {
-                "$className": "SpotLight",
-                "$properties": {
-                  "Color": [1.0, 0.8862745, 0.6],
-                  "Brightness": 3,
-                  "Range": 20,
-                  "Angle": 90,
-                  "Face": "Front",
-                  "Enabled": true
-                }
+                "$className": "SpotLight"
               }
             }
           },
           "LeaderboardBoard": {
             "$className": "Part",
-            "$properties": {
-              "Size": [8, 6, 0.4],
-              "Anchored": true,
-              "CanCollide": false,
-              "CanQuery": false,
-              "CastShadow": false,
-              "Material": "SmoothPlastic",
-              "Color": [0.0980392, 0.1058824, 0.1372549]
-            },
             "WorldLeaderboardGui": {
               "$className": "SurfaceGui",
-              "$properties": {
-                "Face": "Front",
-                "SizingMode": "PixelsPerStud",
-                "PixelsPerStud": 50,
-                "LightInfluence": 0,
-                "AlwaysOnTop": false,
-                "ClipsDescendants": true
-              },
               "Board": {
                 "$className": "Frame",
-                "$properties": {
-                  "Size": { "UDim2": [[1, 0], [1, 0]] },
-                  "BackgroundColor3": [0.0784314, 0.1019608, 0.1647059],
-                  "BackgroundTransparency": 0.08,
-                  "BorderSizePixel": 0
-                },
-                "UIStroke": {
-                  "$className": "UIStroke",
-                  "$properties": {
-                    "Color": [0.2156863, 0.2431373, 0.3294118],
-                    "Thickness": 2
-                  }
-                },
                 "Title": {
-                  "$className": "TextLabel",
-                  "$properties": {
-                    "BackgroundTransparency": 1,
-                    "Size": { "UDim2": [[0.92, 0], [0.115, 0]] },
-                    "Position": { "UDim2": [[0.04, 0], [0.035, 0]] },
-                    "Font": "GothamBold",
-                    "TextScaled": true,
-                    "TextColor3": [1.0, 0.8156863, 0.1568628],
-                    "Text": "🏆 Fastest Players"
-                  }
+                  "$className": "TextLabel"
                 },
                 "Subtitle": {
-                  "$className": "TextLabel",
-                  "$properties": {
-                    "BackgroundTransparency": 1,
-                    "Size": { "UDim2": [[0.92, 0], [0.07, 0]] },
-                    "Position": { "UDim2": [[0.04, 0], [0.155, 0]] },
-                    "Font": "GothamMedium",
-                    "TextScaled": true,
-                    "TextColor3": [0.6666667, 0.6901961, 0.7607843],
-                    "Text": ""
-                  }
+                  "$className": "TextLabel"
                 },
                 "Divider": {
-                  "$className": "Frame",
-                  "$properties": {
-                    "BackgroundColor3": [0.2156863, 0.2431373, 0.3294118],
-                    "BorderSizePixel": 0,
-                    "Size": { "UDim2": [[0.92, 0], [0.006, 0]] },
-                    "Position": { "UDim2": [[0.04, 0], [0.235, 0]] }
-                  }
+                  "$className": "Frame"
                 },
                 "List": {
                   "$className": "Frame",
-                  "$properties": {
-                    "BackgroundTransparency": 1,
-                    "Size": { "UDim2": [[0.92, 0], [0.72, 0]] },
-                    "Position": { "UDim2": [[0.04, 0], [0.265, 0]] },
-                    "ClipsDescendants": true
-                  },
-                  "UIListLayout": {
-                    "$className": "UIListLayout",
-                    "$properties": {
-                      "Padding": { "UDim": [0.006, 0] },
-                      "SortOrder": "LayoutOrder"
-                    }
-                  },
                   "EmptyLbl": {
-                    "$className": "TextLabel",
-                    "$properties": {
-                      "BackgroundTransparency": 1,
-                      "Size": { "UDim2": [[1, 0], [0.1, 0]] },
-                      "LayoutOrder": 0,
-                      "Font": "GothamMedium",
-                      "TextScaled": true,
-                      "TextColor3": [0.4705882, 0.5019608, 0.5803922],
-                      "Text": "No times yet - be the first!",
-                      "Visible": false
-                    }
+                    "$className": "TextLabel"
                   }
                 }
               }

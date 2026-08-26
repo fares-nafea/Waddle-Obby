@@ -242,15 +242,12 @@ local function closePanel()
 end
 
 closeBtn.MouseButton1Click:Connect(function()
-    task.wait(0.1)
     closePanel()
 end)
 dim.MouseButton1Click:Connect(function()
-    task.wait(0.1)
     closePanel()
 end)
 giftButton.MouseButton1Click:Connect(function()
-	task.wait(0.1)
 	if panel.Visible then
 		closePanel()
 	else
@@ -294,7 +291,6 @@ end
 
 --============================ CLAIM WIRING ============================--
 claimButton.MouseButton1Click:Connect(function()
-	task.wait(0.1)
 	if not claimButton.Active then return end
 	DailyRewardRemote:FireServer("Claim")
 end)

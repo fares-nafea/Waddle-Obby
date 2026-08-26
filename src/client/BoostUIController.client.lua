@@ -155,7 +155,6 @@ local function closePanel()
 end
 
 openButton.MouseButton1Click:Connect(function()
-	task.wait(0.1)
 
 	if panel.Visible then
 		closePanel()
@@ -165,11 +164,9 @@ openButton.MouseButton1Click:Connect(function()
 end)
 
 closeBtn.MouseButton1Click:Connect(function()
-    task.wait(0.1)
     closePanel()
 end)
 dim.MouseButton1Click:Connect(function()
-    task.wait(0.1)
     closePanel()
 end)
 
@@ -198,7 +195,6 @@ for _, item in ipairs(BoostConfig.Items) do
 			UIAnimation.ButtonPress(buyButton)
 
 			buyButton.MouseButton1Click:Connect(function()
-				task.wait(0.1)
 				ButtonClick:Play()
 				local now = os.clock()
 				if now - lastClick < BUY_DEBOUNCE then return end
