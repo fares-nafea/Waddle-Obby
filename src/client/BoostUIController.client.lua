@@ -52,9 +52,6 @@ local openButton2 = gui2:WaitForChild("OpenButton")
 local openButton3 = gui3:WaitForChild("OpenButton")
 local openButton4 = gui4:WaitForChild("GiftButton")
 
-
-
-
 local dim = gui:WaitForChild("Dim")
 local panel = gui:WaitForChild("BoostFrame")
 local header = panel:WaitForChild("Header")
@@ -158,6 +155,8 @@ local function closePanel()
 end
 
 openButton.MouseButton1Click:Connect(function()
+	task.wait(0.1)
+
 	if panel.Visible then
 		closePanel()
 	else
@@ -165,8 +164,14 @@ openButton.MouseButton1Click:Connect(function()
 	end
 end)
 
-closeBtn.MouseButton1Click:Connect(closePanel)
-dim.MouseButton1Click:Connect(closePanel)
+closeBtn.MouseButton1Click:Connect(function()
+    task.wait(0.1)
+    closePanel()
+end)
+dim.MouseButton1Click:Connect(function()
+    task.wait(0.1)
+    closePanel()
+end)
 
 UIAnimation.ButtonPress(openButton)
 UIAnimation.ButtonPress(closeBtn)
@@ -193,6 +198,7 @@ for _, item in ipairs(BoostConfig.Items) do
 			UIAnimation.ButtonPress(buyButton)
 
 			buyButton.MouseButton1Click:Connect(function()
+				task.wait(0.1)
 				ButtonClick:Play()
 				local now = os.clock()
 				if now - lastClick < BUY_DEBOUNCE then return end

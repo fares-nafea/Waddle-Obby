@@ -64,6 +64,7 @@ local openButton2 = gui1:WaitForChild("OpenButton")
 local openButton3 = gui2:WaitForChild("OpenButton")
 local openButton4 = profileGui:WaitForChild("OpenButton")
 
+local badge = gui1:WaitForChild("StatusBadge")
 
 dim.Visible = false
 profileFrame.Visible = false
@@ -172,6 +173,7 @@ end
 --============================ OPEN / CLOSE ============================--
 local function openProfile()
 	refreshAll()
+	UIDisable.DisableTop(badge)
 	UIDisable.Disable(openButton1, openButton2, openButton3, openButton4)
 	if UIAnimation.Open(profileFrame, dim) then
 		ButtonClick:Play()
@@ -179,6 +181,7 @@ local function openProfile()
 end
 
 local function closeProfile()
+	UIDisable.AppearTop(badge)
 	UIDisable.Appear(openButton1, openButton2, openButton3, openButton4)
 	if UIAnimation.Close(profileFrame, dim) then
 		ButtonClick:Play()
@@ -186,6 +189,7 @@ local function closeProfile()
 end
 
 openButton.MouseButton1Click:Connect(function()
+	task.wait(0.1)
 	if profileFrame.Visible then
 		closeProfile()
 	else
@@ -193,8 +197,14 @@ openButton.MouseButton1Click:Connect(function()
 	end
 end)
 
-closeBtn.MouseButton1Click:Connect(closeProfile)
-dim.MouseButton1Click:Connect(closeProfile)
+closeBtn.MouseButton1Click:Connect(function()
+    task.wait(0.1)
+    closeProfile()
+end)
+dim.MouseButton1Click:Connect(function()
+    task.wait(0.1)
+    closeProfile()
+end)
 
 UIAnimation.ButtonPress(openButton)
 UIAnimation.ButtonPress(closeBtn)

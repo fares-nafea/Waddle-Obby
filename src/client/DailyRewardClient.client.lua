@@ -72,6 +72,7 @@ local openButton1 = gui:WaitForChild("OpenButton")
 local openButton2 = gui2:WaitForChild("OpenButton")
 local openButton3 = gui3:WaitForChild("OpenButton")
 
+local badge = gui:WaitForChild("StatusBadge")
 
 local giftNotifyDot = giftButton:WaitForChild("NotifyDot")
 
@@ -225,6 +226,7 @@ dailyStreak.Changed:Connect(refreshAll)
 --============================ OPEN / CLOSE ============================--
 local function openPanel()
 	refreshAll()
+	UIDisable.DisableTop(badge)
 	UIDisable.Disable(giftButton, openButton1, openButton2, openButton3)
 	if UIAnimation.Open(panel, dim) then
 		ButtonClick:Play()
@@ -232,15 +234,23 @@ local function openPanel()
 end
 
 local function closePanel()
+	UIDisable.AppearTop(badge)
 	UIDisable.Appear(giftButton, openButton1, openButton2, openButton3)
 	if UIAnimation.Close(panel, dim) then
 		ButtonClick:Play()
 	end
 end
 
-closeBtn.MouseButton1Click:Connect(closePanel)
-dim.MouseButton1Click:Connect(closePanel)
+closeBtn.MouseButton1Click:Connect(function()
+    task.wait(0.1)
+    closePanel()
+end)
+dim.MouseButton1Click:Connect(function()
+    task.wait(0.1)
+    closePanel()
+end)
 giftButton.MouseButton1Click:Connect(function()
+	task.wait(0.1)
 	if panel.Visible then
 		closePanel()
 	else
@@ -284,6 +294,7 @@ end
 
 --============================ CLAIM WIRING ============================--
 claimButton.MouseButton1Click:Connect(function()
+	task.wait(0.1)
 	if not claimButton.Active then return end
 	DailyRewardRemote:FireServer("Claim")
 end)

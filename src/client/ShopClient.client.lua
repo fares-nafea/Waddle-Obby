@@ -55,6 +55,8 @@ local openButton2 = gui1:WaitForChild("OpenButton")
 local openButton3 = gui2:WaitForChild("OpenButton")
 local openButton4 = shopGui:WaitForChild("OpenButton")
 
+local badge = gui1:WaitForChild("StatusBadge")
+
 local grid = shopFrame:WaitForChild("Grid")
 
 dim.Visible = false
@@ -143,6 +145,7 @@ end)
 local function openShop()
 	refreshAll()
 	refreshCoins()
+	UIDisable.DisableTop(badge)
 	UIDisable.Disable(openButton1, openButton2, openButton3, openButton4)
 	if UIAnimation.Open(shopFrame, dim) then
 		ButtonClick:Play()
@@ -150,6 +153,7 @@ local function openShop()
 end
 
 local function closeShop()
+	UIDisable.AppearTop(badge)
 	UIDisable.Appear(openButton1, openButton2, openButton3, openButton4)
 	if UIAnimation.Close(shopFrame, dim) then
 		ButtonClick:Play()
@@ -157,6 +161,7 @@ local function closeShop()
 end
 
 openButton.MouseButton1Click:Connect(function()
+	task.wait(0.1)
 
 	if shopFrame.Visible then
 		closeShop()
@@ -166,9 +171,14 @@ openButton.MouseButton1Click:Connect(function()
 
 end)
 
-closeBtn.MouseButton1Click:Connect(closeShop)
-
-dim.MouseButton1Click:Connect(closeShop)
+closeBtn.MouseButton1Click:Connect(function()
+    task.wait(0.1)
+    closeShop()
+end)
+dim.MouseButton1Click:Connect(function()
+    task.wait(0.1)
+    closeShop()
+end)
 
 UIAnimation.ButtonPress(openButton)
 UIAnimation.ButtonPress(closeBtn)

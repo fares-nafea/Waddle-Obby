@@ -140,8 +140,14 @@ local function hideResult()
 	end
 end
 
-closeBtn.MouseButton1Click:Connect(hideResult)
-dim.MouseButton1Click:Connect(hideResult)
+closeBtn.MouseButton1Click:Connect(function()
+    task.wait(0.1)
+    hideResult()
+end)
+dim.MouseButton1Click:Connect(function()
+    task.wait(0.1)
+    hideResult()
+end)
 
 UIAnimation.ButtonPress(closeBtn)
 
