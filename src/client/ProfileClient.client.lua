@@ -24,6 +24,7 @@ local playerGui = player:WaitForChild("PlayerGui")
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local ObbyConfig = require(Shared:WaitForChild("ObbyConfig"))
 local UIAnimation = require(Shared:WaitForChild("UIAnimation"))
+local UIDisable = require(Shared:WaitForChild("UIDisable"))
 
 local OBBY_COUNT = 6
 
@@ -53,6 +54,15 @@ local coinsAmount = currencyCard:WaitForChild("CoinsAmount")
 local trailCard = content:WaitForChild("TrailCard")
 local equippedLbl = trailCard:WaitForChild("EquippedLbl")
 local ownedCountLbl = trailCard:WaitForChild("OwnedCountLbl")
+
+local gui1 = playerGui:WaitForChild("BoostUI")
+local gui2 = playerGui:WaitForChild("ShopUI")
+local gui3 = playerGui:WaitForChild("DailyRewardGiftButtonUI")
+
+local openButton1 = gui3:WaitForChild("GiftButton")
+local openButton2 = gui1:WaitForChild("OpenButton")
+local openButton3 = gui2:WaitForChild("OpenButton")
+local openButton4 = profileGui:WaitForChild("OpenButton")
 
 
 dim.Visible = false
@@ -162,12 +172,14 @@ end
 --============================ OPEN / CLOSE ============================--
 local function openProfile()
 	refreshAll()
+	UIDisable.Disable(openButton1, openButton2, openButton3, openButton4)
 	if UIAnimation.Open(profileFrame, dim) then
 		ButtonClick:Play()
 	end
 end
 
 local function closeProfile()
+	UIDisable.Appear(openButton1, openButton2, openButton3, openButton4)
 	if UIAnimation.Close(profileFrame, dim) then
 		ButtonClick:Play()
 	end

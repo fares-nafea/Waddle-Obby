@@ -24,6 +24,7 @@ local EquipEvent = ReplicatedStorage:WaitForChild("Events"):WaitForChild("EquipE
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local TrailConfig = require(Shared:WaitForChild("TrailConfig"))
 local UIAnimation = require(Shared:WaitForChild("UIAnimation"))
+local UIDisable = require(Shared:WaitForChild("UIDisable"))
 
 local ButtonClick = SoundService:WaitForChild("ButtonClick")
 local Buy = SoundService:WaitForChild("Buy")
@@ -44,6 +45,15 @@ local headerRight = header:WaitForChild("HeaderRight")
 local closeBtn = headerRight:WaitForChild("CloseBtn")
 local coinPill = headerRight:WaitForChild("CoinPill")
 local coinAmount = coinPill:WaitForChild("CoinAmount")
+
+local gui1 = playerGui:WaitForChild("BoostUI")
+local gui2 = playerGui:WaitForChild("ProfileUI")
+local gui3 = playerGui:WaitForChild("DailyRewardGiftButtonUI")
+
+local openButton1 = gui3:WaitForChild("GiftButton")
+local openButton2 = gui1:WaitForChild("OpenButton")
+local openButton3 = gui2:WaitForChild("OpenButton")
+local openButton4 = shopGui:WaitForChild("OpenButton")
 
 local grid = shopFrame:WaitForChild("Grid")
 
@@ -133,12 +143,14 @@ end)
 local function openShop()
 	refreshAll()
 	refreshCoins()
+	UIDisable.Disable(openButton1, openButton2, openButton3, openButton4)
 	if UIAnimation.Open(shopFrame, dim) then
 		ButtonClick:Play()
 	end
 end
 
 local function closeShop()
+	UIDisable.Appear(openButton1, openButton2, openButton3, openButton4)
 	if UIAnimation.Close(shopFrame, dim) then
 		ButtonClick:Play()
 	end

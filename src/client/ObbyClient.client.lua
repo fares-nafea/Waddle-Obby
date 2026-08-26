@@ -22,6 +22,7 @@ local ButtonClick = SoundService:WaitForChild("ButtonClick")
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local ObbyConfig = require(Shared:WaitForChild("ObbyConfig"))
 local UIAnimation = require(Shared:WaitForChild("UIAnimation"))
+local UIDisable = require(Shared:WaitForChild("UIDisable"))
 local rowTemplate = Shared:WaitForChild("Templates"):WaitForChild("LeaderboardRow")
 
 --============================ GUI ============================--
@@ -40,6 +41,16 @@ local timeLbl = panel:WaitForChild("TimeLbl")
 local bestLbl = panel:WaitForChild("BestLbl")
 local rewardLbl = panel:WaitForChild("RewardLbl")
 local list = panel:WaitForChild("List")
+
+local gui1 = playerGui:WaitForChild("BoostUI")
+local gui2 = playerGui:WaitForChild("ShopUI")
+local gui3 = playerGui:WaitForChild("ProfileUI")
+local gui4 = playerGui:WaitForChild("DailyRewardGiftButtonUI")
+
+local openButton1 = gui4:WaitForChild("GiftButton")
+local openButton2 = gui3:WaitForChild("OpenButton")
+local openButton3 = gui2:WaitForChild("OpenButton")
+local openButton4 = gui1:WaitForChild("OpenButton")
 
 dim.Visible = false
 panel.Visible = false
@@ -116,12 +127,14 @@ local function showResult(obbyId, timeMs, reward, isNewBest, bestMs)
 	bestBanner.Visible = isNewBest
 
 	renderLeaderboard({}) -- clear stale rows while the fresh list loads
+	
 	UIAnimation.Open(panel, dim)
-
+	UIDisable.Disable(openButton1, openButton2, openButton3, openButton4)
 	LeaderboardEvent:FireServer(obbyId)
 end
 
 local function hideResult()
+	UIDisable.Appear(openButton1, openButton2, openButton3, openButton4)
 	if UIAnimation.Close(panel, dim) then
 		ButtonClick:Play()
 	end
