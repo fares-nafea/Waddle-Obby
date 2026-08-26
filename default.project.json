@@ -1067,7 +1067,7 @@
             "$className": "Trail"
           }
         },
-        "Purple Flame Trail": {
+        "PurpleFlame Trail": {
           "$className": "Folder",
           "Attachment0": {
             "$className": "Attachment"
@@ -1151,7 +1151,7 @@
             "$className": "Trail"
           }
         },
-        "Waddle Legend Trail": {
+        "WaddleLegend Trail": {
           "$className": "Folder",
           "Attachment0": {
             "$className": "Attachment"
@@ -1166,6 +1166,9 @@
       }
     },
     "ServerScriptService": {
+      "UIColorService": {
+        "$path": "src/server/UIColorService.server.lua"
+      },
       "DamageWater": {
         "$path": "src/server/DamageWater.server.lua"
       },
