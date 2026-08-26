@@ -13,17 +13,17 @@
 
 local Config = {}
 
-Config.MaxDay = 7
+Config.MaxDay = 8
 
 Config.Days = {
-	[1] = { Type = "Coins", Amount = 100 },
-	[2] = { Type = "Coins", Amount = 250 },
-	[3] = { Type = "Coins", Amount = 500 },
-	[4] = { Type = "Coins", Amount = 750 },
-	[5] = { Type = "Coins", Amount = 1000 },
-	[6] = { Type = "Coins", Amount = 1500 },
-	[7] = { Type = "Coins", Amount = 2500 },
-	[8] = { Type = "Coins", Amount = 2500 },
+    [1] = { Type = "Coins", Amount = 100 },
+    [2] = { Type = "Coins", Amount = 250 },
+    [3] = { Type = "Coins", Amount = 500 },
+    [4] = { Type = "Coins", Amount = 750 },
+    [5] = { Type = "Coins", Amount = 1000 },
+    [6] = { Type = "Coins", Amount = 1500 },
+    [7] = { Type = "Coins", Amount = 2500 },
+    [8] = { Type = "Coins", Amount = 5000 },
 }
 
 -- the reward for `day`, clamped to MaxDay so a streak past Day 7 keeps
