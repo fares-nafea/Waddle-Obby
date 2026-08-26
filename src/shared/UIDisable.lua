@@ -1,6 +1,6 @@
-local TweenService = game:GetService("TweenService")
+local DisableUI = {}
 
-local Module = {}
+local TweenService = game:GetService("TweenService")
 
 local originalPositions = {}
 
@@ -8,7 +8,7 @@ local function SavePosition(button)
 	originalPositions[button] = button.Position
 end
 
-function Module.Disable(disappears1, disappears2, disappears3, disappears4)
+function DisableUI.Disable(disappears1, disappears2, disappears3, disappears4)
 	local buttons = {
 		disappears1,
 		disappears2,
@@ -17,20 +17,15 @@ function Module.Disable(disappears1, disappears2, disappears3, disappears4)
 	}
 
 	for _, button in ipairs(buttons) do
-		originalPositions[button] = button.Position
-		button.Visible = true
+		SavePosition(button)
 
 		local tween = TweenService:Create(
 			button,
-			TweenInfo.new(
-				90,
-				Enum.EasingStyle.Quad,
-				Enum.EasingDirection.In
-			),
+			TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.In),
 			{
 				Position = UDim2.new(
-					1,
-					100,
+					0,
+					-50,
 					button.Position.Y.Scale,
 					button.Position.Y.Offset
 				)
@@ -39,13 +34,13 @@ function Module.Disable(disappears1, disappears2, disappears3, disappears4)
 
 		tween:Play()
 
-		tween.Completed:Once(function()
+		tween.Completed:Connect(function()
 			button.Visible = false
 		end)
 	end
 end
 
-function Module.Appear(appear1, appear2, appear3, appear4)
+function DisableUI.Appear(appear1, appear2, appear3, appear4)
 	local buttons = {
 		appear1,
 		appear2,
@@ -59,7 +54,7 @@ function Module.Appear(appear1, appear2, appear3, appear4)
 
 			local tween = TweenService:Create(
 				button,
-				TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				TweenInfo.new(0.42, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
 				{
 					Position = originalPositions[button]
 				}
@@ -70,4 +65,4 @@ function Module.Appear(appear1, appear2, appear3, appear4)
 	end
 end
 
-return Module
+return DisableUI

@@ -37,12 +37,24 @@ local boostPermanent = player:WaitForChild("BoostPermanent", 10)
 
 --============================ GUI ============================--
 local gui = playerGui:WaitForChild("BoostUI")
+local gui2 = playerGui:WaitForChild("ShopUI")
+local gui3 = playerGui:WaitForChild("ProfileUI")
+local gui4 = playerGui:WaitForChild("DailyRewardGiftButtonUI")
+
 
 local badge = gui:WaitForChild("StatusBadge")
 local statusLbl = badge:WaitForChild("StatusLbl")
 local timeLbl = badge:WaitForChild("TimeLbl")
 
+--// Open Buttons
 local openButton = gui:WaitForChild("OpenButton")
+local openButton2 = gui2:WaitForChild("OpenButton")
+local openButton3 = gui3:WaitForChild("OpenButton")
+local openButton4 = gui4:WaitForChild("GiftButton")
+
+
+
+
 local dim = gui:WaitForChild("Dim")
 local panel = gui:WaitForChild("BoostFrame")
 local header = panel:WaitForChild("Header")
@@ -130,13 +142,14 @@ refresh()
 
 --============================ PANEL OPEN / CLOSE ============================--
 local function openPanel()
-	UIDisable.Disable(openButton, openButton, openButton, openButton)
+	UIDisable.Disable(openButton, openButton2, openButton3, openButton4)
 	if UIAnimation.Open(panel, dim) then
 		ButtonClick:Play()
 	end
 end
 
 local function closePanel()
+	UIDisable.Appear(openButton, openButton2, openButton3, openButton4)
 	if UIAnimation.Close(panel, dim) then
 		ButtonClick:Play()
 	end

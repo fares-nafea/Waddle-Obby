@@ -27,6 +27,7 @@ local DailyRewardRemote = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild
 local Shared = ReplicatedStorage:WaitForChild("Shared")
 local DailyRewardConfig = require(Shared:WaitForChild("DailyRewardConfig"))
 local UIAnimation = require(Shared:WaitForChild("UIAnimation"))
+local UIDisable = require(Shared:WaitForChild("UIDisable"))
 local coinToastTemplate = Shared:WaitForChild("Templates"):WaitForChild("CoinToast")
 
 local DAY_COUNT = DailyRewardConfig.MaxDay
@@ -61,8 +62,17 @@ local cardsRow = panel:WaitForChild("CardsRow")
 local countdownLbl = panel:WaitForChild("CountdownLbl")
 local claimButton = panel:WaitForChild("ClaimButton")
 
+local gui = playerGui:WaitForChild("BoostUI")
+local gui2 = playerGui:WaitForChild("ShopUI")
+local gui3 = playerGui:WaitForChild("ProfileUI")
 local giftGui = playerGui:WaitForChild("DailyRewardGiftButtonUI")
+
 local giftButton = giftGui:WaitForChild("GiftButton")
+local openButton1 = gui:WaitForChild("OpenButton")
+local openButton2 = gui2:WaitForChild("OpenButton")
+local openButton3 = gui3:WaitForChild("OpenButton")
+
+
 local giftNotifyDot = giftButton:WaitForChild("NotifyDot")
 
 local claimSound = SoundService:FindFirstChild("DailyRewardClaimSound")
@@ -215,12 +225,14 @@ dailyStreak.Changed:Connect(refreshAll)
 --============================ OPEN / CLOSE ============================--
 local function openPanel()
 	refreshAll()
+	UIDisable.Disable(giftButton, openButton1, openButton2, openButton3)
 	if UIAnimation.Open(panel, dim) then
 		ButtonClick:Play()
 	end
 end
 
 local function closePanel()
+	UIDisable.Appear(giftButton, openButton1, openButton2, openButton3)
 	if UIAnimation.Close(panel, dim) then
 		ButtonClick:Play()
 	end
