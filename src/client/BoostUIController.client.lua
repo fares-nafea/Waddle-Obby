@@ -26,6 +26,7 @@ local Shared = ReplicatedStorage:WaitForChild("Shared")
 local BoostRemote = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("BoostRemote")
 local BoostConfig = require(Shared:WaitForChild("BoostConfig"))
 local UIAnimation = require(Shared:WaitForChild("UIAnimation"))
+local UIDisable = require(Shared:WaitForChild("UIDisable"))
 
 local activateSound = SoundService:FindFirstChild("BoostActivateSound")
 local expirationSound = SoundService:FindFirstChild("BoostExpirationSound")
@@ -129,6 +130,7 @@ refresh()
 
 --============================ PANEL OPEN / CLOSE ============================--
 local function openPanel()
+	UIDisable.Disable(openButton, openButton, openButton, openButton)
 	if UIAnimation.Open(panel, dim) then
 		ButtonClick:Play()
 	end

@@ -38,6 +38,9 @@
       },
       "Shared": {
         "$className": "Folder",
+        "UIDisable": {
+          "$path": "src/shared/UIDisable.lua"
+        },
         "ObbyConfig": {
           "$path": "src/shared/ObbyConfig.lua"
         },
