@@ -184,13 +184,13 @@ local CLAIM_ACTIVE_COLOR = 1
 local CLAIM_DISABLED_COLOR = 0.7
 
 local function refreshClaimButton()
-	local text = claimButton:WaitForChild("text")
+	local text = claimButton:WaitForChild("text", 10)
 	local remaining = secondsUntilClaimable()
 	local claimableNow = remaining <= 0
 
 	claimButton.Active = claimableNow
 	claimButton.AutoButtonColor = claimableNow
-	claimButton.text.Text = claimableNow and "Claim" or "Claimed"
+	text.Text = claimableNow and "Claim" or "Claimed"
 	claimButton.Disabled.BackgroundTransparency = claimableNow and CLAIM_ACTIVE_COLOR or CLAIM_DISABLED_COLOR
 
 	countdownLbl.Visible = not claimableNow
