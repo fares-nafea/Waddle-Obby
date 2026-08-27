@@ -1682,6 +1682,9 @@
     },
     "StarterPlayer": {
       "StarterPlayerScripts": {
+        "DisableReset": {
+          "$path": "src/client/DisableReset.client.lua"
+        },
         "ObbyClient": {
           "$path": "src/client/ObbyClient.client.lua"
         },
