@@ -2,70 +2,113 @@ local DisableUI = {}
 
 local TweenService = game:GetService("TweenService")
 
-local originalPositions = {}
-local originalTopPositions = {}
+local originalTransparency = {}
 
-local function SavePosition(button)
-	originalPositions[button] = button.Position
+local function SaveTransparency(object)
+	if originalTransparency[object] then
+		return
+	end
+
+	local data = {}
+
+	if object:IsA("GuiObject") then
+		data.BackgroundTransparency = object.BackgroundTransparency
+	end
+
+	if object:IsA("TextLabel") or object:IsA("TextButton") or object:IsA("TextBox") then
+		data.TextTransparency = object.TextTransparency
+		data.TextStrokeTransparency = object.TextStrokeTransparency
+	end
+
+	if object:IsA("ImageLabel") or object:IsA("ImageButton") then
+		data.ImageTransparency = object.ImageTransparency
+	end
+
+	originalTransparency[object] = data
 end
 
-local function SaveTopPosition(button)
-	originalTopPositions[button] = button.Position
+local function FadeObject(object, transparency, duration)
+	if not object then
+		return
+	end
+
+	SaveTransparency(object)
+
+	local goal = {}
+
+	if object:IsA("GuiObject") then
+		goal.BackgroundTransparency = transparency
+	end
+
+	if object:IsA("TextLabel") or object:IsA("TextButton") or object:IsA("TextBox") then
+		goal.TextTransparency = transparency
+		goal.TextStrokeTransparency = transparency
+	end
+
+	if object:IsA("ImageLabel") or object:IsA("ImageButton") then
+		goal.ImageTransparency = transparency
+	end
+
+	local tween = TweenService:Create(
+		object,
+		TweenInfo.new(
+			duration,
+			Enum.EasingStyle.Quint,
+			Enum.EasingDirection.In
+		),
+		goal
+	)
+
+	tween:Play()
+
+	return tween
 end
 
-function DisableUI.Disable(disappears1, disappears2, disappears3, disappears4)
-	local buttons = {
-		disappears1,
-		disappears2,
-		disappears3,
-		disappears4
-	}
+local function RestoreObject(object, duration)
+	local saved = originalTransparency[object]
+
+	if not saved then
+		return
+	end
+
+	local tween = TweenService:Create(
+		object,
+		TweenInfo.new(
+			duration,
+			Enum.EasingStyle.Quint,
+			Enum.EasingDirection.Out
+		),
+		saved
+	)
+
+	tween:Play()
+
+	return tween
+end
+
+function DisableUI.Disable(...)
+	local buttons = { ... }
 
 	for _, button in ipairs(buttons) do
-		SavePosition(button)
+		if button then
+			local tween = FadeObject(button, 1, 0.5)
 
-		local tween = TweenService:Create(
-			button,
-			TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.In),
-			{
-				Position = UDim2.new(
-					0,
-					-50,
-					button.Position.Y.Scale,
-					button.Position.Y.Offset
-				)
-			}
-		)
-
-		tween:Play()
-
-		tween.Completed:Connect(function()
-			button.Visible = false
-		end)
+			if tween then
+				tween.Completed:Connect(function()
+					button.Visible = false
+				end)
+			end
+		end
 	end
 end
 
-function DisableUI.Appear(appear1, appear2, appear3, appear4)
-	local buttons = {
-		appear1,
-		appear2,
-		appear3,
-		appear4
-	}
+function DisableUI.Appear(...)
+	local buttons = { ... }
 
 	for _, button in ipairs(buttons) do
-		if originalPositions[button] then
+		if button then
 			button.Visible = true
-
-			local tween = TweenService:Create(
-				button,
-				TweenInfo.new(0.42, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
-				{
-					Position = originalPositions[button]
-				}
-			)
-
-			tween:Play()
+			RestoreObject(button, 0.5)
 		end
 	end
 end
@@ -75,26 +118,13 @@ function DisableUI.DisableTop(...)
 
 	for _, button in ipairs(buttons) do
 		if button then
-			SaveTopPosition(button)
+			local tween = FadeObject(button, 1, 0.5)
 
-			local tween = TweenService:Create(
-				button,
-				TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.In),
-				{
-					Position = UDim2.new(
-						button.Position.X.Scale,
-						button.Position.X.Offset,
-						0,
-						-button.AbsoluteSize.Y - 50
-					)
-				}
-			)
-
-			tween:Play()
-
-			tween.Completed:Connect(function()
-				button.Visible = false
-			end)
+			if tween then
+				tween.Completed:Connect(function()
+					button.Visible = false
+				end)
+			end
 		end
 	end
 end
@@ -103,18 +133,9 @@ function DisableUI.AppearTop(...)
 	local buttons = { ... }
 
 	for _, button in ipairs(buttons) do
-		if button and originalTopPositions[button] then
+		if button then
 			button.Visible = true
-
-			local tween = TweenService:Create(
-				button,
-				TweenInfo.new(0.42, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
-				{
-					Position = originalTopPositions[button]
-				}
-			)
-
-			tween:Play()
+			RestoreObject(button, 0.5)
 		end
 	end
 end

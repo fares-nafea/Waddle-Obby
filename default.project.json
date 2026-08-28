@@ -639,11 +639,38 @@
       }
     },
     "StarterGui": {
+      "Buttons": {
+        "$className": "ScreenGui",
+        "Frame": {
+          "$className": "Frame",
+          "UIGridLayout": {
+            "$className": "UIGridLayout"
+          },
+          "OpenButton1": {
+            "$className": "ImageButton"
+          },
+          "OpenButton2": {
+            "$className": "ImageButton"
+          },
+          "GiftButton": {
+            "$className": "ImageButton",
+            "NotifyDot": {
+              "$className": "Frame",
+              "UICorner": {
+                "$className": "UICorner"
+              },
+              "UIStroke": {
+                "$className": "UIStroke"
+              }
+            }
+          },
+          "OpenButton3": {
+            "$className": "ImageButton"
+          }
+        }
+      },
       "ShopUI": {
         "$className": "ScreenGui",
-        "OpenButton": {
-          "$className": "ImageButton"
-        },
         "Dim": {
           "$className": "TextButton"
         },
@@ -1206,20 +1233,8 @@
       },
       "ResultGui": {
         "$className": "ScreenGui",
-        "$properties": {
-          "ResetOnSpawn": false,
-          "IgnoreGuiInset": true
-        },
         "Dim": {
-          "$className": "TextButton",
-          "$properties": {
-            "Size": { "UDim2": [[1, 0], [1, 0]] },
-            "BackgroundColor3": [0, 0, 0],
-            "BackgroundTransparency": 0.5,
-            "Text": "",
-            "AutoButtonColor": false,
-            "Visible": false
-          }
+          "$className": "TextButton"
         },
         "Panel": {
           "$className": "Frame",
@@ -1260,9 +1275,6 @@
       },
       "ProfileUI": {
         "$className": "ScreenGui",
-        "OpenButton": {
-          "$className": "ImageButton"
-        },
         "Dim": {
           "$className": "TextButton"
         },
@@ -1402,21 +1414,6 @@
           "$className": "Frame",
           "NoticeLbl": {
             "$className": "TextLabel"
-          }
-        }
-      },
-      "DailyRewardGiftButtonUI": {
-        "$className": "ScreenGui",
-        "GiftButton": {
-          "$className": "ImageButton",
-          "NotifyDot": {
-            "$className": "Frame",
-            "UICorner": {
-              "$className": "UICorner"
-            },
-            "UIStroke": {
-              "$className": "UIStroke"
-            }
           }
         }
       },
@@ -1620,9 +1617,6 @@
           "TimeLbl": {
             "$className": "TextLabel"
           }
-        },
-        "OpenButton": {
-          "$className": "ImageButton"
         },
         "Dim": {
           "$className": "TextButton"

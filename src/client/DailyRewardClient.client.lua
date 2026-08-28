@@ -55,6 +55,10 @@ local dailyRewardGui = playerGui:WaitForChild("DailyRewardUI")
 local dim = dailyRewardGui:WaitForChild("Dim")
 local panel = dailyRewardGui:WaitForChild("DailyRewardFrame")
 
+local Buttons = playerGui:WaitForChild("Buttons")
+local Frame = Buttons:WaitForChild("Frame")
+local GiftButton = Frame:WaitForChild("GiftButton")
+
 local header = panel:WaitForChild("Header")
 local closeBtn = header:WaitForChild("CloseBtn")
 local streakLbl = panel:WaitForChild("StreakLbl")
@@ -63,18 +67,14 @@ local countdownLbl = panel:WaitForChild("CountdownLbl")
 local claimButton = panel:WaitForChild("ClaimButton")
 
 local gui = playerGui:WaitForChild("BoostUI")
-local gui2 = playerGui:WaitForChild("ShopUI")
-local gui3 = playerGui:WaitForChild("ProfileUI")
-local giftGui = playerGui:WaitForChild("DailyRewardGiftButtonUI")
 
-local giftButton = giftGui:WaitForChild("GiftButton")
-local openButton1 = gui:WaitForChild("OpenButton")
-local openButton2 = gui2:WaitForChild("OpenButton")
-local openButton3 = gui3:WaitForChild("OpenButton")
+local openButton1 = Frame:WaitForChild("OpenButton1")
+local openButton2 = Frame:WaitForChild("OpenButton2")
+local openButton3 = Frame:WaitForChild("OpenButton3")
 
 local badge = gui:WaitForChild("StatusBadge")
 
-local giftNotifyDot = giftButton:WaitForChild("NotifyDot")
+local giftNotifyDot = GiftButton:WaitForChild("NotifyDot")
 
 local claimSound = SoundService:FindFirstChild("DailyRewardClaimSound")
 local ButtonClick = SoundService:WaitForChild("ButtonClick")
@@ -227,7 +227,7 @@ dailyStreak.Changed:Connect(refreshAll)
 local function openPanel()
 	refreshAll()
 	UIDisable.DisableTop(badge)
-	UIDisable.Disable(giftButton, openButton1, openButton2, openButton3)
+	UIDisable.Disable(GiftButton, openButton1, openButton2, openButton3)
 	if UIAnimation.Open(panel, dim) then
 		ButtonClick:Play()
 	end
@@ -235,7 +235,7 @@ end
 
 local function closePanel()
 	UIDisable.AppearTop(badge)
-	UIDisable.Appear(giftButton, openButton1, openButton2, openButton3)
+	UIDisable.Appear(GiftButton, openButton1, openButton2, openButton3)
 	if UIAnimation.Close(panel, dim) then
 		ButtonClick:Play()
 	end
@@ -247,7 +247,7 @@ end)
 dim.MouseButton1Click:Connect(function()
     closePanel()
 end)
-giftButton.MouseButton1Click:Connect(function()
+GiftButton.MouseButton1Click:Connect(function()
 	if panel.Visible then
 		closePanel()
 	else
@@ -257,7 +257,7 @@ end)
 
 UIAnimation.ButtonPress(closeBtn)
 UIAnimation.ButtonPress(claimButton)
-UIAnimation.ButtonPress(giftButton)
+UIAnimation.ButtonPress(GiftButton)
 
 --============================ CLAIM ANIMATION ============================--
 local function showCoinToast(card, text)
