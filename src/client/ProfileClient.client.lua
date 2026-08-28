@@ -35,7 +35,6 @@ local unlockedObby = player:WaitForChild("UnlockedObby", 10)
 
 --============================ GUI ============================--
 local profileGui = playerGui:WaitForChild("ProfileUI")
-local openButton = profileGui:WaitForChild("OpenButton")
 local dim = profileGui:WaitForChild("Dim")
 local profileFrame = profileGui:WaitForChild("ProfileFrame")
 
@@ -55,16 +54,16 @@ local trailCard = content:WaitForChild("TrailCard")
 local equippedLbl = trailCard:WaitForChild("EquippedLbl")
 local ownedCountLbl = trailCard:WaitForChild("OwnedCountLbl")
 
-local gui1 = playerGui:WaitForChild("BoostUI")
-local gui2 = playerGui:WaitForChild("ShopUI")
-local gui3 = playerGui:WaitForChild("DailyRewardGiftButtonUI")
+local Buttons = playerGui:WaitForChild("Buttons") 
+local Frame = Buttons:WaitForChild("Frame")
 
-local openButton1 = gui3:WaitForChild("GiftButton")
-local openButton2 = gui1:WaitForChild("OpenButton")
-local openButton3 = gui2:WaitForChild("OpenButton")
-local openButton4 = profileGui:WaitForChild("OpenButton")
+local openButton1 = Frame:WaitForChild("GiftButton")
+local openButton2 = Frame:WaitForChild("OpenButton1")
+local openButton = Frame:WaitForChild("OpenButton2")
+local openButton4 = Frame:WaitForChild("OpenButton3")
 
-local badge = gui1:WaitForChild("StatusBadge")
+local BoostUI = playerGui:WaitForChild("BoostUI")
+local badge = BoostUI:WaitForChild("StatusBadge")
 
 dim.Visible = false
 profileFrame.Visible = false
@@ -174,7 +173,7 @@ end
 local function openProfile()
 	refreshAll()
 	UIDisable.DisableTop(badge)
-	UIDisable.Disable(openButton1, openButton2, openButton3, openButton4)
+	UIDisable.Disable(openButton1, openButton2, openButton, openButton4)
 	if UIAnimation.Open(profileFrame, dim) then
 		ButtonClick:Play()
 	end
@@ -182,7 +181,7 @@ end
 
 local function closeProfile()
 	UIDisable.AppearTop(badge)
-	UIDisable.Appear(openButton1, openButton2, openButton3, openButton4)
+	UIDisable.Appear(openButton1, openButton2, openButton, openButton4)
 	if UIAnimation.Close(profileFrame, dim) then
 		ButtonClick:Play()
 	end
