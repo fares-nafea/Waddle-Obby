@@ -42,15 +42,16 @@ local bestLbl = panel:WaitForChild("BestLbl")
 local rewardLbl = panel:WaitForChild("RewardLbl")
 local list = panel:WaitForChild("List")
 
-local gui1 = playerGui:WaitForChild("BoostUI")
-local gui2 = playerGui:WaitForChild("ShopUI")
-local gui3 = playerGui:WaitForChild("ProfileUI")
-local gui4 = playerGui:WaitForChild("DailyRewardGiftButtonUI")
+local Buttons = playerGui:WaitForChild("Buttons")
+local Frame = Buttons:WaitForChild("Frame")
 
-local openButton1 = gui4:WaitForChild("GiftButton")
-local openButton2 = gui3:WaitForChild("OpenButton")
-local openButton3 = gui2:WaitForChild("OpenButton")
-local openButton4 = gui1:WaitForChild("OpenButton")
+local openButton1 = Frame:WaitForChild("GiftButton")
+local openButton2 = Frame:WaitForChild("OpenButton1")
+local openButton3 = Frame:WaitForChild("OpenButton2")
+local openButton4 = Frame:WaitForChild("OpenButton3")
+
+local BoostUI = playerGui:WaitForChild("BoostUI")
+local badge = BoostUI:WaitForChild("StatusBadge")
 
 dim.Visible = false
 panel.Visible = false
@@ -129,12 +130,14 @@ local function showResult(obbyId, timeMs, reward, isNewBest, bestMs)
 	renderLeaderboard({}) -- clear stale rows while the fresh list loads
 	
 	UIAnimation.Open(panel, dim)
-	UIDisable.Disable(openButton1, openButton2, openButton3, openButton4)
+	UIDisable.DisableTop(badge)
+	UIDisable.Disable(Frame)
 	LeaderboardEvent:FireServer(obbyId)
 end
 
 local function hideResult()
-	UIDisable.Appear(openButton1, openButton2, openButton3, openButton4)
+	UIDisable.AppearTop(badge)
+	UIDisable.Appear(Frame)
 	if UIAnimation.Close(panel, dim) then
 		ButtonClick:Play()
 	end

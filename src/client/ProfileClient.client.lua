@@ -173,7 +173,7 @@ end
 local function openProfile()
 	refreshAll()
 	UIDisable.DisableTop(badge)
-	UIDisable.Disable(openButton1, openButton2, openButton, openButton4)
+	UIDisable.Disable(Frame)
 	if UIAnimation.Open(profileFrame, dim) then
 		ButtonClick:Play()
 	end
@@ -181,7 +181,7 @@ end
 
 local function closeProfile()
 	UIDisable.AppearTop(badge)
-	UIDisable.Appear(openButton1, openButton2, openButton, openButton4)
+	UIDisable.Appear(Frame)
 	if UIAnimation.Close(profileFrame, dim) then
 		ButtonClick:Play()
 	end

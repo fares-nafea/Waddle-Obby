@@ -138,7 +138,7 @@ refresh()
 
 --============================ PANEL OPEN / CLOSE ============================--
 local function openPanel()
-	UIDisable.Disable(openButton, openButton2, openButton3, openButton1)
+	UIDisable.Disable(Frame)
 	UIDisable.DisableTop(badge)
 	if UIAnimation.Open(panel, dim) then
 		ButtonClick:Play()
@@ -146,7 +146,7 @@ local function openPanel()
 end
 
 local function closePanel()
-	UIDisable.Appear(openButton, openButton2, openButton3, openButton1)
+	UIDisable.Appear(Frame)
 	UIDisable.AppearTop(badge)
 	if UIAnimation.Close(panel, dim) then
 		ButtonClick:Play()

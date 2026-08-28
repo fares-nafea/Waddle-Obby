@@ -36,7 +36,6 @@ local UNEQUIP_IMAGE = "rbxassetid://110451088897225"
 
 --============================ GUI ============================--
 local shopGui = playerGui:WaitForChild("ShopUI")
-local openButton = shopGui:WaitForChild("OpenButton")
 local dim = shopGui:WaitForChild("Dim")
 local shopFrame = shopGui:WaitForChild("ShopFrame")
 
@@ -46,16 +45,16 @@ local closeBtn = headerRight:WaitForChild("CloseBtn")
 local coinPill = headerRight:WaitForChild("CoinPill")
 local coinAmount = coinPill:WaitForChild("CoinAmount")
 
-local gui1 = playerGui:WaitForChild("BoostUI")
-local gui2 = playerGui:WaitForChild("ProfileUI")
-local gui3 = playerGui:WaitForChild("DailyRewardGiftButtonUI")
+local Buttons = playerGui:WaitForChild("Buttons")
+local Frame = Buttons:WaitForChild("Frame")
 
-local openButton1 = gui3:WaitForChild("GiftButton")
-local openButton2 = gui1:WaitForChild("OpenButton")
-local openButton3 = gui2:WaitForChild("OpenButton")
-local openButton4 = shopGui:WaitForChild("OpenButton")
+local openButton1 = Frame:WaitForChild("GiftButton")
+local openButton2 = Frame:WaitForChild("OpenButton3")
+local openButton3 = Frame:WaitForChild("OpenButton2")
+local openButton = Frame:WaitForChild("OpenButton1")
 
-local badge = gui1:WaitForChild("StatusBadge")
+local gui = playerGui:WaitForChild("BoostUI")
+local badge = gui:WaitForChild("StatusBadge")
 
 local grid = shopFrame:WaitForChild("Grid")
 
@@ -146,7 +145,7 @@ local function openShop()
 	refreshAll()
 	refreshCoins()
 	UIDisable.DisableTop(badge)
-	UIDisable.Disable(openButton1, openButton2, openButton3, openButton4)
+	UIDisable.Disable(Frame)
 	if UIAnimation.Open(shopFrame, dim) then
 		ButtonClick:Play()
 	end
@@ -154,7 +153,7 @@ end
 
 local function closeShop()
 	UIDisable.AppearTop(badge)
-	UIDisable.Appear(openButton1, openButton2, openButton3, openButton4)
+	UIDisable.Appear(Frame)
 	if UIAnimation.Close(shopFrame, dim) then
 		ButtonClick:Play()
 	end

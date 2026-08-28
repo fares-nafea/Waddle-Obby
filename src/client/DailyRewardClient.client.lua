@@ -227,7 +227,7 @@ dailyStreak.Changed:Connect(refreshAll)
 local function openPanel()
 	refreshAll()
 	UIDisable.DisableTop(badge)
-	UIDisable.Disable(GiftButton, openButton1, openButton2, openButton3)
+	UIDisable.Disable(Frame)
 	if UIAnimation.Open(panel, dim) then
 		ButtonClick:Play()
 	end
@@ -235,7 +235,7 @@ end
 
 local function closePanel()
 	UIDisable.AppearTop(badge)
-	UIDisable.Appear(GiftButton, openButton1, openButton2, openButton3)
+	UIDisable.Appear(Frame)
 	if UIAnimation.Close(panel, dim) then
 		ButtonClick:Play()
 	end
