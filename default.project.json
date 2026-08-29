@@ -639,6 +639,12 @@
       }
     },
     "StarterGui": {
+      "ShiftLockGui": {
+        "$className": "ScreenGui",
+        "ShiftLockButton": {
+          "$className": "ImageButton"
+        }
+      },
       "Buttons": {
         "$className": "ScreenGui",
         "Frame": {
@@ -1676,6 +1682,9 @@
     },
     "StarterPlayer": {
       "StarterPlayerScripts": {
+        "ShiftLock": {
+          "$path": "src/client/ShiftLock.client.lua"
+        },
         "DisableReset": {
           "$path": "src/client/DisableReset.client.lua"
         },
