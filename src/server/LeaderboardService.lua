@@ -15,7 +15,7 @@ local Workspace = game:GetService("Workspace")
 local LeaderboardEvent = ReplicatedStorage:WaitForChild("Events"):WaitForChild("LeaderboardEvent")
 local Config = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("ObbyConfig"))
 
-local STORE_NAME = "ObbyBestTimes_v1"
+local STORE_NAME = "ObbyBestTimes_v12"
 local CACHE_TTL = 20        -- seconds a fetched top-list stays valid before refetching
 local REQUEST_COOLDOWN = 2  -- min seconds between leaderboard requests per player
 

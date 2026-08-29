@@ -18,7 +18,7 @@ local MarketplaceService = game:GetService("MarketplaceService")
 local DataStoreService = game:GetService("DataStoreService")
 local Players = game:GetService("Players")
 
-local receiptStore = DataStoreService:GetDataStore("PurchaseReceipts_v11")
+local receiptStore = DataStoreService:GetDataStore("PurchaseReceipts_v12")
 
 local PurchaseDispatcher = {}
 
